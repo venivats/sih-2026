@@ -1,3 +1,7 @@
+import { Operations, StationQuestions } from "./Operations";
+import { Science } from "./Science";
+import { useNavigation, routeHref } from "./navigation";
+import { Appearance, EquipmentIdentity } from "./Appearance";
 import { useState, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -122,12 +126,29 @@ const pages: {
     subtitle:
       "Trace every value to its origin, acquisition and transformations.",
   },
+  {
+    id: "operations",
+    name: "People & operations",
+    icon: ClipboardList,
+    subtitle:
+      "Connect duty periods, outdoor activities, contact sessions and handovers.",
+  },
+  {
+    id: "research",
+    name: "Scientific workspace",
+    icon: FlaskConical,
+    subtitle:
+      "Inspect data quality, service continuity and explicit model assumptions.",
+  },
 ];
 export default function App() {
-  const [page, setPage] = useState<Page>("overview"),
-    [station, setStation] = useState("maitri"),
-    [workspace, setWorkspace] = useState("demo"),
-    [role, setRole] = useState("public"),
+  const nav = useNavigation();
+  const { page, setPage, station, setStation, workspace, setWorkspace } = nav;
+  const [role, setRole] = useState("public"),
+    [audience, setAudience] = useState(
+      () => localStorage.getItem("polaris-audience") || "operator",
+    ),
+    [ask, setAsk] = useState(false),
     [planningTarget, setPlanningTarget] = useState(180),
     [exercise, setExercise] = useState(false),
     [search, setSearch] = useState(false),
@@ -139,9 +160,7 @@ export default function App() {
       ScenarioInputs | undefined
     >(),
     [focus, setFocus] = useState(""),
-    [asset, setAsset] = useState<Asset | null>(null),
     [evidence, setEvidence] = useState<string[] | null>(null),
-    [incident, setIncident] = useState<string | null>(null),
     [login, setLogin] = useState(false),
     [toast, setToast] = useState(""),
     [menu, setMenu] = useState(false),
@@ -158,6 +177,33 @@ export default function App() {
     staleTime: API ? 10000 : Infinity,
   });
   const d = q.data;
+  const asset =
+    nav.detail?.kind === "assets"
+      ? d?.assets.find(
+          (a) => a.code === nav.detail?.id || a.id === nav.detail?.id,
+        ) || null
+      : null;
+  const incident =
+    nav.detail?.kind === "alerts"
+      ? nav.detail.id
+      : nav.detail?.kind === "work-orders"
+        ? d?.work_orders.find((w) => w.id === nav.detail?.id)?.alert_id || null
+        : null;
+  const setAsset = (a: Asset | null) => {
+    if (a) nav.openDetail("assets", a.code);
+    else if (nav.detail?.kind === "assets") setPage("twin");
+  };
+  const setIncident = (id: string | null) => {
+    if (id) nav.openDetail("alerts", id);
+    else if (
+      nav.detail?.kind === "alerts" ||
+      nav.detail?.kind === "work-orders"
+    )
+      setPage("maintenance");
+  };
+  useEffect(() => {
+    document.title = `${station === "maitri" ? "Maitri" : "Bharati"} · ${page} | POLARIS`;
+  }, [station, page]);
   const current = pages.find((p) => p.id === page)!;
   const notify = (s: string) => setToast(s);
   const refresh = () =>
@@ -170,8 +216,6 @@ export default function App() {
       (workspace === "operational" &&
         ["administrator", "operator"].includes(role)));
   const go = (p: Page) => {
-    setIncident(null);
-    setAsset(null);
     setPage(p);
     setMenu(false);
   };
@@ -228,14 +272,17 @@ export default function App() {
   useEffect(() => {
     setScenarioPreset(undefined);
     setFocus("");
-    setIncident(null);
-    setAsset(null);
     setEvidence(null);
   }, [workspace, station]);
   const props: Props | undefined = d
     ? {
         d,
         go,
+        detail: nav.openDetail,
+        scenario: (v) => {
+          setScenarioPreset(v);
+          go("scenarios");
+        },
         select: setAsset,
         evidence: setEvidence,
         investigate: setIncident,
@@ -337,10 +384,16 @@ export default function App() {
         <div className="sidebar-label">OPERATIONS CONSOLE</div>
         <nav aria-label="Main navigation">
           {pages.map((p) => (
-            <button
+            <a
+              href={routeHref(p.id, station, workspace)}
               key={p.id}
               className={page === p.id ? "active" : ""}
-              onClick={() => go(p.id)}
+              onClick={(e) => {
+                if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                  e.preventDefault();
+                  go(p.id);
+                }
+              }}
               aria-current={page === p.id ? "page" : undefined}
             >
               <p.icon size={19} />
@@ -351,7 +404,7 @@ export default function App() {
                     {d.alerts.filter((a) => !a.recovered).length}
                   </b>
                 )}
-            </button>
+            </a>
           ))}
         </nav>
         <div className="sidebar-bottom">
@@ -382,10 +435,41 @@ export default function App() {
               <Menu size={21} />
             </button>
             <span className="breadcrumb">
-              Operations <ChevronRight size={14} /> <b>Antarctica</b>
+              <a
+                href={routeHref("overview", station, workspace)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  go("overview");
+                }}
+              >
+                {station === "maitri" ? "Maitri" : "Bharati"}
+              </a>{" "}
+              <ChevronRight size={14} /> <b>{current.name}</b>
+              {nav.detail && (
+                <>
+                  <ChevronRight size={14} />
+                  <span>{asset?.code || nav.detail.kind}</span>
+                </>
+              )}
             </span>
           </div>
           <div className="topbar-controls">
+            <Appearance />
+            <select
+              aria-label="Workspace perspective"
+              value={audience}
+              onChange={(e) => {
+                setAudience(e.target.value);
+                localStorage.setItem("polaris-audience", e.target.value);
+                go(e.target.value === "scientist" ? "research" : "overview");
+              }}
+            >
+              <option value="operator">Operator</option>
+              <option value="scientist">Scientist</option>
+            </select>
+            <button className="small-button" onClick={() => setAsk(true)}>
+              Ask station
+            </button>
             <button
               className="header-search icon-button"
               aria-label="Search records"
@@ -401,7 +485,6 @@ export default function App() {
                 value={station}
                 onChange={(e) => {
                   setStation(e.target.value);
-                  setAsset(null);
                 }}
               >
                 <option value="maitri">Maitri station</option>
@@ -412,7 +495,7 @@ export default function App() {
               <span className="sr-only">Workspace</span>
               <select
                 aria-label="Workspace"
-                value={workspace === "operational" ? "operational" : "demo"}
+                value={workspace}
                 onChange={(e) => {
                   setWorkspace(e.target.value);
                   setAsset(null);
@@ -420,6 +503,9 @@ export default function App() {
               >
                 <option value="demo">Demonstration</option>
                 <option value="operational">Operational</option>
+                {workspace !== "demo" && workspace !== "operational" && (
+                  <option value={workspace}>Private demonstration</option>
+                )}
               </select>
             </label>
             <button
@@ -593,7 +679,16 @@ export default function App() {
               </button>
             </Notice>
           )}
-          {q.isLoading ? (
+          {nav.invalid ? (
+            <Panel>
+              <Empty title="Page not found">
+                Choose a station workspace from the navigation.
+              </Empty>
+              <button className="primary" onClick={() => go("overview")}>
+                Open station overview
+              </button>
+            </Panel>
+          ) : q.isLoading ? (
             <div className="loading" role="status">
               <RefreshCw size={24} /> Loading workspace records…
               <div className="skeleton" />
@@ -638,6 +733,10 @@ export default function App() {
                   <Maintenance {...props} />
                 ) : page === "environment" ? (
                   <Environment {...props} />
+                ) : page === "operations" ? (
+                  <Operations {...props} />
+                ) : page === "research" ? (
+                  <Science {...props} />
                 ) : page === "scenarios" ? (
                   <Scenarios {...props} initial={scenarioPreset} />
                 ) : (
@@ -654,6 +753,11 @@ export default function App() {
           </footer>
         </main>
       </div>
+      {ask && props && (
+        <Modal title="Station questions" onClose={() => setAsk(false)}>
+          <StationQuestions key={workspace + station} {...props} />
+        </Modal>
+      )}
       {exercise && d && (
         <Exercise
           d={d}
@@ -676,6 +780,34 @@ export default function App() {
       {search && props && (
         <SearchRecords {...props} onClose={() => setSearch(false)} />
       )}
+      {nav.detail?.kind === "shipments" && d && (
+        <Modal title="Shipment record" onClose={() => go("logistics")}>
+          <p>
+            {d.shipments.find((s) => s.id === nav.detail?.id)?.name ||
+              "Record unavailable in this workspace"}
+          </p>
+          {d.shipments
+            .filter((s) => s.id === nav.detail?.id)
+            .map((s) => (
+              <div key={s.id}>
+                <Badge>{s.status}</Badge>
+                <p>Expected arrival {date(s.eta)}</p>
+                <p>{s.risk}</p>
+                {s.manifest.map((m, i) => (
+                  <p key={i}>
+                    {m.name} · {n(m.quantity)} {m.unit}
+                  </p>
+                ))}
+                <h3>Status history</h3>
+                {s.history.map((h, i) => (
+                  <p key={i}>
+                    {date(h.at)} · {h.status} · {h.note}
+                  </p>
+                ))}
+              </div>
+            ))}
+        </Modal>
+      )}
       {asset && d && (
         <Modal title={asset.name} onClose={() => setAsset(null)} wide>
           <div className="asset-detail-head">
@@ -686,6 +818,7 @@ export default function App() {
             </div>
             <Badge tone="muted">Topology unverified</Badge>
           </div>
+          <EquipmentIdentity code={asset.code} />
           <div className="detail-columns">
             <div>
               <h3>Latest recorded measurements</h3>
@@ -837,6 +970,17 @@ export default function App() {
           </div>
         </Modal>
       )}
+      {d &&
+        nav.detail &&
+        ["assets", "work-orders"].includes(nav.detail.kind) &&
+        !(asset || incident) && (
+          <Modal title="Record unavailable" onClose={() => go(page)}>
+            <Notice>
+              This record is absent from the selected station and workspace.
+              Check the address or return to its register.
+            </Notice>
+          </Modal>
+        )}
       {incident && props && (
         <Modal
           title="Incident investigation"

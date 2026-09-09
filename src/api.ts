@@ -1,3 +1,5 @@
+import { validateOps } from "./opsValidation";
+import type { OpsRecord } from "./types";
 import { randomId } from "./id";
 import type { Snapshot } from "./types";
 // Explicit browser-only mode also allows evaluating the public deployment locally.
@@ -102,7 +104,71 @@ async function mutateUnserialized(
       details,
       created_at: now,
     });
-  if (endpoint === "/exercises") {
+  if (endpoint === "/operations" || endpoint.startsWith("/operations/")) {
+    d.operations ||= [];
+    const data = body.data as Record<string, unknown>;
+    if (endpoint === "/operations") {
+      const kind = String(body.kind),
+        label = String(body.label || ""),
+        key = String(body.idempotency_key || "");
+      if (label.length < 2 || label.length > 150 || key.length < 8)
+        throw Error("Invalid record label or idempotency key");
+      validateOps(d, kind, data);
+      const old = d.operations.find((r) => r.idempotency_key === key);
+      if (old) {
+        if (
+          old.kind !== kind ||
+          old.label !== label ||
+          JSON.stringify(old.data) !== JSON.stringify(data)
+        )
+          throw Error("Idempotency key reused");
+        return old;
+      }
+      const row: OpsRecord = {
+        id: randomId(),
+        kind: kind as OpsRecord["kind"],
+        label,
+        data,
+        origin: "simulation",
+        version: 0,
+        idempotency_key: key,
+        created_at: now,
+      };
+      d.operations.push(row);
+      result = row;
+      log("operations_created", row.id, { kind, label });
+    } else {
+      const row = d.operations.find((r) => r.id === id);
+      if (!row) throw Error("Record unavailable");
+      if (row.kind === "handover") throw Error("Saved handovers are immutable");
+      if (row.version !== body.version)
+        throw Error("Record changed. Reload before saving");
+      validateOps(d, row.kind, data);
+      const before = row.data;
+      row.data = data;
+      row.version++;
+      result = row;
+      log("operations_updated", row.id, {
+        before,
+        after: data,
+        version: row.version,
+      });
+    }
+  } else if (endpoint.endsWith("/assign-crew")) {
+    const w = d.work_orders.find((w) => w.id === id),
+      c = d.operations?.find((c) => c.id === body.crew_id && c.kind === "crew");
+    if (!w || !c) throw Error("Scoped work order or crew unavailable");
+    if (
+      w.status === "resolved" ||
+      c.data.status !== "on_duty" ||
+      w.due_date < c.data.shift_start.slice(0, 10) ||
+      w.due_date > c.data.shift_end.slice(0, 10)
+    )
+      throw Error("Crew unavailable during work due date");
+    w.assignee = c.label;
+    result = w;
+    log("crew_assigned", w.id, { crew_id: c.id, notes: body.notes });
+  } else if (endpoint === "/exercises") {
     if (
       !["overheat", "recovery"].includes(String(body.preset)) ||
       String(body.idempotency_key || "").length < 8

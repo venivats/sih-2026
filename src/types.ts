@@ -132,7 +132,18 @@ export interface WasteRecord {
   idempotency_key: string;
   created_at: string;
 }
+export interface OpsRecord {
+  id: string;
+  kind: "crew" | "outdoor_task" | "contact" | "research" | "handover";
+  label: string;
+  data: Record<string, any>;
+  origin: string;
+  version: number;
+  idempotency_key: string;
+  created_at: string;
+}
 export interface Snapshot {
+  operations?: OpsRecord[];
   waste?: WasteRecord[];
   workspace: string;
   station: string;
@@ -212,4 +223,6 @@ export type Page =
   | "environment"
   | "maintenance"
   | "scenarios"
-  | "evidence";
+  | "evidence"
+  | "operations"
+  | "research";

@@ -1,3 +1,4 @@
+import { DecisionCentre, Handover } from "./Operations";
 import { useState } from "react";
 import {
   ArrowUpRight,
@@ -33,7 +34,7 @@ export function Overview(p: Props) {
   ];
   return (
     <div className="operations-overview">
-      <header className="station-hero">
+      <header className="station-hero antarctic-hero">
         <div className="station-identity">
           <div className="eyebrow">
             <span className="station-index">
@@ -47,7 +48,16 @@ export function Overview(p: Props) {
             {d.station.toUpperCase()}
             <span className="station-period">.</span>
           </h1>
-          <p>Every system. Every dependency. The next informed action.</p>
+          <p>Infrastructure, resources and research continuity.</p>
+          <a
+            className="image-credit"
+            href="https://science.nasa.gov/earth/earth-observatory/antarctic-landscape-illuminated-84683/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Landscape: coastal West Antarctica · NASA / Michael Studinger, 2014.
+            Illustrative context, not this station.
+          </a>
         </div>
         <div className="hero-conditions">
           <div className="conditions-title">
@@ -126,12 +136,16 @@ export function Overview(p: Props) {
         className="overview-view"
       >
         {view === "brief" ? (
-          <Briefing {...p} />
+          <>
+            <Handover {...p} />
+            <Briefing {...p} />
+          </>
         ) : view === "readiness" ? (
           <Readiness {...p} />
         ) : (
           <>
             <OperationsMetrics {...p} />
+            <DecisionCentre {...p} />
             <StationTwin {...p} />
             <div className="overview-lower">
               <Panel

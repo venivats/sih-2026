@@ -43,3 +43,11 @@ Station names and programme context originate from the supplied SIH problem stat
 
 ## Internally generated demonstration
 `backend/seed.py` generates fixed, repeatable 5–6 September 2026 examples and stores them only in `demo` or `session-*` workspaces. Origin=simulation; verification=illustrative; source provider=POLARIS project team. No NCPOR attribution appears on generated data. Project-authored synthetic data is offered under CC0-1.0.
+
+## Geographic and visual context added 9 September 2026
+These are context sources, not new station telemetry. Dataset acquisition does not establish the authenticity of unrelated measurements.
+
+- **Maitri and Bharati station descriptions**, NCPOR: https://ncpor.res.in/antarcticas/display/376-maitri- and https://ncpor.res.in/antarcticas/display/377-bharati . Retrieval succeeded 9 September 2026. Used for documented station location and general context; no hardware model inventory or current communications availability inferred.
+- **Antarctic Landscape Illuminated**, NASA Earth Observatory, photograph by Michael Studinger, coastal West Antarctica, 29 October 2014: https://science.nasa.gov/earth/earth-observatory/antarctic-landscape-illuminated-84683/ . Image downloaded successfully; NASA informational imagery terms and credit recorded in public/images/credits.json. Header crop is clearly illustrative geographic context.
+- **An aerial view of the Indian Station Maitri, Antarctica on February 2, 2005**, Ministry of Science and Technology / PIB, via Wikimedia Commons. Exact page, image URL and GODL-India evidence are in public/images/credits.json. Download succeeded. Individual photographer unlisted; historical date stays visible. The official licence page was not retrieved; Commons explicitly supplies the licence metadata.
+- **Natural Earth 1:110m Admin 0 – Countries**, version 5.1.1 archive and official project GeoJSON: Antarctica geometry downloaded successfully, 8 polygons / 661 coordinate pairs. Public-domain terms: https://www.naturalearthdata.com/about/terms-of-use/ . Exact download references and checksum in public/images/map-source.json. Retained geometry is projected for display, not used for navigation or station topology.

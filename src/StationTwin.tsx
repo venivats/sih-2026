@@ -1,3 +1,4 @@
+import { EquipmentIdentity } from "./Appearance";
 import { useState } from "react";
 import {
   ArrowUpRight,
@@ -89,7 +90,16 @@ export function StationTwin(p: Props) {
         </div>
         <details className="relationship-list">
           <summary>Inspect relationship records</summary>
-          {p.d.edges.map(edge=><button key={edge.id} onClick={()=>p.evidence([edge.id])}>Relationship: {p.d.assets.find(a=>a.id===edge.upstream)?.code} → {p.d.assets.find(a=>a.id===edge.downstream)?.code} · {edge.relationship}{edge.backup?" · backup":""}<ArrowUpRight size={13}/></button>)}
+          {p.d.edges.map((edge) => (
+            <button key={edge.id} onClick={() => p.evidence([edge.id])}>
+              Relationship:{" "}
+              {p.d.assets.find((a) => a.id === edge.upstream)?.code} →{" "}
+              {p.d.assets.find((a) => a.id === edge.downstream)?.code} ·{" "}
+              {edge.relationship}
+              {edge.backup ? " · backup" : ""}
+              <ArrowUpRight size={13} />
+            </button>
+          ))}
         </details>
       </div>
       <aside className="asset-inspector" aria-label="Asset inspector">
@@ -101,6 +111,7 @@ export function StationTwin(p: Props) {
           <AssetIcon kind={asset.kind} size={25} />
           <h2>{asset.name}</h2>
         </div>
+        <EquipmentIdentity code={asset.code} />
         <div className="health-pair">
           <span>
             <i

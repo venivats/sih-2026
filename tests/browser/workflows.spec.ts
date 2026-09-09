@@ -97,7 +97,7 @@ async function nav(page: any, name: string) {
   if (await menu.isVisible()) await menu.click();
   await page
     .getByRole("navigation")
-    .getByRole("button", { name: new RegExp(name) })
+    .getByRole("link", { name: new RegExp(name) })
     .click();
 }
 test("private maintenance workflow consumes one spare and retains separate recovery", async ({
@@ -158,7 +158,6 @@ test("private maintenance workflow consumes one spare and retains separate recov
     });
   await expect(row).toContainText("2 each");
   await page.reload();
-  await page.getByRole("button", { name: "Start private demo" }).click();
   await nav(page, "Alerts & maintenance");
   await expect(page.getByText("resolved", { exact: true })).toBeVisible();
 });
@@ -269,4 +268,49 @@ test("low bandwidth and presentation are reversible preferences", async ({
   await expect(page.getByRole("navigation")).not.toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("navigation")).toBeVisible();
+});
+
+test('page hierarchy, theme and asset addresses survive browser navigation', async ({page}) => {
+  await page.goto('/?browser-demo=1');
+  await page.getByRole('combobox',{name:'Colour theme',exact:true}).selectOption('light');
+  await nav(page,'Scientific workspace');
+  await expect(page).toHaveURL(/\/stations\/maitri\/research/);
+  await page.getByRole('button',{name:'Station geography',exact:true}).click();
+  await expect(page.getByRole('img',{name:'South polar map locating Maitri and Bharati',exact:true})).toBeVisible();
+  await page.goBack();
+  await expect(page).toHaveURL(/\/stations\/maitri\/overview/);
+  await page.goForward();
+  await expect(page.getByRole('heading',{name:'The Antarctic context',exact:true})).toBeVisible();
+  await nav(page,'Digital twin');
+  await page.getByRole('button',{name:'Full asset record',exact:true}).click();
+  await expect(page).toHaveURL(/\/assets\/GEN-A/);
+  await page.reload();
+  await expect(page.getByRole('dialog',{name:'Primary generator',exact:true})).toBeVisible();
+  await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+});
+
+test('private crew, weather task and handover retain scoped records after reload', async ({page}) => {
+  await page.goto('/?browser-demo=1');
+  await page.getByRole('button',{name:'Start private demo',exact:true}).click();
+  await nav(page,'People & operations');
+  await page.getByLabel('Display name',{exact:true}).fill('Fictional engineer');
+  await page.getByLabel('Duty ends · UTC',{exact:true}).fill('2026-12-01T00:00');
+  await page.getByRole('button',{name:'Save record',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Fictional engineer',exact:true})).toBeVisible();
+  await page.getByRole('tab',{name:'Outdoor operations',exact:true}).click();
+  await page.getByLabel('Activity / session name',{exact:true}).fill('Fictional fuel transfer');
+  await page.getByLabel('Responsible crew',{exact:true}).selectOption({label:'Fictional engineer'});
+  await page.getByLabel('Evidence / review notes',{exact:true}).fill('Training threshold. Review conditions before authorizing any outdoor work.');
+  await page.getByRole('button',{name:'Save record',exact:true}).click();
+  await expect(page.getByText('Below wind threshold',{exact:true})).toBeVisible();
+  await page.getByRole('checkbox',{name:'Apply 130 km/h wind assumption to this view',exact:true}).check();
+  await expect(page.getByText('Threshold exceeded — review activity',{exact:true})).toBeVisible();
+  await page.getByRole('tab',{name:'Handover',exact:true}).click();
+  await page.getByRole('button',{name:'Generate shift handover',exact:true}).click();
+  await page.getByRole('button',{name:'Save reviewed handover',exact:true}).click();
+  await expect(page.locator('details').filter({hasText:/Shift handover 20/})).toHaveCount(1);
+  await page.reload();
+  await expect(page.locator('details').filter({hasText:/Shift handover 20/})).toHaveCount(1);
+  await page.getByRole('button',{name:'How much fuel remains?',exact:true}).click();
+  await expect(page.getByRole('article')).toContainText('28,400 L');
 });

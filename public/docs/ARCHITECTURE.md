@@ -65,3 +65,12 @@ Migration 0003 adds scoped waste records, quantity/unit validation, source evide
 A preference disables SSE and animation, reduces connected polling to 120 seconds, and disables refetch-on-focus. Failed refreshes retain labelled cached records and prevent writes. There is no durable offline write queue or binary-delta protocol. The assumed 180-day target and ±20% burn sensitivity are explicitly scenario inputs. Thermal holdover, actual satellite passes and ML confidence need validation inputs before implementation.
 
 Documentation consulted: [FastAPI dependencies with yield](https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/), [TanStack Query documentation](https://tanstack.com/query/latest/docs/framework/react), and [Antarctic Treaty waste-management information](https://www.ats.aq/e/waste.html). Existing compatible dependency pins and lockfiles are retained.
+
+## ADR-009: addressable console and scientific evidence separation
+The Expedition release uses the browser History API with typed station/page/detail routes. React remains a Vite application and hosting rewrites route refreshes to index.html. URL mode selects a workspace class; private workspace identifiers stay in session storage and backend permissions still resolve every request. Native form controls provide dark/light/system preferences without a new component dependency.
+
+Migration 0004 adds a station/workspace-scoped operations register. Typed Pydantic data variants validate crew, outdoor task, contact, research and immutable handover data. Idempotency keys, version checks, row locks and audit history protect consequential writes. The browser demo mirrors these behaviours in serialized tab-local mutations, with its storage limit labelled.
+
+Pure scientific functions calculate weather review, resupply coverage, one backup path ceiling, thermal sensitivity and read-only quality findings. New model tests cover missing/stale data and isolation. Handover exports copy the input records so later edits cannot rewrite the captured baseline. Station answers use supported deterministic intents and actual identifiers; no external model receives station data.
+
+Documentation consulted for routing/theme behaviour: https://developer.mozilla.org/en-US/docs/Web/API/History_API and https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme . Existing dependency pins and both lockfiles are retained. The full assumptions and changes are in EXPEDITION_RELEASE.md.

@@ -4,7 +4,7 @@ Independent SIH26060 prototype. No government endorsement. No actual station-con
 ## Start here
 Open the shared demo and select **Start private demo**. Go to **Alerts & maintenance** to acknowledge the generator alert, create a work order, allocate a coolant filter, start work, use the allocated filter and resolve it with notes. Inspect the fuel ledger, run a what-if scenario and explore the genuine historical NASA POWER sample.
 
-The public frontend runs isolated demonstrations in each browser tab. It does not have a hosted FastAPI/PostgreSQL backend. Browser changes survive a reload of that tab; reselect Start private demo to reopen them. Closing the tab may remove them. Do not treat browser demo state as durable team storage.
+The public frontend runs isolated demonstrations in each browser tab. It does not have a hosted FastAPI/PostgreSQL backend. Browser changes survive a reload of the private workspace URL in that tab. Closing the tab may remove them. Do not treat browser demo state as durable team storage.
 
 The source contains the full React/TypeScript frontend, FastAPI backend, SQLAlchemy models, Alembic migration, PostgreSQL Compose setup, CSV import, provenance, resource model, authentication and tests. A conventional container host with persistent PostgreSQL and durable file storage is needed for the persistent team deployment. No paid services were provisioned.
 
@@ -40,7 +40,10 @@ The source contains the full React/TypeScript frontend, FastAPI backend, SQLAlch
 - Original data, historical NASA sample, imports, authentication, maintenance and inventory workflows remain available. No station hardware names, measured satellite latency or official winter requirements have been invented.
 
 ### Updating an existing local installation
-Back up the database and source-file storage using docs/BACKUP_RESTORE.md. Pull the reviewed code, retain your environment file, install the committed dependencies if changed, then run `.venv\Scripts\python -m alembic upgrade head` on Windows (or `.venv/bin/python -m alembic upgrade head` on Linux). Migration 0003 adds waste records without replacing saved records. Restart with `node scripts/dev.mjs`. The normal container startup also runs migrations. Do not downgrade destructively; restore a tested backup into a separate database when rolling back.
+Back up the database and source-file storage using docs/BACKUP_RESTORE.md. Pull the reviewed code, retain your environment file, install the committed dependencies if changed, then run `.venv\Scripts\python -m alembic upgrade head` on Windows (or `.venv/bin/python -m alembic upgrade head` on Linux). Migrations 0003 and 0004 add waste and operations records without replacing saved records. Restart with `node scripts/dev.mjs`. The normal container startup also runs migrations. Do not downgrade destructively; restore a tested backup into a separate database when rolling back.
 
 ### Remaining integrations
-The public URL is a browser demonstration. Full shared persistence, operational sign-in and uploads need the prepared FastAPI container plus managed PostgreSQL and durable storage. No hosting charges have been incurred. Actual equipment surveys, thermal calibration, satellite scheduling, validated ML, document-grounded model assistance, and durable offline synchronization remain future work. Generic rule explanations currently require no model credentials.
+The public URL is a browser demonstration. Full shared persistence, operational sign-in and uploads need the prepared FastAPI container plus managed PostgreSQL and durable storage. No hosting charges have been incurred. Actual equipment surveys, thermal calibration, computed satellite scheduling, validated ML, document-grounded model assistance, and durable offline synchronization remain future work. Generic rule explanations currently require no model credentials.
+
+## Expedition enhancement release
+See [the complete changes and connected team demonstration](EXPEDITION_RELEASE.md). Ten addressable pages, persistent light/dark/system themes, Antarctic context, crew/task/contact/research registers, shipment-linked planning, immutable handovers, record-backed questions and scientific screening/model workspaces are implemented. Scientific models are explicitly illustrative.

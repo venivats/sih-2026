@@ -50,7 +50,7 @@ def demo_session(db=Depends(db_session)):
 @app.get('/api/w/{workspace}/{station}/snapshot',response_model=SnapshotOut)
 def snapshot(workspace:str,station:Station,who=Depends(actor),db=Depends(db_session)):
     authorize(who,workspace)
-    models={'assets':Asset,'edges':Edge,'measurements':Measurement,'sources':Source,'rules':Rule,'alerts':Alert,'work_orders':WorkOrder,'inventory':Inventory,'ledger':Ledger,'shipments':Shipment,'audit':Audit,'replenishments':Replenishment,'acquisitions':Acquisition,'attachments':Attachment,'reservations':Reservation,'waste':WasteRecord}
+    models={'assets':Asset,'edges':Edge,'measurements':Measurement,'sources':Source,'rules':Rule,'alerts':Alert,'work_orders':WorkOrder,'inventory':Inventory,'ledger':Ledger,'shipments':Shipment,'audit':Audit,'replenishments':Replenishment,'acquisitions':Acquisition,'attachments':Attachment,'reservations':Reservation,'waste':WasteRecord,'operations':OpsRecord}
     return {'workspace':workspace,'station':station,'fetched_at':now(),**{key:[serialize(x) for x in db.scalars(scoped(db,model,workspace,station))] for key,model in models.items()}}
 @app.post('/api/w/{workspace}/{station}/measurements',response_model=MeasurementOut)
 def reading(workspace:str,station:Station,body:ReadingIn,who=Depends(actor),db=Depends(db_session)):
@@ -194,8 +194,28 @@ def waste_update(workspace:str,station:Station,id:str,body:WasteTransitionIn,who
     from .modules.waste import transition as waste_transition
     return serialize(waste_transition(db,workspace,station,who['sub'],id,body.status,body.note))
 
+from .modules.operations import OpsIn,OpsUpdate,AssignCrew
+@app.post('/api/w/{workspace}/{station}/operations',response_model=OpsOut)
+def ops_create(workspace:str,station:Station,body:OpsIn,who=Depends(actor),db=Depends(db_session)):
+    authorize(who,workspace,write=True)
+    from .modules.operations import create
+    return serialize(create(db,workspace,station,who['sub'],body))
+@app.patch('/api/w/{workspace}/{station}/operations/{id}',response_model=OpsOut)
+def ops_update(workspace:str,station:Station,id:str,body:OpsUpdate,who=Depends(actor),db=Depends(db_session)):
+    authorize(who,workspace,write=True)
+    from .modules.operations import update
+    return serialize(update(db,workspace,station,who['sub'],id,body))
+@app.post('/api/w/{workspace}/{station}/work-orders/{id}/assign-crew',response_model=WorkOrderOut)
+def assign_crew(workspace:str,station:Station,id:str,body:AssignCrew,who=Depends(actor),db=Depends(db_session)):
+    authorize(who,workspace,write=True)
+    from .modules.operations import assign
+    return serialize(assign(db,workspace,station,who['sub'],id,body))
+
 # The production image serves the compiled React app from the same origin.
 from pathlib import Path
 from fastapi.staticfiles import StaticFiles
 if Path('dist/index.html').is_file():
+    from fastapi.responses import FileResponse
+    @app.get('/stations/{route:path}')
+    def station_page(route:str):return FileResponse('dist/index.html')
     app.mount('/',StaticFiles(directory='dist',html=True),name='frontend')

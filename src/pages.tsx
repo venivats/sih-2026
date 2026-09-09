@@ -1,3 +1,4 @@
+import { ResupplyCoverage } from "./Operations";
 import { randomId } from "./id";
 import { PlanningAnalysis } from "./PlanningAnalysis";
 import { Waste } from "./Waste";
@@ -39,6 +40,8 @@ import { energy, latest, n, date, calculate, affected } from "./model";
 import { API, request, path, mutate, bearer } from "./api";
 export interface Props {
   d: Snapshot;
+  detail?: (kind: string, id: string) => void;
+  scenario?: (inputs: ScenarioInputs) => void;
   go: (page: Page) => void;
   select: (a: Asset) => void;
   evidence: (ids: string[]) => void;
@@ -134,6 +137,7 @@ export function Energy(p: Props) {
           </div>
         </Panel>
       </div>
+      <ResupplyCoverage {...p} />
       <PlanningAnalysis {...p} />
       <Panel
         title="Fuel consumption history"
@@ -159,6 +163,7 @@ export function Logistics(p: Props) {
   const [view, setView] = useState("inventory");
   return (
     <>
+      <ResupplyCoverage {...p} />
       <div
         className="logistics-tabs segmented"
         role="group"

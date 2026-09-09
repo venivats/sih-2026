@@ -23,7 +23,9 @@ AcquisitionOut=output(models.Acquisition)
 AttachmentOut=output(models.Attachment)
 ImportBatchOut=output(models.ImportBatch)
 WasteOut=output(models.WasteRecord)
+OpsOut=output(models.OpsRecord)
 class SnapshotOut(BaseModel):
+    operations:list[OpsOut]
     workspace:str
     station:str
     fetched_at:str

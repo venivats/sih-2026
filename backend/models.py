@@ -201,3 +201,14 @@ class Attachment(Scoped):
     checksum: Mapped[str]
     uploader: Mapped[str]
     created_at: Mapped[str] = mapped_column(default=now)
+
+class OpsRecord(Scoped):
+    __tablename__='ops_records'
+    kind: Mapped[str]
+    label: Mapped[str]
+    data: Mapped[dict]=mapped_column(JSON)
+    origin: Mapped[str]
+    version: Mapped[int]=mapped_column(default=0)
+    idempotency_key: Mapped[str]
+    created_at: Mapped[str]=mapped_column(default=now)
+    __table_args__=(UniqueConstraint('workspace','station','idempotency_key'),)

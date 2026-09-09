@@ -5,6 +5,7 @@ import App from "./App";
 import "./style.css";
 import "./redesign.css";
 import "./console.css";
+import "./expedition.css";
 const queryClient = new QueryClient({
   defaultOptions: {
     mutations: { retry: false },
