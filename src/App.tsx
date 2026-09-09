@@ -1,3 +1,4 @@
+import { OfficialWeather, ConnectionStatus } from "./OfficialWeather";
 import { Operations, StationQuestions } from "./Operations";
 import { Science } from "./Science";
 import { useNavigation, routeHref } from "./navigation";
@@ -144,6 +145,7 @@ const pages: {
 export default function App() {
   const nav = useNavigation();
   const { page, setPage, station, setStation, workspace, setWorkspace } = nav;
+  const [connectionOpen, setConnectionOpen] = useState(false);
   const [role, setRole] = useState("public"),
     [audience, setAudience] = useState(
       () => localStorage.getItem("polaris-audience") || "operator",
@@ -455,6 +457,12 @@ export default function App() {
           </div>
           <div className="topbar-controls">
             <Appearance />
+            <button
+              className="small-button"
+              onClick={() => setConnectionOpen(true)}
+            >
+              Connection
+            </button>
             <select
               aria-label="Workspace perspective"
               value={audience}
@@ -650,6 +658,9 @@ export default function App() {
               <Badge tone="muted">This tab only</Badge>
             )}
           </div>
+          {workspace === "operational" && (
+            <OfficialWeather station={station} role={role} operational />
+          )}
           {workspace === "operational" && !API && (
             <Notice>
               No operational measurements are available in this deployment. The
@@ -753,6 +764,19 @@ export default function App() {
           </footer>
         </main>
       </div>
+      {connectionOpen && (
+        <Modal
+          title="Operational readiness"
+          onClose={() => setConnectionOpen(false)}
+        >
+          <ConnectionStatus />
+          <OfficialWeather
+            station={station}
+            role={role}
+            operational={workspace === "operational"}
+          />
+        </Modal>
+      )}
       {ask && props && (
         <Modal title="Station questions" onClose={() => setAsk(false)}>
           <StationQuestions key={workspace + station} {...props} />

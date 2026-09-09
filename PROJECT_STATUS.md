@@ -9,3 +9,10 @@ Independent SIH26060 prototype; no government endorsement or operational validat
 - Blockers: separate container/database/file-storage hosting account and any cost approval; disposable PostgreSQL for contention/managed restore verification; mobile browser emulation; actual station equipment, topology, procedures and operational feeds. No Vercel deployment has been verified.
 - Next action: connect the prepared persistent hosting stack when account access and cost scope are resolved, then run PostgreSQL contention, managed restore and mobile browser checks.
 - Team handover: docs/EXPEDITION_RELEASE.md explains changed behaviour, evidence boundaries and the connected demonstration.
+
+## Official-source intake addition — 9 September 2026
+- Implemented: protected NCPOR published-weather intake, originals/checksums, failure history, timezone uncertainty, additive migration 0005 and operational connection/source panels. No provider values seeded or admitted as measured telemetry.
+- Verified: 25 backend tests passed, 1 PostgreSQL integration test skipped; TypeScript/Vite production build passed. Intake tests use fabricated parser fixtures, not downloaded provider data.
+- Actual source finding: official data.ncpor.res.in page readable through web research; direct backend download returned HTTP 502. Provider timezone, cadence and dataset-specific reuse terms remain unresolved.
+- Blocker: no accessible Vercel teams or connected persistent backend hosting. This public site remains frontend-only until a container, PostgreSQL and durable storage are activated.
+- Next action: account owner signs in to Render, connects venivats/sih-2026, and reviews hosting costs before any paid resources are created. Follow docs/OFFICIAL_DATA_AND_HOSTING.md; verify restore and persistence after activation.

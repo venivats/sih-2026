@@ -30,3 +30,6 @@ The Playwright CLI specifications now include route/theme/detail reload and crew
 - No managed PostgreSQL backup/restore, production backend authentication/uploads or persistence after hosted-container restart has been verified.
 - Mobile emulation and network-outage browser simulation are not verified in this release. Responsive CSS and existing disconnected-write guards remain in place.
 - No deployed Vercel URL is verified. Sites publication status is reported by the native hosting service after this source is published; agent-side checks used the internal preview.
+
+## Official weather intake addition (9 September 2026)
+25 backend tests passed; 1 PostgreSQL test skipped. Production TypeScript/Vite build passed. New tests verify admin permissions, download byte preservation and checksum, two-station parsing, cooldown, failure history and no measured telemetry writes. Parser fixtures are fabricated; raw government download and live-feed integration have NOT succeeded. No new deployed-backend persistence or browser result is claimed.

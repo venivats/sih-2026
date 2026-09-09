@@ -212,3 +212,14 @@ class OpsRecord(Scoped):
     idempotency_key: Mapped[str]
     created_at: Mapped[str]=mapped_column(default=now)
     __table_args__=(UniqueConstraint('workspace','station','idempotency_key'),)
+
+class OfficialWeatherReport(Scoped):
+    __tablename__ = 'official_weather_reports'
+    status: Mapped[str]
+    reference: Mapped[str]
+    acquired_at: Mapped[str] = mapped_column(default=now)
+    parser_version: Mapped[str]
+    checksum: Mapped[str | None]
+    storage_key: Mapped[str | None]
+    payload: Mapped[dict] = mapped_column(JSON, default=dict)
+    detail: Mapped[str]

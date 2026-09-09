@@ -213,6 +213,19 @@ def assign_crew(workspace:str,station:Station,id:str,body:AssignCrew,who=Depends
 
 # The production image serves the compiled React app from the same origin.
 from pathlib import Path
+@app.get('/api/w/operational/{station}/official-weather')
+def official_weather_status(station:Station,who=Depends(actor),db=Depends(db_session)):
+    authorize(who,'operational')
+    from .modules.official_weather import summary
+    return summary(db,station)
+
+@app.post('/api/w/operational/{station}/official-weather/refresh')
+def official_weather_refresh(station:Station,who=Depends(actor),db=Depends(db_session)):
+    authorize(who,'operational',write=True,admin=True)
+    from .modules.official_weather import refresh,summary
+    refresh(db,who['sub'])
+    return summary(db,station)
+
 from fastapi.staticfiles import StaticFiles
 if Path('dist/index.html').is_file():
     from fastapi.responses import FileResponse
