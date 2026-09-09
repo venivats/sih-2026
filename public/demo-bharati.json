@@ -1,0 +1,3893 @@
+{
+  "workspace": "demo",
+  "station": "bharati",
+  "fetched_at": "2026-09-07T03:08:01.868108+00:00",
+  "assets": [
+    {
+      "code": "BAT",
+      "name": "Battery reserve",
+      "kind": "battery",
+      "critical": true,
+      "capacity": 120.0,
+      "capacity_unit": "kWh",
+      "position": {
+        "x": 2,
+        "y": 215
+      },
+      "documentation": [
+        {
+          "title": "Illustrative asset and capacity assumptions",
+          "url": "/docs/DEMO_MODEL.md"
+        }
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "a3ecc9db-0d35-4472-8756-705f1c47171b"
+    },
+    {
+      "code": "BUS",
+      "name": "Electrical distribution",
+      "kind": "distribution",
+      "critical": true,
+      "capacity": null,
+      "capacity_unit": null,
+      "position": {
+        "x": 2,
+        "y": 40
+      },
+      "documentation": [
+        {
+          "title": "Illustrative asset and capacity assumptions",
+          "url": "/docs/DEMO_MODEL.md"
+        }
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "80327e6b-83d7-4b65-8bb1-35f763ac6882"
+    },
+    {
+      "code": "COMMS",
+      "name": "Communications",
+      "kind": "communications",
+      "critical": true,
+      "capacity": null,
+      "capacity_unit": null,
+      "position": {
+        "x": 4,
+        "y": 40
+      },
+      "documentation": [
+        {
+          "title": "Illustrative asset and capacity assumptions",
+          "url": "/docs/DEMO_MODEL.md"
+        }
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "22cfa171-384f-4e79-8178-e507bea787a7"
+    },
+    {
+      "code": "ENV",
+      "name": "Environment monitor",
+      "kind": "environment",
+      "critical": false,
+      "capacity": null,
+      "capacity_unit": null,
+      "position": {
+        "x": 0,
+        "y": 300
+      },
+      "documentation": [
+        {
+          "title": "Illustrative asset and capacity assumptions",
+          "url": "/docs/DEMO_MODEL.md"
+        }
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f"
+    },
+    {
+      "code": "FUEL",
+      "name": "Fuel storage",
+      "kind": "fuel",
+      "critical": false,
+      "capacity": 42000.0,
+      "capacity_unit": "L",
+      "position": {
+        "x": 0,
+        "y": 120
+      },
+      "documentation": [
+        {
+          "title": "Illustrative asset and capacity assumptions",
+          "url": "/docs/DEMO_MODEL.md"
+        }
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "b4d61707-b8cd-456d-99db-9ca4cc907965"
+    },
+    {
+      "code": "GEN-A",
+      "name": "Primary generator",
+      "kind": "generator",
+      "critical": true,
+      "capacity": 280,
+      "capacity_unit": "kW",
+      "position": {
+        "x": 1,
+        "y": 40
+      },
+      "documentation": [
+        {
+          "title": "Illustrative asset and capacity assumptions",
+          "url": "/docs/DEMO_MODEL.md"
+        }
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "693eca71-8f40-4a59-b50f-6e3738e1f51a"
+    },
+    {
+      "code": "GEN-B",
+      "name": "Standby generator",
+      "kind": "generator",
+      "critical": true,
+      "capacity": 180.0,
+      "capacity_unit": "kW",
+      "position": {
+        "x": 1,
+        "y": 215
+      },
+      "documentation": [
+        {
+          "title": "Illustrative asset and capacity assumptions",
+          "url": "/docs/DEMO_MODEL.md"
+        }
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "1aee17f3-c03c-4f3b-bf4f-66ee87f5681a"
+    },
+    {
+      "code": "HVAC",
+      "name": "Heating & ventilation",
+      "kind": "heating",
+      "critical": true,
+      "capacity": null,
+      "capacity_unit": null,
+      "position": {
+        "x": 3,
+        "y": 40
+      },
+      "documentation": [
+        {
+          "title": "Illustrative asset and capacity assumptions",
+          "url": "/docs/DEMO_MODEL.md"
+        }
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "cf2791ac-77cf-45be-9cc5-0c31509f8354"
+    },
+    {
+      "code": "LOAD",
+      "name": "Essential loads",
+      "kind": "load",
+      "critical": true,
+      "capacity": null,
+      "capacity_unit": null,
+      "position": {
+        "x": 4,
+        "y": 215
+      },
+      "documentation": [
+        {
+          "title": "Illustrative asset and capacity assumptions",
+          "url": "/docs/DEMO_MODEL.md"
+        }
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "2fe277d0-61d7-40ae-97d9-d89db4c46d08"
+    },
+    {
+      "code": "WATER",
+      "name": "Water treatment",
+      "kind": "water",
+      "critical": true,
+      "capacity": null,
+      "capacity_unit": null,
+      "position": {
+        "x": 3,
+        "y": 215
+      },
+      "documentation": [
+        {
+          "title": "Illustrative asset and capacity assumptions",
+          "url": "/docs/DEMO_MODEL.md"
+        }
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "d65f7927-b1bf-487a-ac06-1e1491fd88ba"
+    }
+  ],
+  "edges": [
+    {
+      "upstream": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "downstream": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "relationship": "fuel",
+      "backup": false,
+      "verified": false,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "deaad198-8392-4a9f-bba3-eff0c3027dc6"
+    },
+    {
+      "upstream": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "downstream": "1aee17f3-c03c-4f3b-bf4f-66ee87f5681a",
+      "relationship": "fuel",
+      "backup": true,
+      "verified": false,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "8e328ab7-0a14-46c3-8b7d-f8c1f0271d48"
+    },
+    {
+      "upstream": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "downstream": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "relationship": "electricity",
+      "backup": false,
+      "verified": false,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "71a07c91-471b-418a-9c7e-07449673646a"
+    },
+    {
+      "upstream": "1aee17f3-c03c-4f3b-bf4f-66ee87f5681a",
+      "downstream": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "relationship": "electricity",
+      "backup": true,
+      "verified": false,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "3a6f1ff9-4e11-47f6-98f0-fb352729232c"
+    },
+    {
+      "upstream": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "downstream": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "relationship": "electricity",
+      "backup": true,
+      "verified": false,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "501c503e-38ff-40e4-a243-ade63505d0aa"
+    },
+    {
+      "upstream": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "downstream": "cf2791ac-77cf-45be-9cc5-0c31509f8354",
+      "relationship": "electricity",
+      "backup": false,
+      "verified": false,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "59e21559-2a26-4fd3-aed1-3969cf203405"
+    },
+    {
+      "upstream": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "downstream": "d65f7927-b1bf-487a-ac06-1e1491fd88ba",
+      "relationship": "electricity",
+      "backup": false,
+      "verified": false,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "3d31ada8-3b5f-418c-8584-7160e063ca80"
+    },
+    {
+      "upstream": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "downstream": "22cfa171-384f-4e79-8178-e507bea787a7",
+      "relationship": "electricity",
+      "backup": false,
+      "verified": false,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5f1b44b2-3aa6-4ae4-a102-4e242edf6c03"
+    },
+    {
+      "upstream": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "downstream": "2fe277d0-61d7-40ae-97d9-d89db4c46d08",
+      "relationship": "electricity",
+      "backup": false,
+      "verified": false,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "49b89d91-1078-4922-94b1-23efda2641fc"
+    },
+    {
+      "upstream": "cf2791ac-77cf-45be-9cc5-0c31509f8354",
+      "downstream": "2fe277d0-61d7-40ae-97d9-d89db4c46d08",
+      "relationship": "heat",
+      "backup": false,
+      "verified": false,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "9e39a816-d1b1-406a-b897-ceee0a071a12"
+    }
+  ],
+  "measurements": [
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -25.6,
+      "unit": "degC",
+      "observed_at": "2026-09-05T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.697608+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "dcda78a1-780b-4744-904a-d7c9e4c51df8"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -25.1,
+      "unit": "degC",
+      "observed_at": "2026-09-05T01:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.704003+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5c68ec83-e654-4a99-ae0c-551389b5cba8"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -24.6,
+      "unit": "degC",
+      "observed_at": "2026-09-05T02:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.709587+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ac8eb5cc-ad54-4b62-ac2d-51b5dfc57152"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -24.2,
+      "unit": "degC",
+      "observed_at": "2026-09-05T03:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.715207+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "19ae7255-60e0-4207-bbb3-bd0268feb11b"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -23.7,
+      "unit": "degC",
+      "observed_at": "2026-09-05T04:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.721491+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "07199600-24e9-464c-9ba1-7f7212d6cd6d"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -23.4,
+      "unit": "degC",
+      "observed_at": "2026-09-05T05:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.727527+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "2527853d-4d55-4c42-a4f1-67a53aae8191"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -23.1,
+      "unit": "degC",
+      "observed_at": "2026-09-05T06:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.733416+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5be07938-5cb9-4f09-918d-257444be8bad"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -22.8,
+      "unit": "degC",
+      "observed_at": "2026-09-05T07:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.739340+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "6fbd8eb3-6f48-4f14-9e80-9d02667016f2"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": null,
+      "unit": "degC",
+      "observed_at": "2026-09-05T08:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.744932+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "missing",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "701f2f48-2bd4-40a5-a08b-52b4b7544d86"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": null,
+      "unit": "degC",
+      "observed_at": "2026-09-05T09:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.751001+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "missing",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "bb03771b-f004-4340-8bd7-b65792142821"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -22.6,
+      "unit": "degC",
+      "observed_at": "2026-09-05T10:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.757949+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "01db125b-d52b-4487-a4e3-01b2ccf34fca"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -22.7,
+      "unit": "degC",
+      "observed_at": "2026-09-05T11:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.764134+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "8f46d287-bf0b-41bf-9361-da7cb45e27e7"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -22.9,
+      "unit": "degC",
+      "observed_at": "2026-09-05T12:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.770629+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "27259498-1578-4257-aa69-f4a1746e80a3"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -23.1,
+      "unit": "degC",
+      "observed_at": "2026-09-05T13:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.777052+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "50d0b956-eb53-4b70-8d4c-bcd4796f0503"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -23.4,
+      "unit": "degC",
+      "observed_at": "2026-09-05T14:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.782843+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "3ad9717e-aece-4cdb-bec6-5a3837c45b94"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -23.8,
+      "unit": "degC",
+      "observed_at": "2026-09-05T15:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.788589+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "531992f6-754a-4a55-be6f-6f9b423e51d9"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -24.2,
+      "unit": "degC",
+      "observed_at": "2026-09-05T16:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.794160+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "73c36c7a-1b17-4841-ab26-ced85dc43112"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -24.7,
+      "unit": "degC",
+      "observed_at": "2026-09-05T17:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.800211+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "654f2bad-fd30-4685-8d34-0715a338473d"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -25.2,
+      "unit": "degC",
+      "observed_at": "2026-09-05T18:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.806030+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "1431ca12-3be2-4aba-a538-495ea795ad4b"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -25.7,
+      "unit": "degC",
+      "observed_at": "2026-09-05T19:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.811782+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "222a3338-56c7-42d1-a76d-da58b676b030"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -26.2,
+      "unit": "degC",
+      "observed_at": "2026-09-05T20:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.818349+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "8c5816cc-2f05-4a4b-a0d6-a8dfad0ea392"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -26.7,
+      "unit": "degC",
+      "observed_at": "2026-09-05T21:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.824275+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "adbec43f-bdb5-4dc9-b5c0-6b45a08d9f5e"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -27.1,
+      "unit": "degC",
+      "observed_at": "2026-09-05T22:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.830140+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "995cc9ea-dc98-4909-934f-49ddcb94eff8"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -27.5,
+      "unit": "degC",
+      "observed_at": "2026-09-05T23:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.835681+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "321148d9-691d-44a8-b557-b1c56b5e3247"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "temperature",
+      "value": -27.9,
+      "unit": "degC",
+      "observed_at": "2026-09-06T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.842423+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "039da8c0-9cc6-4d09-b7e2-32713d9fc0f2"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 12.0,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.698385+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "6685b419-e87d-43f2-b2dd-6de6a3f2009f"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 11.9,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T01:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.704755+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "a652f666-f9ce-41cb-a547-d28f4000d486"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 11.6,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T02:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.710350+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5fbdadbc-dc23-4c5d-88e3-4b224e01503a"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 11.2,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T03:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.716344+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "2ff210e4-0637-4e4f-9624-955fb29f8b78"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 10.6,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T04:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.722253+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "d651c71a-3d06-4654-9499-48438d4e9c3e"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 9.9,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T05:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.728318+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "d3fd0734-9bd6-4be1-8db2-3a516317f7cb"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 9.2,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T06:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.734292+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "1d0a737d-22ff-41e1-94ab-df0dbed06f89"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 8.5,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T07:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.740144+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "fb2cb339-714b-4ada-b626-0cc689112d35"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 7.8,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T08:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.745828+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "d0e3ebc8-b36f-4509-a918-5d2151be99dd"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 7.1,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T09:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.751785+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "dc42647d-2a5f-4559-872b-207c543cd76a"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 6.6,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T10:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.758757+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "63e934e9-0947-43c0-9e2e-ff4447ab60f6"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 6.2,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T11:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.764958+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "3a186bb8-e837-4c38-a4cf-c930dc339eab"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 6.0,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T12:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.771430+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "b871663b-4988-4ecc-9d9a-2395a6649537"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 6.0,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T13:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.777988+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "86b5e9ab-0d11-43c9-a5e8-e44fb599741f"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 6.2,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T14:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.783673+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "36fc8169-78ee-4820-bcb4-12ecb396790e"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 6.5,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T15:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.789363+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "01ecfda8-8978-4470-a17a-cb9fc7f4fb36"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 7.0,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T16:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.794928+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "8db2c6ac-f5fc-4c7f-b2bb-62e17594a081"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 7.7,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T17:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.800970+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "d2a7325e-a427-4c29-a0ae-ae9612259949"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 8.4,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T18:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.806790+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "f24c3db6-3485-453f-b82b-564a10810b3d"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 9.1,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T19:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.812626+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "3733d740-398c-4f13-9d36-7871fc2b2e6e"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 9.9,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T20:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.819200+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "b655e02c-6bf1-4715-8ad8-784b7413b99b"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 10.5,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T21:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.825040+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "678a3dec-5dd4-4271-ba24-ece553e037c6"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 11.1,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T22:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.830890+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "4ddedf83-51e5-4f88-86a9-0f463ce7e9a7"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 11.6,
+      "unit": "m/s",
+      "observed_at": "2026-09-05T23:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.836463+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "c9d2d221-c6b5-4cfa-9640-c842760d3af6"
+    },
+    {
+      "asset_id": "1ebc7b1e-3f1f-460d-90ff-81e320cecc3f",
+      "metric": "wind_speed",
+      "value": 11.9,
+      "unit": "m/s",
+      "observed_at": "2026-09-06T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.843279+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "6ad337a2-eabd-476e-973d-95021e633bcd"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 78.0,
+      "unit": "degC",
+      "observed_at": "2026-09-05T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.694975+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "0fe41894-b376-4559-8a40-fb205f0a1e9d"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 78.3,
+      "unit": "degC",
+      "observed_at": "2026-09-05T01:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.701425+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "45e369fd-a532-4bab-b4e6-4376961ccb92"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 78.6,
+      "unit": "degC",
+      "observed_at": "2026-09-05T02:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.707115+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "27ec1fb8-e7d6-47e3-93a7-52643aa7e63a"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 78.9,
+      "unit": "degC",
+      "observed_at": "2026-09-05T03:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.712740+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "9fc960c3-19ed-4c71-bfcb-c65a1bd16ce4"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 79.2,
+      "unit": "degC",
+      "observed_at": "2026-09-05T04:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.718985+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "7c110a8e-6ef0-4cfe-9f1c-33507fe153a3"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 79.5,
+      "unit": "degC",
+      "observed_at": "2026-09-05T05:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.724603+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "bb0eeb2d-c955-49c3-b53e-1080300bfce6"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 79.8,
+      "unit": "degC",
+      "observed_at": "2026-09-05T06:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.730568+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "f1a626d9-422f-40ff-a54e-d2644b070c71"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 80.1,
+      "unit": "degC",
+      "observed_at": "2026-09-05T07:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.736904+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "a2e36ee5-246f-48ae-9c0b-62338f917261"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 80.4,
+      "unit": "degC",
+      "observed_at": "2026-09-05T08:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.742427+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "55c8a285-2482-45b1-a271-98cb14b6c383"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 80.7,
+      "unit": "degC",
+      "observed_at": "2026-09-05T09:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.748334+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "d440ec26-cdbb-4e02-977b-78ee04c466c5"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 81.0,
+      "unit": "degC",
+      "observed_at": "2026-09-05T10:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.754626+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "95d14019-6c87-4185-937a-2e94897f1b28"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 81.3,
+      "unit": "degC",
+      "observed_at": "2026-09-05T11:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.761238+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "955a596b-b9a2-4dc7-9cc7-134485f27b1b"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 81.6,
+      "unit": "degC",
+      "observed_at": "2026-09-05T12:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.767896+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "41a99399-3881-44f8-956b-093e1038e4fb"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 81.9,
+      "unit": "degC",
+      "observed_at": "2026-09-05T13:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.774184+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "4290da27-f8b5-4f69-b797-ab10a1fc782e"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 82.2,
+      "unit": "degC",
+      "observed_at": "2026-09-05T14:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.780408+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "18d9f30c-becb-4393-927f-02e14fe477eb"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 82.5,
+      "unit": "degC",
+      "observed_at": "2026-09-05T15:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.786047+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "6f16af45-fce3-4ff2-88ca-4e1c441d4c5c"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 82.8,
+      "unit": "degC",
+      "observed_at": "2026-09-05T16:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.791708+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "c7e1db82-7a71-4f11-9798-6ff6ebe09139"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 83.1,
+      "unit": "degC",
+      "observed_at": "2026-09-05T17:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.797403+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "0e9dd23d-b47d-457d-8796-50ad46a18dd4"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 83.4,
+      "unit": "degC",
+      "observed_at": "2026-09-05T18:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.803428+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "daf626ad-9349-43d8-ba10-ea079c93b04b"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 83.7,
+      "unit": "degC",
+      "observed_at": "2026-09-05T19:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.809260+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "f62adaf9-fc6e-467c-98fa-6aaa5ef08ca7"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 84.0,
+      "unit": "degC",
+      "observed_at": "2026-09-05T20:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.815206+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "09ca0393-fb8c-42fc-bb34-0d2689e235bb"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 87.0,
+      "unit": "degC",
+      "observed_at": "2026-09-05T21:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.821672+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "9db54cbb-403d-4154-9f64-869399d12c6d"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 89.3,
+      "unit": "degC",
+      "observed_at": "2026-09-05T22:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.827643+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ea27753c-8c50-4b89-a382-a73df60389b6"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 91.6,
+      "unit": "degC",
+      "observed_at": "2026-09-05T23:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.833242+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "bad11b47-08a9-4132-963f-3c646dc9f50c"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "value": 93.9,
+      "unit": "degC",
+      "observed_at": "2026-09-06T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.838787+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "97743e72-2e1d-4c30-8e73-27555357e52e"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 253.0,
+      "unit": "kW",
+      "observed_at": "2026-09-05T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.692924+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "dc3bae55-fe9f-4f46-bdd6-51d37756d4e3"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 255.0,
+      "unit": "kW",
+      "observed_at": "2026-09-05T01:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.699180+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "4106c479-a34e-42c4-b877-8831faf61a92"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 256.8,
+      "unit": "kW",
+      "observed_at": "2026-09-05T02:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.705557+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "a6d5a6b6-f742-4995-915e-850d24c5ce3c"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 258.5,
+      "unit": "kW",
+      "observed_at": "2026-09-05T03:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.711134+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "3a28aa2f-9a68-47b1-af1e-b0ab08b48204"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 259.7,
+      "unit": "kW",
+      "observed_at": "2026-09-05T04:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.717258+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "6ac84225-18aa-4a40-8660-ff7aee2015ba"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 260.6,
+      "unit": "kW",
+      "observed_at": "2026-09-05T05:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.723026+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "53ae149b-dbfa-4fe2-a7a1-90713f7785a9"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 261.0,
+      "unit": "kW",
+      "observed_at": "2026-09-05T06:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.729096+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5bbc5e97-73a1-46c8-9b6c-267c3813e440"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 260.9,
+      "unit": "kW",
+      "observed_at": "2026-09-05T07:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.735260+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5b79591b-67af-4f0d-b834-ea801df52197"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 260.3,
+      "unit": "kW",
+      "observed_at": "2026-09-05T08:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.740922+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "623fd14e-d6a0-4015-9ecc-c601e36c48ad"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 259.2,
+      "unit": "kW",
+      "observed_at": "2026-09-05T09:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.746720+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "58ff761a-6222-4c1a-b202-d3b8b4461427"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 257.8,
+      "unit": "kW",
+      "observed_at": "2026-09-05T10:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.752578+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "08182e78-dcfa-46e6-8ff2-776c68bed74d"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 256.1,
+      "unit": "kW",
+      "observed_at": "2026-09-05T11:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.759622+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "d34f097a-802a-4115-aae1-889a5bfc2ce5"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 254.1,
+      "unit": "kW",
+      "observed_at": "2026-09-05T12:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.765921+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "a481b6fa-be46-4d7c-aa62-215126d9dab7"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 252.1,
+      "unit": "kW",
+      "observed_at": "2026-09-05T13:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.772290+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ebca1e5d-73db-4e0f-9099-ec7d67eb55ed"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 250.2,
+      "unit": "kW",
+      "observed_at": "2026-09-05T14:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.778781+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "0f438140-f8ec-46d6-a6f6-89f9b1fd7e4c"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 248.4,
+      "unit": "kW",
+      "observed_at": "2026-09-05T15:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.784474+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "262860c3-27d7-45ec-99f8-f9a3fa9f6a38"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 246.9,
+      "unit": "kW",
+      "observed_at": "2026-09-05T16:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.790158+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "c9392160-6897-4d4b-82b9-290bb2ec8b92"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 245.8,
+      "unit": "kW",
+      "observed_at": "2026-09-05T17:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.795758+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "8e2668ad-23d2-400d-85b4-cb26e355d70a"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 245.2,
+      "unit": "kW",
+      "observed_at": "2026-09-05T18:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.801732+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "e3940033-47c3-477c-b6d5-39e41b34bd45"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 245.0,
+      "unit": "kW",
+      "observed_at": "2026-09-05T19:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.807654+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ed2a6d85-09bc-4b39-8944-44094e2f25e3"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 245.3,
+      "unit": "kW",
+      "observed_at": "2026-09-05T20:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.813626+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "05d7983f-3d6a-44a7-b6f5-7abdacf6cc16"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 246.1,
+      "unit": "kW",
+      "observed_at": "2026-09-05T21:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.820072+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "f8a2af45-d07f-4df3-a010-4d65e9e4c73b"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 247.4,
+      "unit": "kW",
+      "observed_at": "2026-09-05T22:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.825819+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "e3a38894-7a91-4ef5-9ead-f52b327cd59c"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 248.9,
+      "unit": "kW",
+      "observed_at": "2026-09-05T23:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.831700+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ab9a9f3e-9066-43b5-b7f7-dd0e28b01842"
+    },
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "generation",
+      "value": 250.8,
+      "unit": "kW",
+      "observed_at": "2026-09-06T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.837275+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "3c4eaee0-536c-43a5-b04a-2217632d0bd9"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 228.4,
+      "unit": "kW",
+      "observed_at": "2026-09-05T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.694016+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "f3b26fe6-0481-41c0-89df-edcf6bf8d6b4"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 230.6,
+      "unit": "kW",
+      "observed_at": "2026-09-05T01:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.700555+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "1cca1b94-b5e6-4207-9a27-41c01823f4c4"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 232.1,
+      "unit": "kW",
+      "observed_at": "2026-09-05T02:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.706344+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "fd0127c2-6966-4078-bc88-4b726fb8a75b"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 232.9,
+      "unit": "kW",
+      "observed_at": "2026-09-05T03:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.711943+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "1dd2d25a-b7f3-4357-9433-f7d3f12cf7d2"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 232.9,
+      "unit": "kW",
+      "observed_at": "2026-09-05T04:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.718152+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "11d1b906-11e7-4e1d-8f64-8c4d5695785b"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 232.1,
+      "unit": "kW",
+      "observed_at": "2026-09-05T05:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.723820+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "9dbc8c3c-d624-45bd-bdc5-b8238e922bbf"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 230.5,
+      "unit": "kW",
+      "observed_at": "2026-09-05T06:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.729814+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "9c693d20-95dc-4fe1-8697-2656d2c0cc12"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 228.3,
+      "unit": "kW",
+      "observed_at": "2026-09-05T07:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.736129+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "28cd8391-b760-48ae-9c6e-e16271039675"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 225.6,
+      "unit": "kW",
+      "observed_at": "2026-09-05T08:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.741661+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "7f047010-b923-4c61-92cf-34afd6849302"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 222.5,
+      "unit": "kW",
+      "observed_at": "2026-09-05T09:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.747550+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "df84f403-89aa-43af-a01c-b4bd8699179a"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 219.2,
+      "unit": "kW",
+      "observed_at": "2026-09-05T10:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.753675+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "60f45fd8-512b-48e2-b840-480a3b2f33e6"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 216.1,
+      "unit": "kW",
+      "observed_at": "2026-09-05T11:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.760442+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "01605537-ce01-4e37-86c1-97fade2ce464"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 213.1,
+      "unit": "kW",
+      "observed_at": "2026-09-05T12:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.766725+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "1e62da47-a132-4032-8f9e-470dcc22755f"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 210.6,
+      "unit": "kW",
+      "observed_at": "2026-09-05T13:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.773283+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "955e198d-3e10-480d-93ad-151ed9a28259"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 208.7,
+      "unit": "kW",
+      "observed_at": "2026-09-05T14:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.779623+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "7a5c06a3-814e-44ee-97d6-60098bf20336"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 207.4,
+      "unit": "kW",
+      "observed_at": "2026-09-05T15:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.785282+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "4db55eeb-a6ae-4155-824d-ab7112a19d2e"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 207.0,
+      "unit": "kW",
+      "observed_at": "2026-09-05T16:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.790924+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "16d970a1-1371-4cb4-808e-abc7aeb59b35"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 207.4,
+      "unit": "kW",
+      "observed_at": "2026-09-05T17:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.796534+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "f3bad39a-78cb-437d-b3b3-acc364d00994"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 208.5,
+      "unit": "kW",
+      "observed_at": "2026-09-05T18:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.802592+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5da7ef39-6597-4979-9e74-6e72b4adaa5d"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 210.4,
+      "unit": "kW",
+      "observed_at": "2026-09-05T19:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.808477+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "70c37cfd-de24-43cd-8daa-f91b64376f79"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 212.8,
+      "unit": "kW",
+      "observed_at": "2026-09-05T20:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.814424+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "8e2d42d6-f109-453f-81a4-7a207c9be7e3"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 215.7,
+      "unit": "kW",
+      "observed_at": "2026-09-05T21:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.820810+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "cc410e58-0730-4c84-a881-12b1d1cb0ef7"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 218.9,
+      "unit": "kW",
+      "observed_at": "2026-09-05T22:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.826746+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ab3a5675-280b-4573-8929-0c0d328f3ed5"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 222.2,
+      "unit": "kW",
+      "observed_at": "2026-09-05T23:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.832476+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "62e24fc0-dbe1-4b08-8eba-c5ae187fb285"
+    },
+    {
+      "asset_id": "80327e6b-83d7-4b65-8bb1-35f763ac6882",
+      "metric": "consumption",
+      "value": 225.3,
+      "unit": "kW",
+      "observed_at": "2026-09-06T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.838053+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "f764282a-2f8a-446b-b695-4774371b6f46"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.696022+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "a596c30f-cf99-4a69-ad88-53bead9eaf2c"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T01:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.702380+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "a3252a7c-1a2f-4f8d-ba57-9564e55136bd"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T02:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.708078+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "667015a5-9c2d-4e78-8765-5d7d7c70aceb"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T03:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.713670+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "21304a44-68ed-42e5-a23d-89cf83c08131"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T04:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.719989+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "7f51c3df-5a4e-4d5b-8c50-5464c8d83ecc"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T05:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.725691+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "0d39a8e5-0ee8-4c0e-ad2b-169dc8fe75aa"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T06:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.731508+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ed482d21-d54f-4b11-8f74-ba407a9b5009"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T07:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.737813+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ed7aaf78-5ad2-4976-98ca-44e568ed6336"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T08:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.743351+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "f4f58900-cfe3-42c3-aad7-436e897fae57"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T09:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.749430+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "7d81cbb8-478a-4a13-b159-b1312d91d5bc"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T10:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.755679+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "4270fede-6339-4d9f-b219-e0bda7bcf516"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T11:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.762174+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "fd05e41f-aa31-475a-8db3-f6b5e99e5f04"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T12:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.768880+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "d0ed44e2-7bf4-484c-aa75-d34aa1c2154f"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T13:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.775328+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "2a4ad40a-6abc-4d47-a3d4-a9a086f86a5a"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T14:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.781325+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "fd640e54-e2eb-4101-8a87-27fa8a225c66"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T15:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.786993+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "c8302e1d-47ae-46af-8cec-b0d8da3b6c47"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T16:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.792630+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "51a10457-b49d-4836-adff-127407bd02df"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T17:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.798477+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "1c73f808-ed7d-47ce-96ab-48a199efb51d"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T18:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.804404+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "8a87b958-19c8-4e35-a254-26d871785e01"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T19:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.810190+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "fdc54953-c4cb-44e0-868f-3427034be09b"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T20:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.816383+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "339bed19-e3ba-41f8-a5e9-8a41a090a694"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T21:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.822665+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ce29d367-a798-43c2-b1b0-446b217dc7df"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T22:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.828592+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5b751582-115e-4000-aba7-21e2f672c371"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-05T23:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.834156+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "4d464689-243e-4d89-ac0a-f69db02b5794"
+    },
+    {
+      "asset_id": "a3ecc9db-0d35-4472-8756-705f1c47171b",
+      "metric": "soc",
+      "value": 78.0,
+      "unit": "%",
+      "observed_at": "2026-09-06T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.840241+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "7a89b255-bcc2-46a1-8eec-e4ac13a6ebe3"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.696820+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "b794b26d-cc1a-4183-ab9f-5549b7a15a45"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T01:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.703168+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "567766f2-45b8-485b-a398-7b8731ec270c"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T02:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.708816+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "10567424-4113-4b1c-a26e-55c3fd48fd38"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T03:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.714442+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "37b76434-bf3a-4a18-9c01-d2fa57f96033"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T04:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.720733+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ffc02fec-ad32-4c29-8d34-20dd798645f0"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T05:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.726654+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "7496e6c8-d5f4-4a13-9d97-b03e4d0404e5"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T06:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.732310+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "8e7be965-8781-4e14-94d7-6ae92363f195"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T07:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.738581+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "d20d0768-f3d0-4282-b35f-f8df6a954a5f"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T08:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.744166+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5e5192ea-24d5-4f33-91b2-ef50dfec0e8b"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T09:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.750232+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "af4a0508-8a43-4f83-b38d-4148584e757a"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T10:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.756895+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5df34bf0-b0c0-4ff4-bd2b-4d395e6af13e"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T11:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.762950+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "99d28731-12c2-42ad-87fd-dfecb97cc7df"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T12:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.769787+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "f04f16d2-e1e5-43f4-9577-e35904078159"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T13:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.776262+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "767ae530-2805-48fa-8536-f65c0991739c"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T14:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.782104+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "784fc4f9-882d-4b9e-b866-0f4ee8ce2324"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T15:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.787793+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "0fb2a0e6-c3fd-4443-8589-ecce5f6701c2"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T16:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.793400+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "4e3e72e2-a884-483c-a6e1-f04c77a4ea5f"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T17:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.799375+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "904f0f20-4dc9-425d-bea4-473cac2e4a0d"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T18:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.805178+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ea37d2e2-5f22-4b7b-99fd-b66ba7d3ef5f"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T19:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.810943+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "c2630078-82cd-4b96-aca0-7cd7608646ca"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T20:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.817399+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "f6538850-4ff8-42bb-a281-46a0028a7ea1"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T21:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.823475+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "9707043c-7f65-45a0-be36-d769259337b7"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T22:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.829373+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ccb4934a-ee69-4993-b246-0ee031429723"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-05T23:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.834904+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "22ea6b0e-e20b-4e1a-9031-0e5a3d518900"
+    },
+    {
+      "asset_id": "b4d61707-b8cd-456d-99db-9ca4cc907965",
+      "metric": "fuel_burn",
+      "value": 816.0,
+      "unit": "L/day",
+      "observed_at": "2026-09-06T00:00:00+00:00",
+      "ingested_at": "2026-09-07T02:59:33.841381+00:00",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "origin": "simulation",
+      "processing": "raw",
+      "verification": "illustrative",
+      "quality": "synthetic",
+      "lineage": [
+        "54755d2a-b385-4832-ba11-a7392dedd80f"
+      ],
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "c660290e-38b9-4144-860d-3aa59a3c5a61"
+    }
+  ],
+  "sources": [
+    {
+      "title": "POLARIS deterministic engineering demonstration v1",
+      "provider": "POLARIS project team",
+      "reference": "docs/DEMO_MODEL.md",
+      "origin": "simulation",
+      "verification": "illustrative",
+      "checksum": null,
+      "acquired_at": "2026-09-07T02:59:33.689760+00:00",
+      "parser_version": "seed-v1",
+      "transformations": [
+        "Deterministic synthetic hourly examples; no scientific observations"
+      ],
+      "storage_key": null,
+      "uploader": null,
+      "licence": "Project-authored demonstration data; CC0-1.0",
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "54755d2a-b385-4832-ba11-a7392dedd80f"
+    }
+  ],
+  "rules": [
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "metric": "coolant_temperature",
+      "threshold": 90.0,
+      "recovery_threshold": 85.0,
+      "debounce": 2,
+      "streak": 2,
+      "last_observed": "2026-09-06T00:00:00+00:00",
+      "active_alert": "2da1dbb8-4647-4070-bf1b-c49b45afbe16",
+      "assumption": "Illustrative only: two consecutive readings above 90 degC open an alert; reading at or below 85 degC recovers it. Not manufacturer guidance.",
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "140a11a9-0497-4903-847f-ade2662b9661"
+    }
+  ],
+  "alerts": [
+    {
+      "asset_id": "693eca71-8f40-4a59-b50f-6e3738e1f51a",
+      "rule_id": "140a11a9-0497-4903-847f-ade2662b9661",
+      "measurement_id": "97743e72-2e1d-4c30-8e73-27555357e52e",
+      "title": "Primary generator: coolant temperature above 90 degC",
+      "severity": "warning",
+      "status": "open",
+      "recovered": false,
+      "recovered_at": null,
+      "acknowledged_by": null,
+      "created_at": "2026-09-07T02:59:33.839184+00:00",
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "2da1dbb8-4647-4070-bf1b-c49b45afbe16"
+    }
+  ],
+  "work_orders": [],
+  "inventory": [
+    {
+      "name": "Coolant filter",
+      "category": "spare",
+      "location": "Technical store / A-04",
+      "quantity": 3.0,
+      "unit": "each",
+      "reorder_point": 4.0,
+      "asset_code": "GEN-A",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "version": 0,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "28f4458e-0733-434a-bb50-1cab082d873c"
+    },
+    {
+      "name": "Dry provisions",
+      "category": "provisions",
+      "location": "Main store",
+      "quantity": 1250.0,
+      "unit": "kg",
+      "reorder_point": 600.0,
+      "asset_code": null,
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "version": 0,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "36491041-17d1-42dc-92f8-70d327ffc9c2"
+    },
+    {
+      "name": "Medical supplies",
+      "category": "medical",
+      "location": "Clinic",
+      "quantity": 48.0,
+      "unit": "kits",
+      "reorder_point": 20.0,
+      "asset_code": null,
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "version": 0,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ca27a99d-edc0-4a5e-b60f-ac04989f66fd"
+    },
+    {
+      "name": "Polar diesel",
+      "category": "fuel",
+      "location": "Fuel store F-01",
+      "quantity": 26240.0,
+      "unit": "L",
+      "reorder_point": 15000.0,
+      "asset_code": "FUEL",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "version": 0,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "d6104de1-6119-4758-bbb0-7acf924b8c80"
+    },
+    {
+      "name": "Water treatment cartridge",
+      "category": "spare",
+      "location": "Technical store / B-02",
+      "quantity": 8.0,
+      "unit": "each",
+      "reorder_point": 3.0,
+      "asset_code": "WATER",
+      "source_id": "54755d2a-b385-4832-ba11-a7392dedd80f",
+      "version": 0,
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "5da5c8d1-53d2-41fc-bf3e-68ccc601d9ff"
+    }
+  ],
+  "ledger": [
+    {
+      "item_id": "d6104de1-6119-4758-bbb0-7acf924b8c80",
+      "delta": 26240.0,
+      "balance": 26240.0,
+      "kind": "opening",
+      "reason": "Illustrative opening inventory",
+      "work_order_id": null,
+      "idempotency_key": "d6104de1-6119-4758-bbb0-7acf924b8c80",
+      "actor": "seed-v1",
+      "created_at": "2026-09-07T02:59:33.844034+00:00",
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "625b18c1-90af-48f9-be14-5cc401fd8c55"
+    },
+    {
+      "item_id": "28f4458e-0733-434a-bb50-1cab082d873c",
+      "delta": 3.0,
+      "balance": 3.0,
+      "kind": "opening",
+      "reason": "Illustrative opening inventory",
+      "work_order_id": null,
+      "idempotency_key": "28f4458e-0733-434a-bb50-1cab082d873c",
+      "actor": "seed-v1",
+      "created_at": "2026-09-07T02:59:33.844266+00:00",
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "21a88dba-409f-4835-acca-793e6e513974"
+    },
+    {
+      "item_id": "5da5c8d1-53d2-41fc-bf3e-68ccc601d9ff",
+      "delta": 8.0,
+      "balance": 8.0,
+      "kind": "opening",
+      "reason": "Illustrative opening inventory",
+      "work_order_id": null,
+      "idempotency_key": "5da5c8d1-53d2-41fc-bf3e-68ccc601d9ff",
+      "actor": "seed-v1",
+      "created_at": "2026-09-07T02:59:33.844465+00:00",
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "9229ef35-15c4-4a95-971a-c00a800c6dd6"
+    },
+    {
+      "item_id": "36491041-17d1-42dc-92f8-70d327ffc9c2",
+      "delta": 1250.0,
+      "balance": 1250.0,
+      "kind": "opening",
+      "reason": "Illustrative opening inventory",
+      "work_order_id": null,
+      "idempotency_key": "36491041-17d1-42dc-92f8-70d327ffc9c2",
+      "actor": "seed-v1",
+      "created_at": "2026-09-07T02:59:33.844659+00:00",
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "a99bf468-09c1-45c7-8309-4f0e7b352a67"
+    },
+    {
+      "item_id": "ca27a99d-edc0-4a5e-b60f-ac04989f66fd",
+      "delta": 48.0,
+      "balance": 48.0,
+      "kind": "opening",
+      "reason": "Illustrative opening inventory",
+      "work_order_id": null,
+      "idempotency_key": "ca27a99d-edc0-4a5e-b60f-ac04989f66fd",
+      "actor": "seed-v1",
+      "created_at": "2026-09-07T02:59:33.844953+00:00",
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "a58a17d0-cd1c-441a-b704-289cfe020c9c"
+    }
+  ],
+  "shipments": [
+    {
+      "name": "Summer resupply / DEMO-027",
+      "eta": "2026-11-20",
+      "status": "planned",
+      "manifest": [
+        {
+          "name": "Polar diesel",
+          "quantity": 18000,
+          "unit": "L"
+        },
+        {
+          "name": "Coolant filter",
+          "quantity": 12,
+          "unit": "each"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-09-05T12:00:00+00:00",
+          "status": "planned",
+          "note": "Synthetic planning record"
+        }
+      ],
+      "risk": "Illustrative schedule. Weather and vessel availability are unverified.",
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "ebf6cc1b-977f-47bf-b1e7-01c4fd43b50d"
+    }
+  ],
+  "audit": [
+    {
+      "actor": "seed-v1",
+      "action": "alert_opened",
+      "entity_id": "2da1dbb8-4647-4070-bf1b-c49b45afbe16",
+      "details": {
+        "measurement_id": "97743e72-2e1d-4c30-8e73-27555357e52e",
+        "assumption": "Illustrative only: two consecutive readings above 90 degC open an alert; reading at or below 85 degC recovers it. Not manufacturer guidance."
+      },
+      "created_at": "2026-09-07T02:59:33.839563+00:00",
+      "workspace": "demo",
+      "station": "bharati",
+      "id": "dc41c2d4-8b96-4327-a6d7-92c5fbc5bd4f"
+    }
+  ],
+  "replenishments": [],
+  "acquisitions": [],
+  "attachments": []
+}

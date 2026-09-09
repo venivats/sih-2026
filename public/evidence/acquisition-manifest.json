@@ -1,0 +1,22 @@
+{
+  "title": "NASA POWER daily point meteorology, 1\u20137 January 2024",
+  "provider": "NASA POWER / MERRA-2",
+  "reference": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CWS10M&community=RE&start=20240101&end=20240107&format=JSON&time-standard=UTC&latitude=-70.764&longitude=11.734",
+  "origin": "reanalysis",
+  "verification": "provider_retrieved",
+  "checksum": "9ee9c35a62ec755045e13547259ef6ba97fbeba3048c5c53850b3e6bc7a7bb8d",
+  "acquired_at": "2026-09-07T03:08:19.823329+00:00",
+  "parser_version": "nasa-power-daily-v1",
+  "transformations": [
+    "Daily UTC grid means; timestamp denotes start of aggregation day",
+    "T2M C mapped to degC; WS10M m/s retained",
+    "Provider fill values retained as null",
+    "Approximate query coordinate; not a surveyed station position"
+  ],
+  "storage_key": "operational/9ee9c35a62ec755045e13547259ef6ba97fbeba3048c5c53850b3e6bc7a7bb8d",
+  "uploader": "project-initialization",
+  "licence": "NASA-managed AWS registry lists CC BY 4.0 and requests attribution; NASA catalog does not specify a licence. https://registry.opendata.aws/nasa-power/",
+  "workspace": "operational",
+  "station": "maitri",
+  "id": "32af4a6a-7cae-44bc-b6bb-327ddae053e2"
+}
