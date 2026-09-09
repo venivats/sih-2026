@@ -68,6 +68,7 @@ import {
   Empty,
 } from "./components";
 import { latest, affected, n, date } from "./model";
+import { Analytics } from "@vercel/analytics/react";
 const pages: {
   id: Page;
   name: string;
@@ -1101,6 +1102,7 @@ export default function App() {
           </button>
         </div>
       )}
+      <Analytics />
     </div>
   );
 }
