@@ -8,7 +8,7 @@ The existing Vite project now includes `api/index.py`, a supported Python ASGI f
 
 The function fails closed with HTTP 503 if Vercel lacks PostgreSQL, a sufficient JWT secret or a private S3 bucket. It never seeds, migrates or writes to a local database on request. Source uploads cannot fall back to Vercel's temporary filesystem. SQLAlchemy uses NullPool on Vercel; use a managed provider's pooled PostgreSQL URL. Auth tokens remain in memory: after a full page reload, sign in again to reopen shared records. The public session creation/login limiter is process-local; configure shared gateway rate limits before scaling across instances. SSE streams are finite (about 22 seconds), inspect committed scoped audit revisions and reconnect; polling remains available.
 
-No Vercel deployment or managed database has been activated or platform-tested. The connected account returned no accessible teams on 13 September 2026. Docker remains available for a conventional deployment. The /api function pattern is supported for existing projects; we retain it to avoid restructuring into beta Services.
+No Vercel deployment or managed database has been activated or platform-tested. The connected account returned no accessible teams on 13 September 2026. Docker remains available for a conventional deployment. The `/api/**/*.py` function pattern follows Vercel's documented file-based Python configuration; we retain the `/api` layout to avoid restructuring into beta Services.
 
 ## Beginner activation steps
 

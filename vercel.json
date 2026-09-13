@@ -15,7 +15,7 @@
     }
   ],
   "functions": {
-    "api/index.py": {
+    "api/**/*.py": {
       "maxDuration": 60,
       "excludeFiles": "{.venv/**,node_modules/**,backend/tests/**,tests/**,storage/**,backups/**,*.db}"
     }
