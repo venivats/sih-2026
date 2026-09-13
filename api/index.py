@@ -13,11 +13,21 @@ def configuration_gaps(env):
         gaps.append('private durable S3_BUCKET and provider credentials')
     return gaps
 
-gaps=configuration_gaps(os.environ)
-if gaps and os.getenv('VERCEL'):
-    app=FastAPI(title='POLARIS · activation required')
-    @app.api_route('/{path:path}',methods=['GET','POST','PATCH','PUT','DELETE'])
+def activation_app():
+    activation = FastAPI(title='POLARIS · activation required')
+
+    @activation.api_route('/{path:path}',methods=['GET','POST','PATCH','PUT','DELETE'])
     def activation_required(path:str,request:Request):
         return JSONResponse(status_code=503,content={'detail':'Backend activation required: configure PostgreSQL, signing secret and private object storage; run migrations before use.','status':'configuration_required'},headers={'Cache-Control':'no-store'})
-else:
+
+    return activation
+
+def operational_app():
     from backend.main import app
+    return app
+
+# Keep this as an explicit top-level assignment. Vercel's Python entrypoint
+# scanner requires a statically discoverable `app` name before it will build
+# api/index.py as a function.
+gaps=configuration_gaps(os.environ)
+app = activation_app() if gaps and os.getenv('VERCEL') else operational_app()
