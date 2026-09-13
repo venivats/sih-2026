@@ -569,6 +569,22 @@ summary {
 .topbar-controls {
   margin-left: auto;
 }
+.toolbar-more {
+  display: none;
+}
+@media (max-width: 1400px) {
+  .header-mode span {
+    display: none;
+  }
+}
+@media (max-width: 1100px) {
+  .topbar-controls:not(.expanded) > .responsive-extra {
+    display: none;
+  }
+  .topbar-controls .toolbar-more {
+    display: inline-flex;
+  }
+}
 [data-theme="light"]
   :is(
     label,
@@ -712,5 +728,119 @@ label.row.start input[type="checkbox"] {
   }
   .connection-facts {
     grid-template-columns: 1fr;
+  }
+}
+
+.analysis-controls {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.analysis-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 24px;
+  padding: 24px 0;
+  border-block: 1px solid var(--border);
+  margin: 18px 0;
+}
+.analysis-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.analysis-summary strong {
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+.analysis-summary strong small {
+  font-size: 1rem;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.analysis-summary > div > span:last-child {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.analysis-provenance {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  font-size: 0.875rem;
+}
+@media (max-width: 760px) {
+  .analysis-controls,
+  .analysis-summary {
+    grid-template-columns: 1fr;
+  }
+  .analysis-summary {
+    gap: 22px;
+  }
+  .analysis-summary > div {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+}
+.government-weather {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr auto;
+  align-items: center;
+  gap: 22px;
+  background: var(--panel);
+  padding: 22px 26px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--ice);
+  border-radius: 14px;
+  margin: 20px 0;
+}
+.government-weather > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.government-weather > div > strong {
+  font-size: 1.8rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+}
+.government-weather .government-weather-source > strong {
+  font-size: 1rem;
+}
+.government-weather small {
+  font-size: 1rem;
+  color: var(--muted);
+}
+.government-weather > div > span:last-child {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.government-weather .selected-report > strong {
+  color: var(--ice);
+}
+.recorded-chart {
+  margin: 20px 0;
+}
+@media (max-width: 1000px) {
+  .government-weather {
+    grid-template-columns: 1fr 1fr;
+  }
+  .government-weather-source {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 520px) {
+  .government-weather {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .government-weather-source {
+    grid-column: auto;
   }
 }

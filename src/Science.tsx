@@ -1,3 +1,4 @@
+import { RecordedAnalysis } from "./Analysis";
 import { useState, useEffect } from "react";
 import { Panel, Badge, Notice, Empty, Trend } from "./components";
 import { StationContext } from "./StationContext";
@@ -610,6 +611,7 @@ export function Science(p: Props) {
       <div className="section-tabs">
         {[
           ["quality", "Data quality"],
+          ["analysis", "Recorded trends"],
           ["models", "Capacity & thermal"],
           ["research", "Research continuity"],
           ["replay", "Incident replay"],
@@ -634,6 +636,8 @@ export function Science(p: Props) {
           <Quality {...p} />
           <Benchmark />
         </>
+      ) : tab === "analysis" ? (
+        <RecordedAnalysis {...p} />
       ) : tab === "models" ? (
         <div className="two-columns">
           <Capacity {...p} />

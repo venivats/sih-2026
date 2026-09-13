@@ -1,3 +1,17 @@
+# Current verification — 13 September 2026
+
+- Backend suite: **30 passed, 1 skipped**, 44.53 seconds; one upstream Starlette deprecation warning. Temporary SQLite; PostgreSQL contention remains skipped.
+- Model suite: **8 passed**. Recorded median/MAD guards, source separation, unit/coverage/rate guards, existing operations and engineering models. No real-world anomaly performance claimed.
+- Browser: dark station overview and light recorded-signal analysis inspected. Private demo stays editable on reload; fictional crew saves. NCPOR strip matches original parsed reports stamped 12 September with unzoned times. Compact toolbar, navigation and analysis checked in 390/768 px frames with 375/753 px content widths and no document overflow. Real mobile browser/touch and screen reader audit remain unverified.
+- Two separately authenticated accounts share saved operations and scoped update revisions. Stale version writes return 409; a server-side role reduction is effective for an existing token. Reconnect checks latest revision. This is a local backend test, not a hosted two-browser test.
+- TypeScript/Vite production build passed. Same-origin Vercel build and final static publication build are executed separately; no deployed Vercel route or persistence result is claimed.
+- Direct NCPOR download succeeded on 13 September. Preserved bytes parse Maitri/Bharati temperatures and unzoned provider labels; original/calibration semantics remain unverified. No operational Measurement was created.
+- No managed database/bucket, restore test, orbital prediction, durable offline-write synchronization or independent audit has been completed.
+
+Earlier release history follows; dated failures below describe those earlier attempts.
+
+---
+
 # Actual verification results — 9 September 2026
 
 ## Executed for the Expedition release

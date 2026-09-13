@@ -1,3 +1,4 @@
+import { FuelForecast } from "./Analysis";
 import { ResupplyCoverage } from "./Operations";
 import { randomId } from "./id";
 import { PlanningAnalysis } from "./PlanningAnalysis";
@@ -138,6 +139,7 @@ export function Energy(p: Props) {
         </Panel>
       </div>
       <ResupplyCoverage {...p} />
+      <FuelForecast {...p} />
       <PlanningAnalysis {...p} />
       <Panel
         title="Fuel consumption history"

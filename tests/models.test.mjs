@@ -110,3 +110,111 @@ test("quality screening and synthetic benchmark preserve source records", () => 
     assert.equal(s.tp + s.tn + s.fp + s.fn, 40);
   assert.deepEqual(science.benchmark(), b);
 });
+
+const analysis = await module("src/analysisModel.ts");
+test("recorded robust baseline excludes the current sample, preserves gaps and source boundaries", () => {
+  const template = original.measurements[0];
+  const rows = Array.from({ length: 21 }, (_, i) => ({
+    ...template,
+    id: "r" + i,
+    observed_at: new Date(Date.UTC(2026, 0, 1, i)).toISOString(),
+    value: i === 20 ? 100 : 78 + (i % 5),
+    quality: "good",
+  }));
+  const before = JSON.stringify(rows),
+    r = analysis.robustBaseline(rows);
+  assert.equal(r.flag, true);
+  assert.equal(r.count, 20);
+  assert.equal(r.median, 80);
+  assert.equal(JSON.stringify(rows), before);
+  assert.equal(
+    analysis.robustBaseline(rows.map((m) => ({ ...m, value: 80 }))).score,
+    null,
+  );
+  assert.equal(
+    analysis.robustBaseline(
+      rows.map((m, i) => (i === 20 ? { ...m, value: null } : m)),
+    ).score,
+    null,
+  );
+  assert.equal(
+    analysis.robustBaseline(
+      rows.map((m, i) =>
+        i === 20 ? { ...m, source_id: "another-source" } : m,
+      ),
+    ).score,
+    null,
+  );
+  assert.equal(
+    analysis.robustBaseline(
+      rows.map((m, i) =>
+        i === 20 ? { ...m, observed_at: "2026-02-01T00:00:00Z" } : m,
+      ),
+    ).score,
+    null,
+  );
+  assert.equal(
+    analysis.robustBaseline(
+      rows.map((m, i) =>
+        i === 8 ? { ...m, observed_at: rows[7].observed_at } : m,
+      ),
+    ).score,
+    null,
+  );
+  assert.equal(
+    analysis.robustBaseline(
+      rows.map((m, i) => (i === 8 ? { ...m, observed_at: "invalid" } : m)),
+    ).score,
+    null,
+  );
+  assert.equal(
+    analysis.robustBaseline(rows.filter((m, i) => i < 7 || i > 10)).score,
+    null,
+  );
+});
+test("fuel outlook requires real history length; one ledger stock drives calculation and missing days stay missing", () => {
+  const d = fresh();
+  assert.equal(analysis.fuelTrend(d).days, null);
+  const template = d.measurements.find((m) => m.metric === "fuel_burn");
+  d.measurements = d.measurements.filter((m) => m.metric !== "fuel_burn");
+  d.measurements.push(
+    ...Array.from({ length: 10 }, (_, i) => ({
+      ...template,
+      id: "burn" + i,
+      observed_at: new Date(Date.UTC(2026, 0, 1 + i)).toISOString(),
+      value: 700 + i * 10,
+      quality: "good",
+    })),
+  );
+  const before = JSON.stringify(d),
+    r = analysis.fuelTrend(d);
+  assert.equal(r.count, 10);
+  assert.equal(r.mean, 745);
+  assert.equal(r.days, 28400 / 745);
+  assert.ok(r.range[0] < r.days && r.range[1] > r.days);
+  assert.equal(JSON.stringify(d), before);
+  d.inventory = [];
+  assert.equal(analysis.fuelTrend(d).days, null);
+});
+test("fuel outlook refuses invalid units, nonpositive rates and sparse coverage", () => {
+  const d = fresh(),
+    template = d.measurements.find((m) => m.metric === "fuel_burn");
+  d.measurements = Array.from({ length: 8 }, (_, i) => ({
+    ...template,
+    id: "sparse" + i,
+    observed_at: new Date(Date.UTC(2026, 0, 1 + i * 3)).toISOString(),
+    value: 700,
+    quality: "good",
+  }));
+  assert.equal(analysis.fuelTrend(d).days, null);
+  d.measurements.forEach(
+    (m, i) =>
+      (m.observed_at = new Date(Date.UTC(2026, 0, 1 + i)).toISOString()),
+  );
+  assert.ok(analysis.fuelTrend(d).days > 0);
+  d.measurements.at(-1).value = 0;
+  assert.equal(analysis.fuelTrend(d).days, null);
+  d.measurements.at(-1).value = 700;
+  d.inventory.find((i) => i.name === "Polar diesel").unit = "kg";
+  assert.equal(analysis.fuelTrend(d).days, null);
+});

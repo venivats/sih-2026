@@ -1,9 +1,11 @@
+import { canWrite } from "./permissions";
 import { AlertTriangle, ArrowUpRight, ShieldAlert } from "lucide-react";
 import { Maintenance, type Props } from "./pages";
 import { Badge, Empty, Notice, Panel, Trend } from "./components";
 import { affected, date, energy, n } from "./model";
 
 export function Incident(p: Props & { incidentId: string }) {
+  p = { ...p, write: p.write && canWrite(p.role, "maintenance") };
   const { d } = p;
   const alert = d.alerts.find((a) => a.id === p.incidentId);
   if (!alert)

@@ -1,3 +1,11 @@
+# Current checkpoint — 13 September 2026
+
+Prepared connected deployment, scoped team permissions, shared revisions and recorded-signal analysis. Refreshed original-backed NCPOR archive with reports stamped 12 September; not live telemetry. Verification: 30 backend tests and eight model tests pass; PostgreSQL/hosted persistence remain unverified. See docs/CONNECTED_RELEASE.md and docs/VERCEL.md.
+
+The public site remains a browser prototype. Vercel activation is blocked by account access and unprovisioned managed database/object storage. No paid resources created. Publication outcome is reported separately by the hosting service.
+
+---
+
 # POLARIS project status
 Independent SIH26060 prototype; no government endorsement or operational validation.
 
@@ -16,3 +24,9 @@ Independent SIH26060 prototype; no government endorsement or operational validat
 - Actual source finding: official data.ncpor.res.in page readable through web research; direct backend download returned HTTP 502. Provider timezone, cadence and dataset-specific reuse terms remain unresolved.
 - Blocker: no accessible Vercel teams or connected persistent backend hosting. This public site remains frontend-only until a container, PostgreSQL and durable storage are activated.
 - Next action: account owner signs in to Render, connects venivats/sih-2026, and reviews hosting costs before any paid resources are created. Follow docs/OFFICIAL_DATA_AND_HOSTING.md; verify restore and persistence after activation.
+
+## Connected release in progress — 10 September 2026
+- Prepared Vercel Python entrypoint, same-origin API build, fail-closed activation checks and explicit release migrations; no SQLite/file fallback on Vercel. Account still exposes no team.
+- Shared updates now inspect scoped committed audit revisions, use heartbeat frames and reconnect within bounded function duration. Two-client persistence/isolation test passed; backend suite 27 passed, 1 PostgreSQL gate skipped at this checkpoint.
+- NCPOR direct HTTPS acquisition now succeeded (30,126 bytes). Preserved original and checksum under data/acquisitions/ncpor; parsed both published temperatures. Timestamp remains 8 September 11 PM without timezone. Archived report only; no operational Measurement inserted.
+- Next: improve analysis of recorded measurements, resource uncertainty and connected decision views; verify browser and release.

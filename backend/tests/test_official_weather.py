@@ -60,3 +60,15 @@ def test_failed_refresh_retains_prior_report_and_records_failure(client,monkeypa
     assert after['status']=='failed' and '502' in after['latest_attempt']['detail']
     assert after['latest_attempt']['payload']=={}
     assert after['last_retrieved_report']['id']==before['last_retrieved_report']['id']
+
+
+def test_acquired_official_original_matches_manifest_and_unzoned_report():
+    from pathlib import Path
+    import json
+    manifest=json.loads(Path('data/acquisitions/ncpor/2026-09-10.json').read_text())
+    raw=Path(manifest['original_path']).read_bytes()
+    assert hashlib.sha256(raw).hexdigest()==manifest['checksum']
+    reports=feed.parse_page(raw)
+    assert reports['maitri']['temperature_c']==-17.2
+    assert reports['bharati']['temperature_c']==-17.1
+    assert all(r['observed_at'] is None for r in reports.values())

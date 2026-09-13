@@ -1,3 +1,4 @@
+import { canWrite, hasWrites } from "./permissions";
 import { OfficialWeather, ConnectionStatus } from "./OfficialWeather";
 import { Operations, StationQuestions } from "./Operations";
 import { Science } from "./Science";
@@ -146,7 +147,8 @@ export default function App() {
   const nav = useNavigation();
   const { page, setPage, station, setStation, workspace, setWorkspace } = nav;
   const [connectionOpen, setConnectionOpen] = useState(false);
-  const [role, setRole] = useState("public"),
+  const [moreControls, setMoreControls] = useState(false);
+  const [accountRole, setRole] = useState("public"),
     [audience, setAudience] = useState(
       () => localStorage.getItem("polaris-audience") || "operator",
     ),
@@ -170,6 +172,10 @@ export default function App() {
     [online, setOnline] = useState(navigator.onLine),
     [stream, setStream] = useState("polling");
   const qc = useQueryClient();
+  // Tab-local demo permissions follow its workspace, including after a reload.
+  // Connected permissions come only from the authenticated server response.
+  const role =
+    !API && workspace === "browser-demo" ? "demo_operator" : accountRole;
   const q = useQuery({
     queryKey: ["snapshot", workspace, station],
     queryFn: () => snapshot(workspace, station),
@@ -215,8 +221,7 @@ export default function App() {
     !q.isError &&
     (workspace === "browser-demo" ||
       workspace.startsWith("session-") ||
-      (workspace === "operational" &&
-        ["administrator", "operator"].includes(role)));
+      (workspace === "operational" && hasWrites(role)));
   const go = (p: Page) => {
     setPage(p);
     setMenu(false);
@@ -252,11 +257,25 @@ export default function App() {
         setStream("connected");
         retry = 1000;
         const reader = r.body.getReader();
+        const decoder = new TextDecoder();
+        let pending = "";
         while (!ac.signal.aborted) {
           const chunk = await reader.read();
           if (chunk.done) break;
-          qc.invalidateQueries({ queryKey: ["snapshot", workspace, station] });
+          pending += decoder
+            .decode(chunk.value, { stream: true })
+            .replace(/\r\n/g, "\n");
+          let boundary;
+          while ((boundary = pending.indexOf("\n\n")) >= 0) {
+            const event = pending.slice(0, boundary);
+            pending = pending.slice(boundary + 2);
+            if (event.startsWith("event: refresh"))
+              qc.invalidateQueries({
+                queryKey: ["snapshot", workspace, station],
+              });
+          }
         }
+        setStream("polling");
       } catch {
         setStream("polling");
       }
@@ -270,7 +289,7 @@ export default function App() {
       ac.abort();
       clearTimeout(timer);
     };
-  }, [workspace, station, online, lowBandwidth, qc]);
+  }, [workspace, station, online, lowBandwidth, role, qc]);
   useEffect(() => {
     setScenarioPreset(undefined);
     setFocus("");
@@ -455,15 +474,20 @@ export default function App() {
               )}
             </span>
           </div>
-          <div className="topbar-controls">
-            <Appearance />
+          <div
+            className={"topbar-controls" + (moreControls ? " expanded" : "")}
+          >
+            <div className="responsive-extra">
+              <Appearance />
+            </div>
             <button
-              className="small-button"
+              className="small-button responsive-extra"
               onClick={() => setConnectionOpen(true)}
             >
               Connection
             </button>
             <select
+              className="responsive-extra"
               aria-label="Workspace perspective"
               value={audience}
               onChange={(e) => {
@@ -475,7 +499,10 @@ export default function App() {
               <option value="operator">Operator</option>
               <option value="scientist">Scientist</option>
             </select>
-            <button className="small-button" onClick={() => setAsk(true)}>
+            <button
+              className="small-button responsive-extra"
+              onClick={() => setAsk(true)}
+            >
               Ask station
             </button>
             <button
@@ -517,7 +544,7 @@ export default function App() {
               </select>
             </label>
             <button
-              className="header-mode icon-button"
+              className="header-mode icon-button responsive-extra"
               aria-label="Low-bandwidth mode"
               aria-pressed={lowBandwidth}
               title={
@@ -531,7 +558,7 @@ export default function App() {
               <span>{lowBandwidth ? "Low bandwidth" : "Normal sync"}</span>
             </button>
             <button
-              className="icon-button"
+              className="icon-button responsive-extra"
               aria-label={
                 presentation ? "Exit presentation" : "Presentation mode"
               }
@@ -541,7 +568,7 @@ export default function App() {
               {presentation ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
             </button>
             <button
-              className="exercise-trigger"
+              className="exercise-trigger responsive-extra"
               onClick={() => setExercise(true)}
               disabled={!d || !online || q.isError}
             >
@@ -561,6 +588,13 @@ export default function App() {
               ) : (
                 "A"
               )}
+            </button>
+            <button
+              className="small-button toolbar-more"
+              aria-expanded={moreControls}
+              onClick={() => setMoreControls(!moreControls)}
+            >
+              {moreControls ? "Fewer tools" : "More tools"}
             </button>
           </div>
         </header>
@@ -739,15 +773,24 @@ export default function App() {
                 ) : page === "energy" ? (
                   <Energy {...props} />
                 ) : page === "logistics" ? (
-                  <Logistics {...props} />
+                  <Logistics
+                    {...props}
+                    write={write && canWrite(role, "logistics")}
+                  />
                 ) : page === "maintenance" ? (
-                  <Maintenance {...props} />
+                  <Maintenance
+                    {...props}
+                    write={write && canWrite(role, "maintenance")}
+                  />
                 ) : page === "environment" ? (
                   <Environment {...props} />
                 ) : page === "operations" ? (
                   <Operations {...props} />
                 ) : page === "research" ? (
-                  <Science {...props} />
+                  <Science
+                    {...props}
+                    write={write && canWrite(role, "research")}
+                  />
                 ) : page === "scenarios" ? (
                   <Scenarios {...props} initial={scenarioPreset} />
                 ) : (

@@ -4,7 +4,8 @@ from sqlalchemy import select
 from backend.database import SessionLocal
 from backend.models import User
 from backend.modules.access import passwords
-p=argparse.ArgumentParser();p.add_argument('username');p.add_argument('--role',choices=['viewer','operator','administrator'],default='viewer');a=p.parse_args()
+from backend.modules.permissions import ROLE_AREAS
+p=argparse.ArgumentParser();p.add_argument('username');p.add_argument('--role',choices=[r for r in ROLE_AREAS if r not in ('public','demo_operator')],default='viewer');a=p.parse_args()
 password=getpass.getpass('New user password (12+ characters): ')
 if len(password)<12:raise SystemExit('Password too short')
 with SessionLocal() as db:

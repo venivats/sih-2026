@@ -16,6 +16,7 @@ from .modules.access import actor,authorize,token,passwords
 from .modules.telemetry import ingest
 from .modules.maintenance import acknowledge,create_order,transition
 from .seed import seed_workspace
+from .modules.permissions import ROLE_AREAS,operation_area
 
 app=FastAPI(title='POLARIS API',version='0.1.0',description='Independent SIH26060 engineering prototype. No equipment controls.')
 app.add_middleware(CORSMiddleware,allow_origins=os.getenv('CORS_ORIGINS','http://localhost:4173,http://localhost:5173').split(','),allow_credentials=False,allow_methods=['GET','POST','PATCH'],allow_headers=['Authorization','Content-Type'])
@@ -41,7 +42,7 @@ def login(form:OAuth2PasswordRequestForm=Depends(),db=Depends(db_session)):
     if not user or not passwords.verify(form.password,user.password_hash): raise HTTPException(401,'Incorrect username or password')
     return {'access_token':token(user.id,user.role),'token_type':'bearer','role':user.role}
 @app.get('/api/auth/me')
-def me(who=Depends(actor)): return {'role':who['role'],'workspace':who.get('workspace')}
+def me(who=Depends(actor)): return {'role':who['role'],'subject':who['sub'],'workspace':who.get('workspace'),'write_areas':sorted(ROLE_AREAS.get(who['role'],set()))}
 @app.post('/api/demo-sessions')
 def demo_session(db=Depends(db_session)):
     if os.getenv('ENABLE_PUBLIC_DEMO_SESSIONS','true')!='true': raise HTTPException(403,'Private demo sessions disabled')
@@ -58,13 +59,13 @@ def reading(workspace:str,station:Station,body:ReadingIn,who=Depends(actor),db=D
     return serialize(ingest(db,workspace,station,body.model_dump(),who['sub']))
 @app.post('/api/w/{workspace}/{station}/alerts/{id}/acknowledge',response_model=AlertOut)
 def ack(workspace:str,station:Station,id:str,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True);return serialize(acknowledge(db,workspace,station,id,who['sub']))
+    authorize(who,workspace,write=True,area="maintenance");return serialize(acknowledge(db,workspace,station,id,who['sub']))
 @app.post('/api/w/{workspace}/{station}/alerts/{id}/work-orders',response_model=WorkOrderOut)
 def order(workspace:str,station:Station,id:str,body:OrderIn,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True);return serialize(create_order(db,workspace,station,id,who['sub'],body.model_dump()))
+    authorize(who,workspace,write=True,area="maintenance");return serialize(create_order(db,workspace,station,id,who['sub'],body.model_dump()))
 @app.patch('/api/w/{workspace}/{station}/work-orders/{id}',response_model=WorkOrderOut)
 def update_order(workspace:str,station:Station,id:str,body:TransitionIn,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True);return serialize(transition(db,workspace,station,id,who['sub'],body.status,body.notes))
+    authorize(who,workspace,write=True,area="maintenance");return serialize(transition(db,workspace,station,id,who['sub'],body.status,body.notes))
 
 from .modules.logistics import transact,replenish,reserve,release
 from .modules.energy import energy
@@ -86,16 +87,16 @@ def scenario_route(workspace:str,station:Station,body:ScenarioIn,who=Depends(act
     authorize(who,workspace);return run(db,workspace,station,body.model_dump())
 @app.post('/api/w/{workspace}/{station}/inventory/transactions',response_model=LedgerOut)
 def inventory_route(workspace:str,station:Station,body:LedgerIn,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True);return serialize(transact(db,workspace,station,who['sub'],body.model_dump()))
+    authorize(who,workspace,write=True,area="logistics");return serialize(transact(db,workspace,station,who['sub'],body.model_dump()))
 @app.post('/api/w/{workspace}/{station}/reservations',response_model=ReservationOut)
 def reserve_route(workspace:str,station:Station,body:ReservationIn,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True);return serialize(reserve(db,workspace,station,who['sub'],body.model_dump()))
+    authorize(who,workspace,write=True,area="maintenance");return serialize(reserve(db,workspace,station,who['sub'],body.model_dump()))
 @app.post('/api/w/{workspace}/{station}/reservations/{id}/release',response_model=ReservationOut)
 def release_route(workspace:str,station:Station,id:str,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True);return serialize(release(db,workspace,station,id,who['sub']))
+    authorize(who,workspace,write=True,area="maintenance");return serialize(release(db,workspace,station,id,who['sub']))
 @app.post('/api/w/{workspace}/{station}/replenishments',response_model=ReplenishmentOut)
 def replenishment_route(workspace:str,station:Station,body:ReplenishIn,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True);return serialize(replenish(db,workspace,station,who['sub'],body.model_dump()))
+    authorize(who,workspace,write=True,area="logistics");return serialize(replenish(db,workspace,station,who['sub'],body.model_dump()))
 @app.post('/api/w/{workspace}/{station}/assets',response_model=AssetOut)
 def asset_route(workspace:str,station:Station,body:AssetIn,who=Depends(actor),db=Depends(db_session)):
     authorize(who,workspace,write=True,admin=True)
@@ -109,7 +110,7 @@ def rule_route(workspace:str,station:Station,id:str,body:RuleIn,who=Depends(acto
     r.streak=0;audit(db,workspace,station,who['sub'],'rule_updated',r.id,body.model_dump());return serialize(r)
 @app.patch('/api/w/{workspace}/{station}/shipments/{id}',response_model=ShipmentOut)
 def shipment_route(workspace:str,station:Station,id:str,body:ShipmentIn,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True);r=record(db,Shipment,id,workspace,station,lock=True)
+    authorize(who,workspace,write=True,area="logistics");r=record(db,Shipment,id,workspace,station,lock=True)
     transitions={'planned':['dispatched','delayed'],'dispatched':['in_transit','delayed'],'in_transit':['arrived','delayed'],'delayed':['dispatched','in_transit','arrived'],'arrived':[]}
     if body.status not in transitions[r.status]: raise HTTPException(409,'Invalid shipment status transition')
     r.status=body.status;r.history=[*r.history,{'at':now(),'status':body.status,'note':body.note,'actor':who['sub']}]
@@ -132,7 +133,7 @@ def provider_route(workspace:str,station:Station,who=Depends(actor),db=Depends(d
     authorize(who,workspace,write=True,admin=True);return serialize(acquire(db,workspace,station,who['sub']))
 @app.post('/api/w/{workspace}/{station}/work-orders/{id}/attachments',response_model=AttachmentOut)
 async def attachment_route(workspace:str,station:Station,id:str,file:UploadFile=File(...),who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True);record(db,WorkOrder,id,workspace,station)
+    authorize(who,workspace,write=True,area="maintenance");record(db,WorkOrder,id,workspace,station)
     from pathlib import Path
     filename=Path(file.filename or 'attachment.txt').name
     if Path(filename).suffix.lower() not in ['.pdf','.txt','.md','.csv']:raise HTTPException(422,'Supported attachments: PDF, TXT, MD, CSV')
@@ -145,15 +146,13 @@ def get_attachment(workspace:str,station:Station,id:str,who=Depends(actor),db=De
     authorize(who,workspace);a=record(db,Attachment,id,workspace,station)
     return Response(get_bytes(a.storage_key),media_type='application/octet-stream',headers={'Content-Disposition':'attachment; filename="attachment.bin"'})
 @app.get('/api/w/{workspace}/{station}/events')
-def events(workspace:str,station:Station,who=Depends(actor)):
+def events(workspace:str,station:Station,request:Request,who=Depends(actor),db=Depends(db_session)):
     authorize(who,workspace)
-    import asyncio
     from fastapi.responses import StreamingResponse
-    async def stream():
-        for _ in range(4):
-            yield 'event: refresh\ndata: '+json.dumps({'server_time':now()})+'\n\n'
-            await asyncio.sleep(15)
-    return StreamingResponse(stream(),media_type='text/event-stream',headers={'X-Accel-Buffering':'no'})
+    from sqlalchemy.orm import sessionmaker
+    from .modules.events import stream_revisions
+    factory=sessionmaker(bind=db.get_bind())
+    return StreamingResponse(stream_revisions(factory,workspace,station,request.is_disconnected),media_type='text/event-stream',headers={'X-Accel-Buffering':'no','Cache-Control':'no-cache'})
 
 from .modules.guards import RequestGuards
 app.add_middleware(RequestGuards)
@@ -185,29 +184,31 @@ def exercise_route(workspace:str,station:Station,body:ExerciseIn,who=Depends(act
 
 @app.post('/api/w/{workspace}/{station}/waste',response_model=WasteOut)
 def waste_create(workspace:str,station:Station,body:WasteIn,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True)
+    authorize(who,workspace,write=True,area="logistics")
     from .modules.waste import register
     return serialize(register(db,workspace,station,who['sub'],body.model_dump()))
 @app.patch('/api/w/{workspace}/{station}/waste/{id}',response_model=WasteOut)
 def waste_update(workspace:str,station:Station,id:str,body:WasteTransitionIn,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True)
+    authorize(who,workspace,write=True,area="logistics")
     from .modules.waste import transition as waste_transition
     return serialize(waste_transition(db,workspace,station,who['sub'],id,body.status,body.note))
 
 from .modules.operations import OpsIn,OpsUpdate,AssignCrew
 @app.post('/api/w/{workspace}/{station}/operations',response_model=OpsOut)
 def ops_create(workspace:str,station:Station,body:OpsIn,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True)
+    authorize(who,workspace,write=True,area=operation_area(body.kind))
     from .modules.operations import create
     return serialize(create(db,workspace,station,who['sub'],body))
 @app.patch('/api/w/{workspace}/{station}/operations/{id}',response_model=OpsOut)
 def ops_update(workspace:str,station:Station,id:str,body:OpsUpdate,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True)
+    authorize(who,workspace)
+    existing=record(db,OpsRecord,id,workspace,station)
+    authorize(who,workspace,write=True,area=operation_area(existing.kind))
     from .modules.operations import update
     return serialize(update(db,workspace,station,who['sub'],id,body))
 @app.post('/api/w/{workspace}/{station}/work-orders/{id}/assign-crew',response_model=WorkOrderOut)
 def assign_crew(workspace:str,station:Station,id:str,body:AssignCrew,who=Depends(actor),db=Depends(db_session)):
-    authorize(who,workspace,write=True)
+    authorize(who,workspace,write=True,area="maintenance")
     from .modules.operations import assign
     return serialize(assign(db,workspace,station,who['sub'],id,body))
 

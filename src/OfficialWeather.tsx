@@ -45,7 +45,21 @@ export function OfficialWeather({
     staleTime: 60000,
     retry: false,
   });
-  const report = feed.data?.last_retrieved_report;
+  const useArchive = !API || !operational;
+  const archive = useQuery<{ reports: Record<string, Report> }>({
+    queryKey: ["official-archive"],
+    enabled: useArchive,
+    staleTime: Infinity,
+    retry: false,
+    queryFn: async () => {
+      const response = await fetch("/official-weather-evidence.json");
+      if (!response.ok) throw Error("Archived official report unavailable");
+      return response.json();
+    },
+  });
+  const report = useArchive
+    ? archive.data?.reports[station]
+    : feed.data?.last_retrieved_report;
   return (
     <Panel
       title="Official station weather"
@@ -70,7 +84,11 @@ export function OfficialWeather({
             {n(report?.payload.temperature_c)} <small>°C</small>
           </strong>
           <Badge tone="amber">
-            {report ? "Source review required" : "Feed unavailable"}
+            {report
+              ? useArchive
+                ? "Archived official report · not live"
+                : "Source review required"
+              : "Feed unavailable"}
           </Badge>
         </div>
         <div>
@@ -91,9 +109,10 @@ export function OfficialWeather({
       </div>
       {!API ? (
         <Notice>
-          The official portal is identified, but this website has no connected
-          server to retrieve its reports. Open the provider page to inspect its
-          published temperatures.
+          This archived report was downloaded from NCPOR. Its acquisition time
+          is shown above. No background live collector is connected to this
+          publication. The date below the source value remains its published
+          date.
         </Notice>
       ) : !operational ? (
         <Notice>
@@ -160,8 +179,9 @@ export function OfficialWeather({
         <p>
           Source: NCPOR, “Weather at Indian Polar Stations”. Public page found
           on 9 September 2026. It displayed a provider timestamp without a
-          timezone; update cadence is unconfirmed. Direct retrieval from the
-          development environment returned HTTP 502.
+          timezone; update cadence is unconfirmed. Each retrieved original page
+          and its checksum are preserved. The displayed archive retains its own
+          acquisition time separately from the provider's published time.
         </p>
         <p>
           Server retrieval uses a fixed official URL, a 20-second timeout, a 2
@@ -252,5 +272,54 @@ export function ConnectionStatus() {
         </a>
       </div>
     </Panel>
+  );
+}
+
+export function GovernmentWeatherStrip({
+  station,
+  onInspect,
+}: {
+  station: string;
+  onInspect: () => void;
+}) {
+  const archive = useQuery<{ reports: Record<string, Report> }>({
+    queryKey: ["official-archive"],
+    staleTime: Infinity,
+    retry: false,
+    queryFn: async () => {
+      const r = await fetch("/official-weather-evidence.json");
+      if (!r.ok) throw Error("Archive unavailable");
+      return r.json();
+    },
+  });
+  return (
+    <section
+      className="government-weather"
+      aria-label="Archived government weather reports"
+    >
+      <div className="government-weather-source">
+        <span className="eyebrow">NCPOR · OFFICIAL SOURCE</span>
+        <strong>Published station reports</strong>
+        <span>Archived · not live</span>
+      </div>
+      {["maitri", "bharati"].map((s) => {
+        const r = archive.data?.reports[s];
+        return (
+          <div key={s} className={s === station ? "selected-report" : ""}>
+            <span>{s === "maitri" ? "Maitri" : "Bharati"}</span>
+            <strong>
+              {n(r?.payload.temperature_c)} <small>°C</small>
+            </strong>
+            <span>
+              {r?.payload.published_time_label || "Unavailable"} · timezone{" "}
+              {r ? "unspecified" : "unavailable"}
+            </span>
+          </div>
+        );
+      })}
+      <button className="small-button" onClick={onInspect}>
+        Inspect source <ExternalLink size={14} />
+      </button>
+    </section>
   );
 }

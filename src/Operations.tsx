@@ -1,3 +1,4 @@
+import { canWrite } from "./permissions";
 import { useState } from "react";
 import {
   ArrowRight,
@@ -188,6 +189,7 @@ function download(name: string, value: unknown) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 export function Handover(p: Props) {
+  p = { ...p, write: p.write && canWrite(p.role, "handover") };
   const [report, setReport] = useState<ReturnType<typeof handover> | null>(
       null,
     ),
@@ -424,6 +426,11 @@ export function Operations(p: Props) {
     u.searchParams.set("tab", t);
     history.replaceState({}, "", u);
   }
+  p = {
+    ...p,
+    write:
+      p.write && canWrite(p.role, tab === "brief" ? "handover" : "operations"),
+  };
   async function save(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget),
@@ -487,8 +494,9 @@ export function Operations(p: Props) {
       </div>
       {!p.write && (
         <Notice>
-          Start a private demo to register fictional crew and tasks. Shared
-          demonstration records are read-only.
+          Your current workspace or role does not permit changes in this
+          register. Start a private demonstration or ask the administrator for
+          the appropriate team role.
         </Notice>
       )}
       {tab === "brief" ? (

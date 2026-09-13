@@ -2,12 +2,22 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
   "installCommand": "npm ci",
-  "buildCommand": "npm run build",
+  "buildCommand": "node scripts/build-vercel.mjs",
   "outputDirectory": "dist",
   "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api"
+    },
     {
       "source": "/stations/:path*",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{.venv/**,node_modules/**,backend/tests/**,tests/**,storage/**,backups/**,*.db}"
+    }
+  }
 }

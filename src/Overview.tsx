@@ -1,3 +1,4 @@
+import { GovernmentWeatherStrip, OfficialWeather } from "./OfficialWeather";
 import { DecisionCentre, Handover } from "./Operations";
 import { useState } from "react";
 import {
@@ -94,6 +95,10 @@ export function Overview(p: Props) {
           </small>
         </div>
       </header>
+      <GovernmentWeatherStrip
+        station={d.station}
+        onInspect={() => setView("readiness")}
+      />
       <div className="overview-switcher">
         <div role="tablist" aria-label="Station overview views">
           {tabs.map((t) => (
@@ -141,7 +146,14 @@ export function Overview(p: Props) {
             <Briefing {...p} />
           </>
         ) : view === "readiness" ? (
-          <Readiness {...p} />
+          <>
+            <OfficialWeather
+              station={d.station}
+              role={p.role}
+              operational={d.workspace === "operational"}
+            />
+            <Readiness {...p} />
+          </>
         ) : (
           <>
             <OperationsMetrics {...p} />
