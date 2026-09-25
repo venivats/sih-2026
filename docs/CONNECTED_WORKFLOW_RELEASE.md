@@ -54,6 +54,19 @@ The model and browser-storage adapter suites pass 14 tests. They include locatio
 
 A production build targeting the same-origin `/api` backend passes. No database migration is needed: the new record types use the existing scoped operations table.
 
-Pending gates: visual desktop/mobile checks in light and dark themes; keyboard/dialog review in the running release; PostgreSQL concurrency validation; live Render deployment and persistence verification. The current execution environment rejects the network permission needed for browser access to the local preview. Render also requires explicit user selection of its workspace before its management tools can be used. No live deployment is claimed by this document.
+PR #4 was merged into `main` as `43a4c68269566f9a600fba8c29724e1bf1b38eef`. Render deployment `dep-dar7a3nlk1mc73d7fph0` became live on 25 September 2026 at 13:21 UTC at https://sih-2026-k5jr.onrender.com. The live connection panel reports the application server and PostgreSQL responding.
 
-The release is prepared on a feature branch so the live version can remain available until these gates are completed. Existing Render database, storage, credentials and account configuration are not changed.
+Live browser verification used a newly created private demonstration, without writing operational records:
+
+- Acknowledged the simulated generator warning, assigned a dated work order and created a linked fictional crew assignment.
+- Demonstrated boundary uncertainty and a configured zone breach. Saved an inspection note and an early check-in; both appear in the contact log and incident replay.
+- Started and resolved the work with specific notes. The sensor correctly remained unrecovered.
+- Generated and saved a handover. Its preserved report and private-demo editing access survived a full page reload.
+- Saved a named fuel comparison after reload. Its evidence panel shows the input inventory, burn observation, shipment, formula and time mismatch assumption.
+- Verified browser Back/Forward between workspaces and Escape dismissal of the calculation dialog. Inspected desktop views in both themes; no document-wide horizontal overflow at the tested 1348 px width.
+- The visual review found small map labels and faint definition-list values in light mode. Labels were enlarged and light-theme facts now use theme text colours. The old fixed maintenance due date was removed; users explicitly choose a deadline.
+- The Render error-log query from deployment start through 13:30 UTC returned no error entries.
+
+Remaining verification: mobile-device and screen-reader review; comprehensive keyboard and contrast audit; the skipped disposable PostgreSQL concurrency test; and independent production backup/restore and durable source-file checks. A responding database and a successful browser reload do not establish all of those properties. The automated restart/restore test uses a disposable local SQLite database, not the production PostgreSQL database.
+
+The release uses the existing Render service and database. No new paid resources, storage configuration, credentials or account permissions were created or changed. Real trackers, station-surveyed geometry, offline queued writes and live Antarctic sensor ingestion remain outside this release.

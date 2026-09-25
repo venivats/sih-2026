@@ -858,7 +858,6 @@ export function Maintenance(p: Props & { incidentId?: string }) {
               <input
                 type="date"
                 name="due_date"
-                defaultValue="2026-09-08"
                 required
               />
             </label>

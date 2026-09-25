@@ -116,6 +116,12 @@ body {
 [data-theme="light"] :is(h1, h2, h3, h4, strong, b, .stat-value) {
   color: var(--text);
 }
+[data-theme="light"] dt {
+  color: var(--muted);
+}
+[data-theme="light"] dd {
+  color: var(--text);
+}
 [data-theme="light"]
   :is(
     p,

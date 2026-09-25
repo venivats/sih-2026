@@ -167,7 +167,7 @@
 .crew-map text {
   fill: var(--text);
   font:
-    13px Arial,
+    20px Arial,
     sans-serif;
 }
 .map-station {
