@@ -1,3 +1,4 @@
+import { MissionBrief } from "./MissionBrief";
 import { GovernmentWeatherStrip, OfficialWeather } from "./OfficialWeather";
 import { DecisionCentre, Handover } from "./Operations";
 import { useState } from "react";
@@ -21,7 +22,7 @@ import { latest, n, date } from "./model";
 
 export function Overview(p: Props) {
   const { d, go, evidence } = p;
-  const [view, setView] = useState("systems");
+  const [view, setView] = useState("today");
   const temp = latest(d, "temperature"),
     wind = latest(d, "wind_speed");
   const latestTime = [...d.measurements].sort((a, b) =>
@@ -29,6 +30,7 @@ export function Overview(p: Props) {
   )[0]?.observed_at;
   const shipment = d.shipments[0];
   const tabs = [
+    { id: "today", name: "Station briefing", icon: ClipboardList },
     { id: "systems", name: "Systems view", icon: Network },
     { id: "brief", name: "Shift brief", icon: ClipboardList },
     { id: "readiness", name: "Data readiness", icon: ScanLine },
@@ -140,7 +142,9 @@ export function Overview(p: Props) {
         aria-labelledby={"tab-" + view}
         className="overview-view"
       >
-        {view === "brief" ? (
+        {view === "today" ? (
+          <MissionBrief {...p} />
+        ) : view === "brief" ? (
           <>
             <Handover {...p} />
             <Briefing {...p} />

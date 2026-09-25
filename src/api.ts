@@ -7,9 +7,11 @@ export const API =
   new URLSearchParams(location.search).get("browser-demo") === "1"
     ? ""
     : import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? "/api" : "");
-export let bearer = "";
+// Only the isolated demo credential survives a reload, within this browser tab.
+export let bearer = sessionStorage.getItem("polaris-demo-token") || "";
 export function setBearer(v: string) {
   bearer = v;
+  sessionStorage.removeItem("polaris-demo-token");
 }
 export async function request(path: string, body?: unknown, method?: string) {
   if (!API)
@@ -57,15 +59,21 @@ export async function snapshot(w: string, s: string): Promise<Snapshot> {
       acquisitions: [],
       attachments: [],
     };
-  const stored =
-    w === "browser-demo" ? sessionStorage.getItem("polaris-demo-" + s) : null;
-  if (stored) return JSON.parse(stored);
+  const stored = w.startsWith("browser-")
+    ? sessionStorage.getItem("polaris-demo-" + w + "-" + s) ||
+      (w === "browser-demo"
+        ? sessionStorage.getItem("polaris-demo-" + s)
+        : null)
+    : null;
+  if (stored)
+    return { ...JSON.parse(stored), fetched_at: new Date().toISOString() };
   const r = await fetch("/demo-" + s + ".json");
   if (!r.ok) throw new Error("Demonstration snapshot unavailable");
   const d = await r.json();
-  if (w === "browser-demo") {
+  d.fetched_at = new Date().toISOString();
+  if (w.startsWith("browser-")) {
     d.workspace = w;
-    sessionStorage.setItem("polaris-demo-" + s, JSON.stringify(d));
+    sessionStorage.setItem("polaris-demo-" + w + "-" + s, JSON.stringify(d));
   }
   return d;
 }
@@ -73,9 +81,10 @@ export async function startSession() {
   if (API) {
     const r = await request("/demo-sessions", {});
     setBearer(r.access_token);
+    sessionStorage.setItem("polaris-demo-token", r.access_token);
     return r.workspace;
   }
-  return "browser-demo";
+  return "browser-" + randomId();
 }
 async function mutateUnserialized(
   w: string,
@@ -85,7 +94,7 @@ async function mutateUnserialized(
   method = "POST",
 ) {
   if (API) return request(path(w, s) + endpoint, body, method);
-  if (w !== "browser-demo")
+  if (!w.startsWith("browser-"))
     throw new Error("Start a private demo to make changes.");
   const d = await snapshot(w, s),
     now = new Date().toISOString();
@@ -140,7 +149,12 @@ async function mutateUnserialized(
     } else {
       const row = d.operations.find((r) => r.id === id);
       if (!row) throw Error("Record unavailable");
-      if (row.kind === "handover") throw Error("Saved handovers are immutable");
+      if (
+        ["handover", "field_position", "field_event", "comparison"].includes(
+          row.kind,
+        )
+      )
+        throw Error("Saved evidence is immutable; create a new record");
       if (row.version !== body.version)
         throw Error("Record changed. Reload before saving");
       validateOps(d, row.kind, data);
@@ -518,7 +532,7 @@ async function mutateUnserialized(
     log("shipment_updated", shipment.id);
     result = shipment;
   } else throw new Error("This action requires a connected backend.");
-  sessionStorage.setItem("polaris-demo-" + s, JSON.stringify(d));
+  sessionStorage.setItem("polaris-demo-" + w + "-" + s, JSON.stringify(d));
   return result;
 }
 

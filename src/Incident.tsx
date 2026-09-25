@@ -1,3 +1,4 @@
+import { IncidentJourney } from "./IncidentJourney";
 import { canWrite } from "./permissions";
 import { AlertTriangle, ArrowUpRight, ShieldAlert } from "lucide-react";
 import { Maintenance, type Props } from "./pages";
@@ -45,6 +46,7 @@ export function Incident(p: Props & { incidentId: string }) {
           {alert.recovered ? "Sensor recovered" : "Sensor unrecovered"}
         </Badge>
       </div>
+      <IncidentJourney {...p} incidentId={p.incidentId} />
       <div className="investigation-grid">
         <Panel title="01 / Trigger & evidence">
           <div className="trigger-value">
@@ -200,7 +202,7 @@ export function Incident(p: Props & { incidentId: string }) {
           )}
         </Panel>
       </div>
-      <Maintenance {...p} />
+      <Maintenance {...p} incidentId={p.incidentId} />
     </div>
   );
 }

@@ -11,6 +11,7 @@ export const routePages = [
   "evidence",
   "operations",
   "research",
+  "field",
 ] as const;
 export function readRoute() {
   const u = new URL(location.href),

@@ -100,7 +100,7 @@ export function Exercise({
         return;
       }
       const workspace =
-        d.workspace.startsWith("session-") || d.workspace === "browser-demo"
+        d.workspace.startsWith("session-") || d.workspace.startsWith("browser-")
           ? d.workspace
           : await startSession();
       await snapshot(workspace, d.station);

@@ -425,6 +425,48 @@ export function Evidence({ d, ids }: { d: Snapshot; ids: string[] }) {
   ]);
   return (
     <div className="evidence-content">
+      <p className="muted">
+        Selected station: {d.station} · workspace: {d.workspace}. Observation,
+        acquisition and retrieval times are different events.
+      </p>
+      {d.shipments
+        .filter((r) => ids.includes(r.id))
+        .map((r) => (
+          <div className="record" key={r.id}>
+            <h3>{r.name}</h3>
+            <dl>
+              <dt>Expected arrival</dt>
+              <dd>{date(r.eta)}</dd>
+              <dt>Status</dt>
+              <dd>{r.status}</dd>
+              <dt>Record ID</dt>
+              <dd>{r.id}</dd>
+            </dl>
+            <p>{r.risk}</p>
+          </div>
+        ))}
+      {(d.operations || [])
+        .filter((r) => ids.includes(r.id))
+        .map((r) => (
+          <div className="record" key={r.id}>
+            <h3>{r.label}</h3>
+            <Badge>{r.origin}</Badge>
+            <dl>
+              <dt>Record type</dt>
+              <dd>{r.kind.replaceAll("_", " ")}</dd>
+              <dt>Recorded</dt>
+              <dd>{date(r.created_at)}</dd>
+              <dt>Revision</dt>
+              <dd>{r.version}</dd>
+              <dt>Record ID</dt>
+              <dd className="mono">{r.id}</dd>
+            </dl>
+            <pre className="evidence-json">
+              {JSON.stringify(r.data, null, 2)}
+            </pre>
+          </div>
+        ))}
+
       {d.edges
         .filter((e) => ids.includes(e.id))
         .map((e) => (

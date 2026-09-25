@@ -218,3 +218,202 @@ test("fuel outlook refuses invalid units, nonpositive rates and sparse coverage"
   d.inventory.find((i) => i.name === "Polar diesel").unit = "kg";
   assert.equal(analysis.fuelTrend(d).days, null);
 });
+
+const mission = await module("src/missionModel.ts");
+const fieldValidation = await module("src/fieldValidation.ts");
+const clock = Date.parse("2026-09-25T10:00:00Z");
+const fieldPlan = {
+  id: "plan",
+  kind: "field_plan",
+  label: "Inspection",
+  data: {
+    crew_id: "crew",
+    asset_id: "asset",
+    centre_x: 0,
+    centre_y: 0,
+    radius_m: 100,
+    restricted_x: 400,
+    restricted_y: 0,
+    restricted_radius_m: 50,
+    check_in_due: "2026-09-25T09:59:00Z",
+  },
+};
+const point = (x, y, accuracy_m = 5, age = 0) => ({
+  id: "position",
+  kind: "field_position",
+  created_at: new Date(clock).toISOString(),
+  data: {
+    plan_id: "plan",
+    crew_id: "crew",
+    x,
+    y,
+    accuracy_m,
+    observed_at: new Date(clock - age).toISOString(),
+  },
+});
+test("location classes account for uncertainty, stale readings and reported accuracy", () => {
+  assert.equal(
+    mission.zoneStatus(fieldPlan, point(0, 0), clock).state,
+    "inside",
+  );
+  assert.equal(
+    mission.zoneStatus(fieldPlan, point(96, 0), clock).state,
+    "review",
+  );
+  assert.equal(
+    mission.zoneStatus(fieldPlan, point(120, 0, 40), clock).state,
+    "review",
+  );
+  assert.equal(
+    mission.zoneStatus(fieldPlan, point(150, 0), clock).state,
+    "breach",
+  );
+  assert.equal(
+    mission.zoneStatus(fieldPlan, point(400, 0), clock).state,
+    "breach",
+  );
+  assert.equal(
+    mission.zoneStatus(fieldPlan, point(0, 0, 5, 120001), clock).state,
+    "unknown",
+  );
+  assert.equal(
+    mission.zoneStatus(fieldPlan, point(0, 0, 5, -120000), clock).state,
+    "unknown",
+  );
+  assert.equal(
+    mission.zoneStatus(fieldPlan, point(0, 0, -5), clock).state,
+    "unknown",
+  );
+  assert.equal(
+    mission.zoneStatus(fieldPlan, undefined, clock).state,
+    "unknown",
+  );
+});
+test("late positions cannot replace more recent observations; check-in and SOS remain distinct", () => {
+  const d = fresh(),
+    newer = point(0, 0),
+    older = {
+      ...point(150, 0, 5, 180000),
+      id: "old",
+      created_at: new Date(clock + 1000).toISOString(),
+    };
+  d.operations = [fieldPlan, newer, older];
+  assert.equal(mission.positionFor(d, fieldPlan).id, newer.id);
+  assert.equal(mission.checkInStatus(d, fieldPlan, clock).overdue, true);
+  const event = {
+    kind: "field_event",
+    data: {
+      plan_id: "plan",
+      event: "check_in",
+      check_in_due: fieldPlan.data.check_in_due,
+    },
+    created_at: new Date(clock - 120000).toISOString(),
+  };
+  d.operations.push(event);
+  assert.equal(mission.checkInStatus(d, fieldPlan, clock).overdue, false);
+  assert.equal(
+    mission.checkInStatus(
+      d,
+      {
+        ...fieldPlan,
+        data: { ...fieldPlan.data, check_in_due: "2026-09-25T09:59:30Z" },
+      },
+      clock,
+    ).overdue,
+    true,
+  );
+  d.operations.push({
+    ...event,
+    data: { ...event.data, event: "sos" },
+    created_at: new Date(clock + 1).toISOString(),
+  });
+  d.operations.push({
+    ...event,
+    created_at: new Date(clock + 2).toISOString(),
+  });
+  assert.equal(mission.checkInStatus(d, fieldPlan, clock).sos, true);
+  d.operations.push({
+    ...event,
+    data: { ...event.data, event: "sos_resolved" },
+    created_at: new Date(clock + 3).toISOString(),
+  });
+  assert.equal(mission.checkInStatus(d, fieldPlan, clock).sos, false);
+});
+test("fuel comparisons use explicit alternative assumptions without changing the source", () => {
+  const d = fresh(),
+    before = JSON.stringify(d),
+    r = mission.compareFuel(d, 650, 3, 500);
+  assert.equal(r.available, true);
+  assert.equal(r.days, 75);
+  assert.equal(r.baselineMargin, 28400 - 780 * 75 - 500);
+  assert.equal(r.alternativeMargin, 28400 - 650 * 78 - 500);
+  assert.equal(JSON.stringify(d), before);
+  assert.equal(mission.compareFuel(d, 0, 0, 0).available, false);
+  d.inventory.find((i) => i.category === "fuel").unit = "kg";
+  assert.equal(mission.compareFuel(d, 650, 3, 500).available, false);
+});
+test("handovers report changes against the previous preserved input snapshot", () => {
+  const d = fresh(),
+    first = ops.handover(d);
+  assert.equal(first.changes.previous, null);
+  d.operations = [
+    {
+      id: "h1",
+      kind: "handover",
+      label: "Previous shift",
+      created_at: "2026-09-25T09:00:00Z",
+      data: { snapshot: first },
+    },
+  ];
+  const oldStatus = d.alerts[0].status;
+  d.alerts[0].status = "acknowledged";
+  d.operations.push({
+    id: "inspection",
+    kind: "field_event",
+    label: "External inspection",
+    data: { event: "inspection" },
+    created_at: "2026-09-25T10:00:00Z",
+  });
+  const next = ops.handover(d);
+  assert.equal(next.changes.previous.id, "h1");
+  assert.ok(
+    next.changes.items.some((s) => s.includes("Field event: inspection")),
+  );
+  assert.equal(first.inputs.alerts[0].status, oldStatus);
+  assert.equal(
+    next.inputs.operations.some((r) => r.kind === "handover"),
+    false,
+  );
+});
+test("browser record validation rejects cross-plan evidence and operational geometry", () => {
+  const d = fresh();
+  d.operations = [
+    { id: "crew", kind: "crew" },
+    fieldPlan,
+    {
+      ...point(0, 0),
+      id: "foreign-point",
+      data: { ...point(0, 0).data, plan_id: "other-plan" },
+    },
+  ];
+  assert.throws(
+    () =>
+      fieldValidation.validateField(d, "field_event", {
+        crew_id: "crew",
+        plan_id: "plan",
+        position_id: "foreign-point",
+        event: "inspection",
+        note: "A detailed inspection note.",
+      }),
+    /Position and plan/,
+  );
+  d.workspace = "operational";
+  assert.throws(
+    () =>
+      fieldValidation.validateField(d, "field_plan", {
+        ...fieldPlan.data,
+        note: "Illustrative geometry for testing only.",
+      }),
+    /simulation-only/,
+  );
+});

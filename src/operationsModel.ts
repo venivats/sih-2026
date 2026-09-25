@@ -1,3 +1,9 @@
+import {
+  shiftChanges,
+  positionFor,
+  zoneStatus,
+  checkInStatus,
+} from "./missionModel";
 import type { Snapshot, OpsRecord } from "./types";
 import { energy, latest, n, date, affected } from "./model";
 export function baseline(d: Snapshot) {
@@ -156,7 +162,19 @@ export function decisions(d: Snapshot) {
 export function handover(d: Snapshot) {
   const e = energy(d),
     r = resupply(d);
+  const changes = shiftChanges(d);
+  const field_review = (d.operations || [])
+    .filter((r) => r.kind === "field_plan")
+    .map((plan) => ({
+      plan_id: plan.id,
+      assignment: plan.label,
+      ...zoneStatus(plan, positionFor(d, plan)),
+      check_in_overdue: checkInStatus(d, plan).overdue,
+      sos: checkInStatus(d, plan).sos,
+    }));
   return {
+    changes,
+    field_review,
     workspace: d.workspace,
     station: d.station,
     generated_at: new Date().toISOString(),
@@ -178,6 +196,7 @@ export function handover(d: Snapshot) {
       waste: d.waste || [],
       attachments: d.attachments || [],
       acquisitions: d.acquisitions || [],
+      audit: d.audit,
       operations: (d.operations || []).filter((r) => r.kind !== "handover"),
     }),
     fuel_litres: e.fuel?.quantity ?? null,
@@ -193,7 +212,7 @@ export function handover(d: Snapshot) {
       .map((v) => v.title + " — " + v.owner + ".")
       .join(
         " ",
-      )} Missing values are unavailable. Suggested actions require human review.`,
+      )} Changes since previous handover: ${changes.items.join(" ")} Field review: ${field_review.map((f) => f.assignment + ": " + f.label + "; " + f.reason + (f.check_in_overdue ? " Check-in overdue." : "") + (f.sos ? " SOS unresolved." : "")).join(" ") || "No field assignments registered."} Missing values are unavailable. Suggested actions require human review.`,
   };
 }
 export function stationAnswer(d: Snapshot, q: string) {

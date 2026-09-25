@@ -134,7 +134,16 @@ export interface WasteRecord {
 }
 export interface OpsRecord {
   id: string;
-  kind: "crew" | "outdoor_task" | "contact" | "research" | "handover";
+  kind:
+    | "crew"
+    | "outdoor_task"
+    | "contact"
+    | "research"
+    | "handover"
+    | "field_plan"
+    | "field_position"
+    | "field_event"
+    | "comparison";
   label: string;
   data: Record<string, any>;
   origin: string;
@@ -225,4 +234,5 @@ export type Page =
   | "scenarios"
   | "evidence"
   | "operations"
-  | "research";
+  | "research"
+  | "field";

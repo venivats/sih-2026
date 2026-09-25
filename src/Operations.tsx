@@ -1,5 +1,5 @@
 import { canWrite } from "./permissions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Ship,
@@ -216,6 +216,18 @@ export function Handover(p: Props) {
       {report && (
         <div className="report-output">
           <Badge>Snapshot captured</Badge>
+          <h3>Changes since the previous saved handover</h3>
+          <p>
+            {report.changes.previous
+              ? "Compared with " + report.changes.previous.label
+              : "First preserved baseline"}
+          </p>
+          <ul>
+            {report.changes.items.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+          <h3>Current state and unresolved actions</h3>
           <p>{report.text}</p>
           <small>Generated {date(report.generated_at)} · handover-v1</small>
           <div className="actions">
@@ -397,12 +409,20 @@ function NextContact({ d }: Props) {
 
 export function Operations(p: Props) {
   const [tab, setTab] = useState(
-      new URLSearchParams(location.search).get("tab") || "crew",
+      p.focus === "handover"
+        ? "brief"
+        : new URLSearchParams(location.search).get("tab") || "crew",
     ),
     [editing, setEditing] = useState<OpsRecord | null>(null),
     [busy, setBusy] = useState(false),
     [storm, setStorm] = useState(false),
     [key, setKey] = useState(randomId());
+  useEffect(() => {
+    if (p.focus === "handover") {
+      setTab("brief");
+      p.setFocus("");
+    }
+  }, [p.focus]);
   const records = p.d.operations || [],
     crews = records.filter((r) => r.kind === "crew"),
     at = baseline(p.d) || new Date().toISOString();

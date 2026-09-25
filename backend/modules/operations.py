@@ -1,5 +1,5 @@
 """Scoped crew, task, contact, research and immutable handover registers."""
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from typing import Literal
 from pydantic import Field,FiniteFloat,model_validator
 from fastapi import HTTPException
@@ -34,8 +34,41 @@ class HandoverData(Strict):
     text:str=Field(min_length=20,max_length=20000)
     snapshot:dict
     model_version:Literal['handover-v1']='handover-v1'
+class FieldPlanData(Strict):
+    crew_id:str
+    asset_id:str
+    work_order_id:str|None=None
+    centre_x:FiniteFloat=Field(ge=-5000,le=5000)
+    centre_y:FiniteFloat=Field(ge=-5000,le=5000)
+    radius_m:FiniteFloat=Field(ge=20,le=3000)
+    restricted_x:FiniteFloat=Field(ge=-5000,le=5000)
+    restricted_y:FiniteFloat=Field(ge=-5000,le=5000)
+    restricted_radius_m:FiniteFloat=Field(ge=10,le=3000)
+    check_in_due:str
+    note:str=Field(min_length=10,max_length=2000)
+class PositionData(Strict):
+    crew_id:str
+    plan_id:str
+    x:FiniteFloat=Field(ge=-10000,le=10000)
+    y:FiniteFloat=Field(ge=-10000,le=10000)
+    accuracy_m:FiniteFloat=Field(ge=0,le=5000)
+    observed_at:str
+    device_id:str=Field(min_length=2,max_length=100)
+class FieldEventData(Strict):
+    check_in_due:str|None=None
+    crew_id:str
+    plan_id:str
+    position_id:str|None=None
+    event:Literal['check_in','contact_attempt','acknowledgement','inspection','sos','sos_resolved']
+    note:str=Field(min_length=10,max_length=2000)
+class ComparisonData(Strict):
+    snapshot:dict
+    daily_burn:FiniteFloat=Field(gt=0,le=100000)
+    delay_days:FiniteFloat=Field(ge=0,le=365)
+    reserve_litres:FiniteFloat=Field(ge=0,le=10000000)
+    note:str=Field(min_length=10,max_length=2000)
 class OpsIn(Strict):
-    kind:Literal['crew','outdoor_task','contact','research','handover']
+    kind:Literal['crew','outdoor_task','contact','research','handover','field_plan','field_position','field_event','comparison']
     label:str=Field(min_length=2,max_length=150)
     data:dict
     idempotency_key:str=Field(min_length=8,max_length=100)
@@ -45,7 +78,7 @@ class OpsUpdate(Strict):
 class AssignCrew(Strict):
     crew_id:str
     notes:str=Field(min_length=10,max_length=1000)
-SCHEMAS={'crew':CrewData,'outdoor_task':TaskData,'contact':ContactData,'research':ResearchData,'handover':HandoverData}
+SCHEMAS={'crew':CrewData,'outdoor_task':TaskData,'contact':ContactData,'research':ResearchData,'handover':HandoverData,'field_plan':FieldPlanData,'field_position':PositionData,'field_event':FieldEventData,'comparison':ComparisonData}
 
 def timestamp(v):
     try:
@@ -57,17 +90,29 @@ def timestamp(v):
 def validate(db,w,s,kind,data):
     try:data=SCHEMAS[kind](**data).model_dump()
     except Exception as exc:raise HTTPException(422,'Invalid '+kind+' fields: '+str(exc)[:700])
-    for key in ['shift_start','shift_end','scheduled_at','starts_at','ends_at']:
-        if key in data:timestamp(data[key])
+    if kind in ('field_plan','field_position') and w=='operational':raise HTTPException(422,'Field geometry and positioning are simulation-only until a surveyed map and tracker integration are validated')
+    for key in ['shift_start','shift_end','scheduled_at','starts_at','ends_at','check_in_due','observed_at']:
+        if data.get(key) is not None:timestamp(data[key])
     for a,b in [('shift_start','shift_end'),('starts_at','ends_at')]:
         if a in data and timestamp(data[b])<=timestamp(data[a]):raise HTTPException(422,'End must be after start')
-    for key in ['assignee_id','owner_id']:
+    for key in ['assignee_id','owner_id','crew_id']:
         if key in data:
             crew=record(db,OpsRecord,data[key],w,s)
             if crew.kind!='crew':raise HTTPException(422,'Select a crew record')
     if data.get('asset_id'):record(db,Asset,data['asset_id'],w,s)
     if data.get('shipment_id'):record(db,Shipment,data['shipment_id'],w,s)
-    if kind=='handover' and (data['snapshot'].get('workspace')!=w or data['snapshot'].get('station')!=s):raise HTTPException(422,'Handover snapshot must match workspace and station')
+    if data.get('work_order_id'):
+        order=record(db,WorkOrder,data['work_order_id'],w,s)
+        if order.asset_id!=data.get('asset_id'):raise HTTPException(422,'Work order must belong to the selected asset')
+    if kind in ('field_position','field_event'):
+        plan=record(db,OpsRecord,data['plan_id'],w,s)
+        if plan.kind!='field_plan' or plan.data['crew_id']!=data['crew_id']:raise HTTPException(422,'Plan and crew do not match')
+    if kind=='field_event' and data['event']=='check_in' and data.get('check_in_due')!=plan.data['check_in_due']:raise HTTPException(409,'Check-in deadline changed; reload the assignment')
+    if data.get('position_id'):
+        position=record(db,OpsRecord,data['position_id'],w,s)
+        if position.kind!='field_position' or position.data['plan_id']!=data['plan_id']:raise HTTPException(422,'Position and plan do not match')
+    if kind=='field_position' and timestamp(data['observed_at'])>datetime.now(timezone.utc)+timedelta(seconds=60):raise HTTPException(422,'Position timestamp is in the future')
+    if kind in ('handover','comparison') and (data['snapshot'].get('workspace')!=w or data['snapshot'].get('station')!=s):raise HTTPException(422,'Snapshot must match workspace and station')
     return data
 
 def create(db,w,s,actor,body):
@@ -81,7 +126,7 @@ def create(db,w,s,actor,body):
 
 def update(db,w,s,actor,id,body):
     row=record(db,OpsRecord,id,w,s,lock=True)
-    if row.kind=='handover':raise HTTPException(409,'Saved handovers are immutable; create a new report')
+    if row.kind in ('handover','field_position','field_event','comparison'):raise HTTPException(409,'Saved evidence is immutable; create a new record')
     if row.version!=body.version:raise HTTPException(409,'Record changed. Reload before saving')
     data=validate(db,w,s,row.kind,body.data)
     old=row.data;row.data=data;row.version+=1
