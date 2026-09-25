@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm ci",
+  "buildCommand": "node scripts/build-vercel.mjs",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://sih-2026-k5jr.onrender.com/api/:path*"
+    },
+    {
+      "source": "/stations/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}

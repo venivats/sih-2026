@@ -1,0 +1,21 @@
+{
+  "provider": "NCPOR",
+  "dataset_title": "Weather at Indian Polar Stations",
+  "reference": "https://data.ncpor.res.in/",
+  "retrieval_succeeded": true,
+  "acquired_at": "2026-09-10T01:11:31.149584+00:00",
+  "checksum": "b5f91f783bcc3a8b683a48174fc64f336fbe028e3f97bf208b3e8199d518ab6b",
+  "bytes": 30126,
+  "parser_version": "ncpor-published-weather-v1",
+  "period": "Published timestamp 08 Sep 2026 11:00 PM; timezone unspecified",
+  "units": {
+    "temperature": "degC"
+  },
+  "update_frequency": "unconfirmed",
+  "access": "Public HTTPS page; one direct request succeeded",
+  "terms": "Dataset-specific reuse terms unresolved",
+  "processing": "HTML text extraction; Unicode minus normalization; degree-C numeric parsing; timezone never inferred",
+  "classification": "provider_published_report",
+  "verification": "review_required",
+  "original_path": "data/acquisitions/ncpor/2026-09-10.html"
+}

@@ -1,0 +1,36 @@
+.entrance{min-height:100vh;color:var(--text);background:radial-gradient(circle at 77% 8%,#1c4257 0%,transparent 35%),var(--canvas);}
+.entrance-top{max-width:1440px;margin:auto;padding:1.25rem clamp(1.25rem,4vw,4rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.entrance-wordmark{font-size:1.35rem;font-weight:800;letter-spacing:.17em;color:var(--text)}
+.entrance-wordmark small{font-size:.52rem;letter-spacing:.12em;color:var(--muted)}
+.entrance main{max-width:1440px;margin:auto;padding:0 clamp(1.25rem,4vw,4rem) 5rem}
+.entrance-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);min-height:570px;align-items:center;gap:2rem}
+.entrance-intro h1{font-size:clamp(2.8rem,5.4vw,5.8rem);line-height:1.06;letter-spacing:-.055em;margin:1.1rem 0}
+.entrance-intro h1 em{font-style:normal;color:var(--ice)}
+.entrance-intro p{font-size:1.12rem;max-width:48ch;color:var(--text)}
+.entrance-actions{display:flex;gap:.85rem;flex-wrap:wrap;margin:2rem 0}
+.entrance-intro>small{display:flex;align-items:center;gap:.5rem;color:var(--muted)}
+.entrance-logo{text-align:center;margin:0;animation:enterLogo .65s ease both}
+.entrance-logo img{max-width:min(100%,520px);height:auto;border-radius:50%;filter:drop-shadow(0 26px 60px #03101c88)}
+.entrance-logo figcaption{color:var(--muted);font-size:.76rem}
+.entrance-stations{border-top:1px solid var(--line);padding:2rem 0}
+.entrance-stations h2{font-size:1.7rem;margin:.4rem 0}
+.entrance-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.5rem 0}
+.entrance-cards button{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:16px;text-align:left;overflow:hidden;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem;padding:0 1rem 1rem}
+.entrance-cards img{width:calc(100% + 2rem);height:180px;object-fit:cover;margin:0 -1rem .35rem}
+.entrance-cards span{font-weight:700;letter-spacing:.08em}
+.entrance-cards small{display:block;font-weight:400;letter-spacing:0;color:var(--muted);margin-top:.25rem}
+.weather-current{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:.65rem;margin:1rem 0}
+.weather-current>div{border:1px solid var(--line);border-radius:10px;padding:1rem;background:var(--raised)}
+.weather-current small,.weather-current strong{display:block}.weather-current strong{font-size:1.25rem;margin-top:.3rem}
+.weather-chart{height:280px;width:100%;min-width:0;margin:1rem 0}
+.crew-motion-map{width:100%;height:auto;min-height:200px;max-height:430px;background:var(--raised);border-radius:12px}
+.crew-motion-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem;margin:1rem 0}
+.crew-motion-list>div{border:1px solid var(--line);border-radius:8px;padding:.8rem;display:flex;flex-direction:column;gap:.4rem}.crew-motion-list span{font-size:.82rem}
+.shipment-route{position:relative;height:18px;border-radius:18px;background:var(--raised);margin:3rem 1rem 2.5rem}.shipment-route>div{height:100%;border-radius:inherit;background:var(--ice)}.shipment-route>span{position:absolute;top:-20px;font-size:2rem;color:var(--teal);transform:translateX(-50%)}
+.incident-toast{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;border:1px solid var(--amber);background:var(--surface);border-radius:10px;padding:.7rem 1rem;margin:1rem 0;color:var(--text)}
+.password-field{display:flex;gap:.5rem;align-items:center}.password-field input{flex:1;min-width:0}.signin-demo{border-top:1px solid var(--line);margin-top:1rem;padding-top:1rem}
+.brand-mark img{border-radius:50%;object-fit:cover}
+@keyframes enterLogo{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){.entrance-grid{grid-template-columns:1fr;gap:1rem;padding-top:2rem}.entrance-logo{grid-row:1}.entrance-logo img{max-width:180px}.entrance-cards{grid-template-columns:1fr}.crew-motion-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.entrance-top{flex-wrap:wrap}.crew-motion-list{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.entrance-logo{animation:none}}

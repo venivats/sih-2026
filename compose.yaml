@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:17.7-bookworm
+    environment:
+      POSTGRES_DB: polaris
+      POSTGRES_USER: polaris
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python scripts/setup.py first}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U polaris -d polaris"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "127.0.0.1:5432:5432"
+  app:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://polaris:${POSTGRES_PASSWORD}@db:5432/polaris
+      STORAGE_PATH: /app/storage
+      APP_ENV: development
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - source_files:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  postgres_data:
+  source_files:

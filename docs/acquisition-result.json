@@ -1,0 +1,11 @@
+{
+  "provider": "NASA POWER",
+  "reference": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CWS10M&community=RE&start=20240101&end=20240107&format=JSON&time-standard=UTC&latitude=-70.764&longitude=11.734",
+  "status": "succeeded",
+  "detail": "14 daily grid values parsed. Not station observations.",
+  "source_id": "32af4a6a-7cae-44bc-b6bb-327ddae053e2",
+  "acquired_at": "2026-09-07T03:08:03.245947+00:00",
+  "workspace": "operational",
+  "station": "maitri",
+  "id": "ceb55431-0bd2-4db3-9a42-3636501eef54"
+}

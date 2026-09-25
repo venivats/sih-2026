@@ -1,0 +1,34 @@
+[
+  {
+    "filename": "west-antarctica-nasa-2014.jpg",
+    "width": 1500,
+    "height": 1000,
+    "recommended_use": "Dashboard header; clearly label as coastal West Antarctica landscape, not Maitri or Bharati station.",
+    "caption": "Glaciers and mountains in coastal West Antarctica, photographed during Operation IceBridge, 29 October 2014.",
+    "credit": "NASA / Michael Studinger",
+    "source_page": "https://science.nasa.gov/earth/earth-observatory/antarctic-landscape-illuminated-84683/",
+    "image_url": "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/imagerecords/84000/84683/Antarctica_IceBridge_2014302_large.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1000&w=1500",
+    "rights": "NASA image; available for factual informational web use under NASA Images and Media Usage Guidelines. Acknowledge NASA. No endorsement implied. Source explicitly identifies photographer Michael Studinger, project scientist for NASA Operation IceBridge, and has no third-party copyright marking.",
+    "rights_source": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    "rights_evidence": "Guidelines: NASA content generally is not subject to copyright in the United States; informational web use and factual use without implied endorsement are allowed; NASA should be acknowledged. Source page identifies location/date/photographer.",
+    "modifications": "CSS crop in header; original downloaded bytes retained."
+  },
+  {
+    "filename": "maitri-aerial-2005.jpg",
+    "width": 768,
+    "height": 576,
+    "recommended_use": "Small station card. Historical station image; do not imply current state.",
+    "caption": "Aerial view of Maitri research station, Antarctica, 2 February 2005.",
+    "credit": "Ministry of Science and Technology / Press Information Bureau, Government of India; GODL-India, via Wikimedia Commons",
+    "photographer": "Individual photographer not named; institutional author Ministry of Science and Technology.",
+    "source_page": "https://commons.wikimedia.org/wiki/File:An_aerial_view_of_the_Indian_Station_Maitri,_Antarctica_on_February_2,_2005.jpg",
+    "primary_source_page": "https://archive.pib.gov.in/archive2/photoright.aspx?phid=3419",
+    "primary_source_id": "PIB photo ID 3419, CNR 7092",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/An_aerial_view_of_the_Indian_Station_Maitri%2C_Antarctica_on_February_2%2C_2005.jpg",
+    "rights": "Government Open Data License - India (GODL), as explicitly documented on Commons file page. Worldwide royalty-free commercial and noncommercial adaptation/display permitted. Acknowledge provider, source and license with URL; do not imply endorsement.",
+    "rights_source": "https://commons.wikimedia.org/wiki/File:An_aerial_view_of_the_Indian_Station_Maitri,_Antarctica_on_February_2,_2005.jpg#Licensing",
+    "license_url": "https://data.gov.in/government-open-data-license-india",
+    "rights_evidence": "Commons Licensing section explicitly marks Government of India copyright and GODL-India; source section maps image to Ministry of Science and Technology via PIB ID 3419. Direct official licence page could not be read in web tool, so licence evidence is Commons explicit file metadata.",
+    "modifications": "CSS crop in header; original downloaded bytes retained."
+  }
+]
