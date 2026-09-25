@@ -10,5 +10,8 @@ test-results
 .sites-runtime
 .openai
 node_modules
+api
+requirements.txt
+requirements.lock
 **/__pycache__
 *.tar.gz
