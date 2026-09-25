@@ -226,6 +226,8 @@ export interface ScenarioResult {
 }
 export type Page =
   | "overview"
+  | "geography"
+  | "weather"
   | "twin"
   | "energy"
   | "logistics"

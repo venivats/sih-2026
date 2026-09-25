@@ -308,6 +308,23 @@
 .journey-rail button {
   font-size: 0.875rem;
 }
+.journey-rail li button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+.journey-rail li button b {
+  display: inline-grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--surface);
+}
 .journey-rail button.complete {
   border-color: #4db499;
 }

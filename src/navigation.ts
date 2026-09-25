@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import type { Page } from "./types";
 export const routePages = [
   "overview",
+  "geography",
+  "weather",
   "twin",
   "energy",
   "logistics",
@@ -47,6 +49,7 @@ export function readRoute() {
         ? sessionStorage.getItem("polaris-active-workspace") || "browser-demo"
         : "demo";
   return {
+    entrance: u.pathname === "/",
     page,
     station: valid ? bits[1] : "maitri",
     workspace,
@@ -76,12 +79,6 @@ export function useNavigation() {
   useEffect(() => {
     const update = () => setRoute(readRoute());
     window.addEventListener("popstate", update);
-    if (location.pathname === "/")
-      history.replaceState(
-        {},
-        "",
-        routeHref(route.page, route.station, route.workspace),
-      );
     return () => window.removeEventListener("popstate", update);
   }, []);
   function navigate(

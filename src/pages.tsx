@@ -1,4 +1,5 @@
 import { ResponseComparison } from "./ResponseComparison";
+import { ShipmentJourney } from "./LiveExercises";
 import { FuelForecast } from "./Analysis";
 import { ResupplyCoverage } from "./Operations";
 import { randomId } from "./id";
@@ -167,6 +168,7 @@ export function Logistics(p: Props) {
   const [view, setView] = useState("inventory");
   return (
     <>
+      <ShipmentJourney {...p} />
       <ResupplyCoverage {...p} />
       <div
         className="logistics-tabs segmented"

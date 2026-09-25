@@ -1,4 +1,7 @@
 import { CrewField } from "./CrewField";
+import { Entrance } from "./Entrance";
+import { StationGeography } from "./StationGeography";
+import { WeatherWorkspace } from "./WeatherWorkspace";
 import { JourneyRail } from "./MissionBrief";
 import { randomId } from "./id";
 import { canWrite, hasWrites } from "./permissions";
@@ -34,6 +37,10 @@ import {
   ChevronRight,
   Radio,
   Clock,
+  Bell,
+  Eye,
+  EyeOff,
+  MapPinned,
   Check,
   X,
 } from "lucide-react";
@@ -84,6 +91,18 @@ const pages: {
     name: "Station overview",
     icon: LayoutDashboard,
     subtitle: "A clear view of station systems, resources and priorities.",
+  },
+  {
+    id: "geography",
+    name: "Station & surroundings",
+    icon: MapPinned,
+    subtitle: "Documented locations, photographs and illustrative exercise layers.",
+  },
+  {
+    id: "weather",
+    name: "Weather & evidence",
+    icon: CloudSnow,
+    subtitle: "Recent model estimates and archived station reports with provenance.",
   },
   {
     id: "twin",
@@ -157,6 +176,9 @@ export default function App() {
   const nav = useNavigation();
   const { page, setPage, station, setStation, workspace, setWorkspace } = nav;
   const [connectionOpen, setConnectionOpen] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loginError, setLoginError] = useState("");
+  const [newAlerts, setNewAlerts] = useState<string[]>([]);
   const [moreControls, setMoreControls] = useState(false);
   const [accountRole, setRole] = useState("public"),
     [audience, setAudience] = useState(
@@ -212,6 +234,19 @@ export default function App() {
     staleTime: API ? 10000 : Infinity,
   });
   const d = q.data;
+  useEffect(() => setNewAlerts([]), [workspace, station]);
+  useEffect(() => {
+    if (!d) return;
+    const key = `polaris-seen-alerts-${workspace}-${station}`;
+    const previous = sessionStorage.getItem(key);
+    const current = d.alerts.map((alert) => alert.id);
+    if (previous) {
+      const seen = new Set<string>(JSON.parse(previous));
+      const added = d.alerts.filter((alert) => !seen.has(alert.id) && !alert.recovered).map((alert) => alert.id);
+      if (added.length) setNewAlerts((old) => [...new Set([...old, ...added])]);
+    }
+    sessionStorage.setItem(key, JSON.stringify(current));
+  }, [d, workspace, station]);
   const asset =
     nav.detail?.kind === "assets"
       ? d?.assets.find(
@@ -381,7 +416,8 @@ export default function App() {
     setBusy(true);
     try {
       const w = await startSession();
-      await snapshot(w, station);
+      const initial = await snapshot(w, station);
+      sessionStorage.setItem(`polaris-seen-alerts-${w}-${station}`, JSON.stringify(initial.alerts.map((a) => a.id)));
       const result = (await mutate(w, station, "/exercises", {
         preset: "overheat",
         idempotency_key: randomId(),
@@ -430,6 +466,7 @@ export default function App() {
       setBusy(false);
     }
   }
+  if (nav.entrance) return <Entrance enter={(s) => nav.navigate("overview", s, "demo")} signIn={() => { nav.navigate("overview", station, "operational"); setLogin(true); }} />;
   return (
     <div
       className={
@@ -444,9 +481,7 @@ export default function App() {
       </a>
       <aside className={"sidebar " + (menu ? "is-open" : "")}>
         <div className="brand">
-          <div className="brand-mark">
-            <Compass size={30} strokeWidth={1.3} />
-          </div>
+          <a className="brand-mark" href="/" aria-label="POLARIS entrance"><img src="/images/polaris-identity.webp" alt="" width="36" height="36" /></a>
           <div>
             <strong>POLARIS</strong>
             <span>ANTARCTIC OPERATIONS</span>
@@ -560,8 +595,9 @@ export default function App() {
               className="small-button responsive-extra"
               onClick={() => setAsk(true)}
             >
-              Ask station
+              POLARIS guide
             </button>
+            <button className="icon-button" aria-label={`${newAlerts.length} new incidents`} title="New incidents" onClick={() => { if (newAlerts[0]) { nav.openDetail("alerts", newAlerts[0]); setNewAlerts((list) => list.slice(1)); } else go("maintenance"); }}><Bell size={18} />{newAlerts.length > 0 && <b className="nav-count">{newAlerts.length}</b>}</button>
             <button
               className="header-search icon-button"
               aria-label="Search records"
@@ -706,6 +742,7 @@ export default function App() {
               </small>
             </div>
           </div>
+          {newAlerts.length > 0 && <div className="incident-toast" role="status"><Bell size={18} /><span>{newAlerts.length} new incident{newAlerts.length === 1 ? "" : "s"} in this workspace.</span><button className="small-button" onClick={() => { nav.openDetail("alerts", newAlerts[0]); setNewAlerts((list) => list.slice(1)); }}>Open incident →</button></div>}
           <div
             className={
               "workspace-banner " +
@@ -836,6 +873,10 @@ export default function App() {
                   </>
                 ) : page === "overview" ? (
                   <Overview {...props} />
+                ) : page === "geography" ? (
+                  <StationGeography {...props} />
+                ) : page === "weather" ? (
+                  <WeatherWorkspace {...props} />
                 ) : page === "twin" ? (
                   <StationTwin {...props} />
                 ) : page === "energy" ? (
@@ -891,7 +932,7 @@ export default function App() {
         </Modal>
       )}
       {ask && props && (
-        <Modal title="Station questions" onClose={() => setAsk(false)}>
+        <Modal title="POLARIS guide" onClose={() => setAsk(false)}>
           <StationQuestions key={workspace + station} {...props} />
         </Modal>
       )}
@@ -1131,11 +1172,12 @@ export default function App() {
                 Use an account created by your administrator. Access is checked
                 by the backend.
               </p>
-              <form
+              <form className="signin-form"
                 onSubmit={async (e) => {
                   e.preventDefault();
                   const f = new FormData(e.currentTarget);
                   setBusy(true);
+                  setLoginError("");
                   try {
                     const r = await request(
                       "/auth/token",
@@ -1151,7 +1193,7 @@ export default function App() {
                     setLogin(false);
                     notify("Signed in. Operational workspace selected.");
                   } catch (e) {
-                    notify((e as Error).message);
+                    setLoginError((e as Error).message);
                   } finally {
                     setBusy(false);
                   }
@@ -1163,17 +1205,14 @@ export default function App() {
                 </label>
                 <label>
                   Password
-                  <input
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                  />
+                  <span className="password-field"><input name="password" type={passwordVisible ? "text" : "password"} autoComplete="current-password" required /><button type="button" className="icon-button" onClick={() => setPasswordVisible((v) => !v)} aria-label={passwordVisible ? "Hide password" : "Show password"}>{passwordVisible ? <EyeOff size={17} /> : <Eye size={17} />}</button></span>
                 </label>
+                {loginError && <Notice tone="amber"><span role="alert">{loginError}</span></Notice>}
                 <button className="primary" disabled={busy}>
-                  Sign in
+                  {busy ? "Signing in…" : "Sign in to operations"}
                 </button>
               </form>
+              <div className="signin-demo"><p>Exploring the prototype? No account needed.</p><button className="small-button" disabled={busy} onClick={async () => { await begin(); setLogin(false); }}>Explore private demonstration</button></div>
             </>
           ) : (
             <>
