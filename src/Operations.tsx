@@ -297,16 +297,19 @@ export function StationQuestions(p: Props) {
     >([]);
   function ask(q: string) {
     if (!q.trim()) return;
-    setAnswers((v) => [...v.slice(-7), { q, a: stationAnswer(p.d, q) }]);
+    const help = /how (do i|to)|where|what (is|does)|navigate|help|start|use this/i.test(q);
+    const a = help ? { text: "Begin at Station overview to see decisions needed. Open Weather & evidence for provider times and model estimates, Crew & field map for a fictional movement exercise, Logistics for resupply, and Alerts & maintenance to acknowledge and resolve incidents. Select an evidence link to trace a recorded value. Exercise inputs never change operational records.", ids: [] as string[], at: p.d.fetched_at, workspace: p.d.workspace, station: p.d.station } : stationAnswer(p.d, q);
+    setAnswers((v) => [...v.slice(-7), { q, a }]);
     setQuestion("");
   }
   return (
     <Panel
-      title="Ask about this station"
-      sub="Record-backed answers · supported questions, not a general chatbot"
+      title="POLARIS guided assistant"
+      sub="Guided help and deterministic record-backed answers · no language-model service connected"
     >
       <div className="question-suggestions">
         {[
+          "How do I use this site?",
           "How much fuel remains?",
           "Will fuel last until resupply?",
           "Which alerts need attention?",

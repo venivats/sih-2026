@@ -21,3 +21,4 @@ createRoot(document.getElementById("root")!).render(
 );
 
 import "./mission.css";
+import "./arrival.css";

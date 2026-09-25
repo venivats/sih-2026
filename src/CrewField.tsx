@@ -16,6 +16,7 @@ import { randomId } from "./id";
 import { date, n } from "./model";
 import { canWrite } from "./permissions";
 import { positionFor, zoneStatus, checkInStatus } from "./missionModel";
+import { CrewMotion } from "./LiveExercises";
 
 export function CrewField(p: Props) {
   const records = p.d.operations || [],
@@ -176,6 +177,7 @@ export function CrewField(p: Props) {
         limit are demonstration assumptions. This view is not a navigation aid
         or a safety clearance.
       </Notice>
+      {simulation && <CrewMotion p={p} />}
       <div className="mission-toolbar">
         <div className="segmented">
           <button aria-pressed={mode === "map"} onClick={() => setMode("map")}>
