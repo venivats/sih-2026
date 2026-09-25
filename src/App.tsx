@@ -1,3 +1,6 @@
+import { CrewField } from "./CrewField";
+import { JourneyRail } from "./MissionBrief";
+import { randomId } from "./id";
 import { canWrite, hasWrites } from "./permissions";
 import { OfficialWeather, ConnectionStatus } from "./OfficialWeather";
 import { Operations, StationQuestions } from "./Operations";
@@ -136,6 +139,13 @@ const pages: {
       "Connect duty periods, outdoor activities, contact sessions and handovers.",
   },
   {
+    id: "field",
+    name: "Crew & field map",
+    icon: Compass,
+    subtitle:
+      "Assignments, location uncertainty and check-ins in an illustrative station schematic.",
+  },
+  {
     id: "research",
     name: "Scientific workspace",
     icon: FlaskConical,
@@ -172,10 +182,27 @@ export default function App() {
     [online, setOnline] = useState(navigator.onLine),
     [stream, setStream] = useState("polling");
   const qc = useQueryClient();
+  useEffect(() => {
+    if (!API || !bearer) return;
+    let active = true;
+    request("/auth/me")
+      .then((r) => {
+        if (active) setRole(r.role);
+      })
+      .catch(() => {
+        if (active) {
+          setBearer("");
+          setRole("public");
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
   // Tab-local demo permissions follow its workspace, including after a reload.
   // Connected permissions come only from the authenticated server response.
   const role =
-    !API && workspace === "browser-demo" ? "demo_operator" : accountRole;
+    !API && workspace.startsWith("browser-") ? "demo_operator" : accountRole;
   const q = useQuery({
     queryKey: ["snapshot", workspace, station],
     queryFn: () => snapshot(workspace, station),
@@ -219,7 +246,7 @@ export default function App() {
   const write =
     online &&
     !q.isError &&
-    (workspace === "browser-demo" ||
+    (workspace.startsWith("browser-") ||
       workspace.startsWith("session-") ||
       (workspace === "operational" && hasWrites(role)));
   const go = (p: Page) => {
@@ -298,6 +325,7 @@ export default function App() {
   const props: Props | undefined = d
     ? {
         d,
+        startGuide: beginGuided,
         go,
         detail: nav.openDetail,
         scenario: (v) => {
@@ -341,6 +369,35 @@ export default function App() {
         API
           ? "Private demo session created. Changes persist on the server."
           : "Private demo started. Changes are saved only in this browser tab.",
+      );
+    } catch (e) {
+      notify((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function beginGuided() {
+    if (busy) return;
+    setBusy(true);
+    try {
+      const w = await startSession();
+      await snapshot(w, station);
+      const result = (await mutate(w, station, "/exercises", {
+        preset: "overheat",
+        idempotency_key: randomId(),
+      })) as { alert_id: string; asset_id: string };
+      if (result.alert_id)
+        sessionStorage.setItem("polaris-guide-" + w, result.alert_id);
+      setRole("demo_operator");
+      sessionStorage.setItem("polaris-active-workspace", w);
+      nav.navigate(
+        "maintenance",
+        station,
+        w,
+        result.alert_id ? { kind: "alerts", id: result.alert_id } : undefined,
+      );
+      notify(
+        "Isolated incident exercise created. Follow the five steps; all inputs are simulated.",
       );
     } catch (e) {
       notify((e as Error).message);
@@ -660,7 +717,7 @@ export default function App() {
               <strong>
                 {workspace === "operational"
                   ? "Operational workspace"
-                  : workspace === "browser-demo"
+                  : workspace.startsWith("browser-")
                     ? "Private browser demonstration"
                     : workspace.startsWith("session-")
                       ? "Private demonstration session"
@@ -671,7 +728,7 @@ export default function App() {
                   ? API
                     ? "Authenticated records only · missing data stays unavailable"
                     : "Backend not connected · operational data unavailable"
-                  : workspace === "browser-demo"
+                  : workspace.startsWith("browser-")
                     ? "Changes saved in this tab · server not connected"
                     : workspace.startsWith("session-")
                       ? "Isolated records · saved on the backend"
@@ -688,7 +745,7 @@ export default function App() {
                 <ArrowRight size={14} />
               </button>
             )}
-            {workspace === "browser-demo" && (
+            {workspace.startsWith("browser-") && (
               <Badge tone="muted">This tab only</Badge>
             )}
           </div>
@@ -766,7 +823,18 @@ export default function App() {
           ) : (
             props && (
               <div key={workspace + station + page}>
-                {page === "overview" ? (
+                <JourneyRail {...props} />
+                {incident ? (
+                  <>
+                    <button
+                      className="text-button"
+                      onClick={() => setIncident(null)}
+                    >
+                      ← Back to maintenance
+                    </button>
+                    <Incident key={incident} {...props} incidentId={incident} />
+                  </>
+                ) : page === "overview" ? (
                   <Overview {...props} />
                 ) : page === "twin" ? (
                   <StationTwin {...props} />
@@ -786,6 +854,8 @@ export default function App() {
                   <Environment {...props} />
                 ) : page === "operations" ? (
                   <Operations {...props} />
+                ) : page === "field" ? (
+                  <CrewField {...props} />
                 ) : page === "research" ? (
                   <Science
                     {...props}
@@ -1048,22 +1118,6 @@ export default function App() {
             </Notice>
           </Modal>
         )}
-      {incident && props && (
-        <Modal
-          title="Incident investigation"
-          onClose={() => setIncident(null)}
-          wide
-        >
-          <Incident
-            {...props}
-            go={(page) => {
-              setIncident(null);
-              go(page);
-            }}
-            incidentId={incident}
-          />
-        </Modal>
-      )}
       {evidence && d && (
         <Modal title="Evidence & lineage" onClose={() => setEvidence(null)}>
           <Evidence d={d} ids={evidence} />

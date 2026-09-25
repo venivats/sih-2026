@@ -1,9 +1,11 @@
+import { validateField } from "./fieldValidation";
 import type { Snapshot, OpsRecord } from "./types";
 export function validateOps(
   d: Snapshot,
   kind: string,
   data: Record<string, any>,
 ) {
+  if (validateField(d, kind, data)) return;
   const defs: Record<string, string[]> = {
     crew: ["role", "status", "shift_start", "shift_end"],
     outdoor_task: [

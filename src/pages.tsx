@@ -1,3 +1,4 @@
+import { ResponseComparison } from "./ResponseComparison";
 import { FuelForecast } from "./Analysis";
 import { ResupplyCoverage } from "./Operations";
 import { randomId } from "./id";
@@ -41,6 +42,7 @@ import { energy, latest, n, date, calculate, affected } from "./model";
 import { API, request, path, mutate, bearer } from "./api";
 export interface Props {
   d: Snapshot;
+  startGuide?: () => void;
   detail?: (kind: string, id: string) => void;
   scenario?: (inputs: ScenarioInputs) => void;
   go: (page: Page) => void;
@@ -1134,10 +1136,12 @@ export function Scenarios(p: Props & { initial?: ScenarioInputs }) {
     failed = p.d.assets.find((a) => a.code === failedCode);
   return (
     <>
+      <ResponseComparison {...p} />
       <Notice>
         Isolated what-if analysis. Inputs and results do not change telemetry,
-        stock, alerts or work orders. Saved comparisons belong to this browser
-        tab and workspace.
+        stock, alerts or work orders. Capacity scenarios below are saved only in
+        this browser tab. Named fuel comparisons above are saved in the selected
+        workspace.
       </Notice>
       <div className="scenario-layout">
         <Panel
