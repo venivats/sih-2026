@@ -1,2 +1,0 @@
-# Reuse the committed compatible Python lockfile on Vercel.
--r requirements.lock

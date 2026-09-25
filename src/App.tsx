@@ -234,6 +234,7 @@ export default function App() {
     staleTime: API ? 10000 : Infinity,
   });
   const d = q.data;
+  useEffect(() => setNewAlerts([]), [workspace, station]);
   useEffect(() => {
     if (!d) return;
     const key = `polaris-seen-alerts-${workspace}-${station}`;
@@ -415,7 +416,8 @@ export default function App() {
     setBusy(true);
     try {
       const w = await startSession();
-      await snapshot(w, station);
+      const initial = await snapshot(w, station);
+      sessionStorage.setItem(`polaris-seen-alerts-${w}-${station}`, JSON.stringify(initial.alerts.map((a) => a.id)));
       const result = (await mutate(w, station, "/exercises", {
         preset: "overheat",
         idempotency_key: randomId(),

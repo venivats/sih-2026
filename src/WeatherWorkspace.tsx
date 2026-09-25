@@ -65,12 +65,12 @@ function WeatherModel({ station }: { station: string }) {
       <p><Badge tone="amber">Model estimate, not live station observation</Badge> Valid at {String(observation?.time)} UTC · retrieved {new Date(q.dataUpdatedAt).toLocaleString()} · grid {lat.toFixed(3)}°, {lon.toFixed(3)}°.</p>
       <div className="mission-toolbar"><label>Variable <select value={metric} onChange={(e) => setMetric(e.target.value as typeof metric)}>{parameters.map(([name, label]) => <option key={name} value={name}>{label}</option>)}</select></label><label>Period <select value={hours} onChange={(e) => setHours(Number(e.target.value))}><option value="24">Last 24 hours</option><option value="48">Last 48 hours</option></select></label></div>
       <div className="weather-chart" role="img" aria-label={`${selected[1]} model time series for the last ${hours} hours`}><ResponsiveContainer width="100%" height="100%"><LineChart data={rows}><CartesianGrid strokeDasharray="3 6" stroke="var(--line)" /><XAxis dataKey="time" stroke="var(--muted)" minTickGap={45} /><YAxis stroke="var(--muted)" width={50} unit={selected[2]} /><Tooltip contentStyle={{ background: "var(--surface)", color: "var(--text)", border: "1px solid var(--line)" }} /><Line type="monotone" dataKey="value" stroke="var(--ice)" strokeWidth={2} dot={false} isAnimationActive={false} /></LineChart></ResponsiveContainer></div>
-      <p className="muted">Provider timestamps are UTC; past points are modelled history, future points are forecasts. Missing values remain gaps. <a href="https://open-meteo.com/en/docs" target="_blank" rel="noreferrer">Provider method and terms ↗</a></p>
+      <p className="muted">Provider timestamps are UTC; the chart shows the last available modelled hours. Missing values remain gaps. <a href="https://open-meteo.com/en/docs" target="_blank" rel="noreferrer">Provider method and terms ↗</a></p>
     </>}
   </Panel>;
 }
 export function WeatherWorkspace(p: Props) {
-  return <div className="mission-workspace"><div className="mission-heading"><div><span className="eyebrow">STATION / ENVIRONMENT / SOURCE</span><h2>Weather & evidence</h2><p>Compare recent regional estimates with the separately archived official station report.</p></div></div>
+  return <div className="mission-workspace"><p className="eyebrow">STATION / ENVIRONMENT / SOURCE</p>
     <WeatherModel station={p.d.station} />
     <OfficialWeather station={p.d.station} role={p.role} operational={p.d.workspace === "operational"} />
     <Panel title="Official station graphs" sub="NCPOR dataset catalogue · time series imported only after data access and provenance are verified"><p>NCPOR lists temperature, air pressure, relative humidity, wind speed and wind direction for Maitri and Bharati, with hourly, daily and monthly averages. Underlying readings have not been imported into this workspace.</p><a href="https://data.ncpor.res.in/graph" target="_blank" rel="noreferrer">Open NCPOR meteorological graphs ↗</a></Panel>
