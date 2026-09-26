@@ -1,4 +1,5 @@
 import { IncidentJourney } from "./IncidentJourney";
+import { IncidentSummary } from "./IncidentSummary";
 import { canWrite } from "./permissions";
 import { AlertTriangle, ArrowUpRight, ShieldAlert } from "lucide-react";
 import { Maintenance, type Props } from "./pages";
@@ -46,6 +47,9 @@ export function Incident(p: Props & { incidentId: string }) {
           {alert.recovered ? "Sensor recovered" : "Sensor unrecovered"}
         </Badge>
       </div>
+      <IncidentSummary {...p} incidentId={p.incidentId} />
+      <details className="incident-technical">
+      <summary>Reading history, rule details & incident replay</summary>
       <IncidentJourney {...p} incidentId={p.incidentId} />
       <div className="investigation-grid">
         <Panel title="01 / Trigger & evidence">
@@ -202,7 +206,10 @@ export function Incident(p: Props & { incidentId: string }) {
           )}
         </Panel>
       </div>
-      <Maintenance {...p} incidentId={p.incidentId} />
+      </details>
+      <div id="incident-workbench" tabIndex={-1}>
+        <Maintenance {...p} incidentId={p.incidentId} />
+      </div>
     </div>
   );
 }

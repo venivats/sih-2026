@@ -15,6 +15,7 @@ import {
 } from "recharts";
 import type { Snapshot, Reading } from "./types";
 import { date, n } from "./model";
+import { originLabel, readingAge } from "./evidenceModel";
 export function Badge({
   children,
   tone = "ice",
@@ -538,7 +539,7 @@ export function Evidence({ d, ids }: { d: Snapshot; ids: string[] }) {
         <div className="record" key={m.id}>
           <div className="row">
             <strong>{m.metric.replaceAll("_", " ")}</strong>
-            <Badge>{m.origin}</Badge>
+            <Badge>{originLabel(m.origin)}</Badge>
           </div>
           <div className="value-inline">
             {n(m.value)} {m.unit}
@@ -546,6 +547,10 @@ export function Evidence({ d, ids }: { d: Snapshot; ids: string[] }) {
           <dl>
             <dt>Observation time</dt>
             <dd>{date(m.observed_at)}</dd>
+            <dt>Observation age</dt>
+            <dd>{readingAge(m)}</dd>
+            <dt>Workspace retrieved</dt>
+            <dd>{date(d.fetched_at)}</dd>
             <dt>Ingestion time</dt>
             <dd>{date(m.ingested_at)}</dd>
             <dt>Processing / quality</dt>

@@ -12,6 +12,7 @@ import { Panel, Badge, Notice } from "./components";
 import { energy, date, n } from "./model";
 import { weather } from "./operationsModel";
 import { zoneStatus, positionFor, checkInStatus } from "./missionModel";
+import { guideKey, incidentHandovers, originLabel, readingAge } from "./evidenceModel";
 import { Explanation } from "./Explanation";
 export function MissionBrief(p: Props) {
   const { d } = p,
@@ -32,6 +33,7 @@ export function MissionBrief(p: Props) {
     ),
     plans = (d.operations || []).filter((r) => r.kind === "field_plan"),
     wind = weather(d);
+  const newest = [...d.measurements].sort((a, b) => Date.parse(b.observed_at) - Date.parse(a.observed_at))[0];
   const [clock, setClock] = useState(Date.now());
   useEffect(() => {
     const t = setInterval(() => setClock(Date.now()), 10000);
@@ -92,6 +94,11 @@ export function MissionBrief(p: Props) {
           <Play size={17} /> Explore a station incident
         </button>
       </div>
+      <section className="station-condition" aria-label="Station condition and evidence age">
+        <div><span className="eyebrow">STATION CONDITION</span><h2>{!d.measurements.length ? "Unable to assess" : alerts.length ? "Recorded issues need review" : "No unresolved alert records"}</h2>
+        <p>{d.workspace === "operational" ? "Condition reflects available records; full station coverage is not established." : "Simulation workspace. The condition describes this exercise."}</p></div>
+        <div><Badge tone={newest?.origin === "simulation" ? "amber" : "muted"}>{originLabel(newest?.origin)}</Badge><p>Newest observation: {date(newest?.observed_at)}</p><p>{readingAge(newest, clock)} · retrieved {date(d.fetched_at)}</p><button className="text-button" onClick={() => p.go("evidence")}>Inspect data coverage</button></div>
+      </section>
       <div className="brief-metrics">
         <div>
           <strong>{alerts.length}</strong>
@@ -107,7 +114,7 @@ export function MissionBrief(p: Props) {
         </div>
         <div>
           <strong>{e.autonomy === null ? "—" : n(e.autonomy)}</strong>
-          <span>Calculated fuel days</span>
+          <span>Calculated fuel days · constant use</span>
         </div>
       </div>
       <div className="briefing-grid">
@@ -138,7 +145,7 @@ export function MissionBrief(p: Props) {
                       : "Sensor remains unrecovered"}{" "}
                     ·{" "}
                     {order
-                      ? "Owner: " + order.assignee
+                      ? "Owner: " + (order.assignee || "Unassigned")
                       : "No work owner assigned"}
                   </small>
                   <small>
@@ -270,78 +277,33 @@ export function MissionBrief(p: Props) {
   );
 }
 export function JourneyRail(p: Props) {
-  const [dismiss, setDismiss] = useState(false),
-    key = "polaris-guide-" + p.d.workspace;
+  const key = guideKey(p.d);
+  const [dismiss, setDismiss] = useState(false);
+  const [reviewed, setReviewed] = useState(() => sessionStorage.getItem(key + "-dependencies") === "reviewed");
+  const [restart, setRestart] = useState(false);
   const id = sessionStorage.getItem(key);
-  const a = p.d.alerts.find((a) => a.id === id);
+  const a = p.d.alerts.find(a => a.id === id);
   if (!id || !a || dismiss) return null;
-  const work = p.d.work_orders.find((w) => w.alert_id === a.id),
-    plans = (p.d.operations || []).filter(
-      (r) => r.kind === "field_plan" && r.data.work_order_id === work?.id,
-    ),
-    inspection = (p.d.operations || []).some(
-      (r) =>
-        r.kind === "field_event" &&
-        r.data.event === "inspection" &&
-        plans.some((z) => z.id === r.data.plan_id),
-    ),
-    handover = (p.d.operations || []).some(
-      (r) =>
-        r.kind === "handover" &&
-        r.data.snapshot?.inputs?.work_orders?.some(
-          (w: any) => w.id === work?.id && w.status === "resolved",
-        ),
-    );
+  const work = p.d.work_orders.find(w => w.alert_id === a.id);
+  const handover = incidentHandovers(p.d, a.id).length > 0;
   const steps = [
-    {
-      name: "Review warning",
-      done: a.status !== "open",
-      act: () => p.investigate(a.id),
-    },
-    { name: "Assign work", done: !!work, act: () => p.investigate(a.id) },
-    { name: "Field inspection", done: inspection, act: () => p.go("field") },
-    {
-      name: "Record resolution",
-      done: work?.status === "resolved",
-      act: () => p.investigate(a.id),
-    },
-    {
-      name: "Save handover",
-      done: handover,
-      act: () => {
-        p.go("operations");
-        p.setFocus("handover");
-      },
-    },
+    { name: "Review warning", done: a.status !== "open", act: () => p.investigate(a.id), hint: "Open the triggering evidence, then acknowledge the warning in maintenance actions." },
+    { name: "Inspect dependencies", done: reviewed, act: () => { p.go("twin"); p.setFocus(a.asset_id); }, hint: "Inspect the generator's registered relationships and their assumptions. Mark this review below." },
+    { name: "Assign work", done: !!work?.assignee, act: () => p.investigate(a.id), hint: "Create a work order with a responsible person and due date. Names in the demo are fictional." },
+    { name: "Record resolution", done: work?.status === "resolved", act: () => p.investigate(a.id), hint: "Start the work, record the inspection outcome and resolve it. A recovery reading is a separate action." },
+    { name: "Save handover", done: handover, act: () => { p.go("operations"); p.setFocus("handover"); }, hint: "Generate and save a reviewed handover containing the resolved work order." },
   ];
-  return (
-    <aside className="journey-rail" aria-label="Guided demonstration">
-      <div className="row">
-        <strong>Guided incident · isolated simulation</strong>
-        <button
-          className="text-button"
-          onClick={() => {
-            setDismiss(true);
-            sessionStorage.removeItem(key);
-          }}
-        >
-          Hide guide
-        </button>
-      </div>
-      <ol>
-        {steps.map((s, i) => (
-          <li key={s.name}>
-            <button onClick={s.act} className={s.done ? "complete" : ""}>
-              {s.done ? <Check size={15} /> : <b>{i + 1}</b>}
-              {s.name}
-            </button>
-          </li>
-        ))}
-      </ol>
-      <p>
-        Complete each action explicitly. Inspection notes do not recover a
-        sensor; a qualifying simulated reading is separate.
-      </p>
-    </aside>
-  );
+  const next = steps.find(s => !s.done);
+  return <aside className="journey-rail" aria-label="Guided demonstration">
+    <div className="row"><strong>Three-minute incident walkthrough · {steps.filter(s => s.done).length}/5 complete</strong>
+      <div className="actions"><button className="text-button" onClick={() => setRestart(!restart)}>Restart walkthrough</button>
+      <button className="text-button" onClick={() => { setDismiss(true); sessionStorage.removeItem(key); }}>Hide guide</button></div>
+    </div>
+    <ol>{steps.map((s, i) => <li key={s.name}><button onClick={s.act} className={s.done ? "complete" : ""} aria-current={next === s ? "step" : undefined}>{s.done ? <Check size={15} /> : <b>{i + 1}</b>}{s.name}</button></li>)}</ol>
+    {next ? <div className="guide-next"><p><strong>Next: {next.name}.</strong> {next.hint}</p><button className="small-button" onClick={next.act}>Open next step</button>
+      {next.name === "Inspect dependencies" && <button className="small-button" onClick={() => { sessionStorage.setItem(key + "-dependencies", "reviewed"); setReviewed(true); }}>Mark dependencies reviewed</button>}
+    </div> : <p role="status">Walkthrough complete. The resolved work and handover are saved in this private demo. Sensor recovery remains separately recorded.</p>}
+    {restart && <div className="guide-next"><p>Start a fresh isolated demo. This session's records will remain intact.</p><button className="primary" disabled={!navigator.onLine} onClick={p.startGuide}>Start fresh walkthrough</button><button onClick={() => setRestart(false)}>Cancel</button></div>}
+    <small>Simulated equipment readings · assumed topology · human decisions. Review progress is stored in this browser tab.</small>
+  </aside>;
 }

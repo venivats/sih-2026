@@ -1,3 +1,4 @@
+import { EvidenceLabel } from "./EvidenceLabel";
 import { MissionBrief } from "./MissionBrief";
 import { GovernmentWeatherStrip, OfficialWeather } from "./OfficialWeather";
 import { DecisionCentre, Handover } from "./Operations";
@@ -76,7 +77,7 @@ export function Overview(p: Props) {
                 {n(temp?.value)}
                 <small> °C</small>
               </strong>
-              <span>Air temperature</span>
+              <span>Recorded air temperature</span>
             </button>
             <button
               disabled={!wind}
@@ -87,14 +88,10 @@ export function Overview(p: Props) {
                 {n(wind?.value)}
                 <small> m/s</small>
               </strong>
-              <span>Wind speed</span>
+              <span>Recorded wind speed</span>
             </button>
           </div>
-          <small>
-            {temp
-              ? `${temp.origin} · ${date(temp.observed_at)}`
-              : "No station observation available"}
-          </small>
+          <details className="hero-evidence"><summary>Origins & observation times</summary><p>Air temperature</p><EvidenceLabel d={d} reading={temp} /><p>Wind speed</p><EvidenceLabel d={d} reading={wind} /></details>
         </div>
       </header>
       <GovernmentWeatherStrip

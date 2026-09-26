@@ -1,3 +1,4 @@
+import { guideKey } from "./evidenceModel";
 import { CrewField } from "./CrewField";
 import { Entrance } from "./Entrance";
 import { StationGeography } from "./StationGeography";
@@ -423,7 +424,7 @@ export default function App() {
         idempotency_key: randomId(),
       })) as { alert_id: string; asset_id: string };
       if (result.alert_id)
-        sessionStorage.setItem("polaris-guide-" + w, result.alert_id);
+        sessionStorage.setItem(guideKey({ workspace: w, station }), result.alert_id);
       setRole("demo_operator");
       sessionStorage.setItem("polaris-active-workspace", w);
       nav.navigate(

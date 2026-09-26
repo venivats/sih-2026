@@ -1,3 +1,4 @@
+import { ResearchEvidence } from "./ResearchEvidence";
 import { ResponseComparison } from "./ResponseComparison";
 import { ShipmentJourney } from "./LiveExercises";
 import { FuelForecast } from "./Analysis";
@@ -1416,6 +1417,7 @@ export function DataPage(p: Props) {
     !!API && p.role === "administrator" && p.d.workspace === "operational";
   return (
     <>
+      <details className="research-register"><summary>Station research and official documentation</summary><ResearchEvidence station={p.d.station} /></details>
       <div className="two-columns">
         <Panel
           title="Evidence in this workspace"

@@ -29,7 +29,7 @@ export function IncidentJourney(p: Props & { incidentId: string }) {
     ["Acknowledged", a.status !== "open"],
     ["Owner assigned", !!order?.assignee],
     ["Work resolved", order?.status === "resolved"],
-    ["Sensor recovered", a.recovered],
+    ["Qualifying recovery reading", a.recovered],
   ] as const;
   return (
     <>
