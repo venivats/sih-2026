@@ -290,7 +290,7 @@ export function Handover(p: Props) {
     </Panel>
   );
 }
-export function StationQuestions(p: Props) {
+export function StationGuide(p: Props) {
   const [question, setQuestion] = useState(""),
     [answers, setAnswers] = useState<
       { q: string; a: ReturnType<typeof stationAnswer> }[]
@@ -304,8 +304,8 @@ export function StationQuestions(p: Props) {
   }
   return (
     <Panel
-      title="POLARIS guided assistant"
-      sub="Guided help and deterministic record-backed answers · no language-model service connected"
+      title="POLARIS station guide"
+      sub="Navigation help and predefined answers from station records · no language-model service connected"
     >
       <div className="question-suggestions">
         {[
@@ -525,7 +525,7 @@ export function Operations(p: Props) {
       {tab === "brief" ? (
         <div className="two-columns">
           <Handover {...p} />
-          <StationQuestions {...p} />
+          <StationGuide {...p} />
         </div>
       ) : (
         <div className="register-layout">

@@ -7,7 +7,7 @@ import { JourneyRail } from "./MissionBrief";
 import { randomId } from "./id";
 import { canWrite, hasWrites } from "./permissions";
 import { OfficialWeather, ConnectionStatus } from "./OfficialWeather";
-import { Operations, StationQuestions } from "./Operations";
+import { Operations, StationGuide } from "./Operations";
 import { Science } from "./Science";
 import { useNavigation, routeHref } from "./navigation";
 import { Appearance, EquipmentIdentity } from "./Appearance";
@@ -934,7 +934,7 @@ export default function App() {
       )}
       {ask && props && (
         <Modal title="POLARIS guide" onClose={() => setAsk(false)}>
-          <StationQuestions key={workspace + station} {...props} />
+          <StationGuide key={workspace + station} {...props} />
         </Modal>
       )}
       {exercise && d && (

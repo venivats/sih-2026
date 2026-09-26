@@ -8,7 +8,7 @@ backups
 playwright-report
 test-results
 .sites-runtime
-.openai
+.project-meta
 node_modules
 api
 requirements.txt

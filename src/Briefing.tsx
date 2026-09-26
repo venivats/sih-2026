@@ -171,7 +171,7 @@ export function Briefing(p: Props) {
           <h2>Your station, in one briefing.</h2>
           <p>
             A deterministic summary of evidence and outstanding actions. No
-            AI-generated diagnoses.
+            automated diagnosis or prescribed response.
           </p>
         </div>
         <button className="primary" onClick={download}>
