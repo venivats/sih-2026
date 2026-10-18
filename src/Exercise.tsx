@@ -8,7 +8,7 @@ import {
   FlaskConical,
 } from "lucide-react";
 import { Modal, Notice, Badge } from "./components";
-import { snapshot, startSession, mutate, API } from "./api";
+import { snapshot, startSession, mutate, usesServer } from "./api";
 import { randomId } from "./id";
 import { date, latest } from "./model";
 import type { ScenarioInputs, Snapshot } from "./types";
@@ -159,7 +159,7 @@ export function Exercise({
       </div>
       <Notice>
         {preset === "overheat" || preset === "recovery"
-          ? `Runs in your private ${API ? "server session" : "browser tab"}. Operational records and other visitors are unaffected. Historical sample time advances; this is not live telemetry.`
+          ? `Runs in your private ${usesServer(d.workspace) ? "server session" : "browser tab"}. Operational records and other visitors are unaffected. Historical sample time advances; this is not live telemetry.`
           : "Pure what-if calculation. Baseline measurements, inventory, alerts and work orders are unchanged."}
       </Notice>
       {error && (

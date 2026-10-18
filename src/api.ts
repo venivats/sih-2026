@@ -13,7 +13,12 @@ export function setBearer(v: string) {
   bearer = v;
   sessionStorage.removeItem("polaris-demo-token");
 }
-export async function request(path: string, body?: unknown, method?: string) {
+// Published simulations and tab-local exercises must not depend on server uptime.
+// Operational records and existing authenticated sessions always stay server-backed.
+export function usesServer(workspace: string) {
+  return !!API && workspace !== "demo" && !workspace.startsWith("browser-");
+}
+export async function request(path: string, body?: unknown, method?: string, timeoutMs = 30000) {
   if (!API)
     throw new Error("Persistent server is not connected to this public demo.");
   const form = body instanceof FormData || body instanceof URLSearchParams;
@@ -24,7 +29,7 @@ export async function request(path: string, body?: unknown, method?: string) {
       ...(!form && body ? { "Content-Type": "application/json" } : {}),
     },
     body: body ? (form ? (body as FormData) : JSON.stringify(body)) : undefined,
-    signal: AbortSignal.timeout(30000),
+    signal: AbortSignal.timeout(timeoutMs),
   });
   if (!r.ok) {
     const d = await r.json().catch(() => ({}));
@@ -38,7 +43,7 @@ export async function request(path: string, body?: unknown, method?: string) {
 }
 export const path = (w: string, s: string) => `/w/${w}/${s}`;
 export async function snapshot(w: string, s: string): Promise<Snapshot> {
-  if (API) return request(path(w, s) + "/snapshot");
+  if (usesServer(w)) return request(path(w, s) + "/snapshot", undefined, undefined, 12000);
   if (w === "operational")
     return {
       workspace: w,
@@ -67,7 +72,7 @@ export async function snapshot(w: string, s: string): Promise<Snapshot> {
     : null;
   if (stored)
     return { ...JSON.parse(stored), fetched_at: new Date().toISOString() };
-  const r = await fetch("/demo-" + s + ".json");
+  const r = await fetch("/demo-" + s + ".json", { signal: AbortSignal.timeout(8000) });
   if (!r.ok) throw new Error("Demonstration snapshot unavailable");
   const d = await r.json();
   d.fetched_at = new Date().toISOString();
@@ -77,8 +82,8 @@ export async function snapshot(w: string, s: string): Promise<Snapshot> {
   }
   return d;
 }
-export async function startSession() {
-  if (API) {
+export async function startSession(serverBacked = false) {
+  if (API && serverBacked) {
     const r = await request("/demo-sessions", {});
     setBearer(r.access_token);
     sessionStorage.setItem("polaris-demo-token", r.access_token);
@@ -93,7 +98,7 @@ async function mutateUnserialized(
   body: Record<string, unknown> = {},
   method = "POST",
 ) {
-  if (API) return request(path(w, s) + endpoint, body, method);
+  if (usesServer(w)) return request(path(w, s) + endpoint, body, method);
   if (!w.startsWith("browser-"))
     throw new Error("Start a private demo to make changes.");
   const d = await snapshot(w, s),
@@ -610,7 +615,7 @@ export function mutate(
   body: Record<string, unknown> = {},
   method = "POST",
 ): Promise<unknown> {
-  if (API) return request(path(w, s) + endpoint, body, method);
+  if (usesServer(w)) return request(path(w, s) + endpoint, body, method);
   const key = w + ":" + s;
   const operation = (pendingWrites.get(key) || Promise.resolve())
     .catch(() => {})

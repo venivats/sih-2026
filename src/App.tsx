@@ -50,6 +50,7 @@ import {
   snapshot,
   startSession,
   API,
+  usesServer,
   request,
   path,
   setBearer,
@@ -176,6 +177,7 @@ const pages: {
 export default function App() {
   const nav = useNavigation();
   const { page, setPage, station, setStation, workspace, setWorkspace } = nav;
+  const connectedWorkspace = usesServer(workspace);
   const [connectionOpen, setConnectionOpen] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loginError, setLoginError] = useState("");
@@ -206,7 +208,7 @@ export default function App() {
     [stream, setStream] = useState("polling");
   const qc = useQueryClient();
   useEffect(() => {
-    if (!API || !bearer) return;
+    if (!connectedWorkspace || !bearer) return;
     let active = true;
     request("/auth/me")
       .then((r) => {
@@ -221,18 +223,19 @@ export default function App() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [connectedWorkspace]);
   // Tab-local demo permissions follow its workspace, including after a reload.
   // Connected permissions come only from the authenticated server response.
   const role =
-    !API && workspace.startsWith("browser-") ? "demo_operator" : accountRole;
+    workspace.startsWith("browser-") ? "demo_operator" : accountRole;
   const q = useQuery({
     queryKey: ["snapshot", workspace, station],
     queryFn: () => snapshot(workspace, station),
-    refetchInterval: API ? (lowBandwidth ? 120000 : 20000) : false,
-    refetchOnWindowFocus: !lowBandwidth,
-    retry: 1,
-    staleTime: API ? 10000 : Infinity,
+    enabled: !nav.entrance,
+    refetchInterval: connectedWorkspace ? (lowBandwidth ? 120000 : 20000) : false,
+    refetchOnWindowFocus: connectedWorkspace && !lowBandwidth,
+    retry: false,
+    staleTime: connectedWorkspace ? 10000 : Infinity,
   });
   const d = q.data;
   useEffect(() => setNewAlerts([]), [workspace, station]);
@@ -306,7 +309,7 @@ export default function App() {
     };
   }, []);
   useEffect(() => {
-    if (!API || !online || lowBandwidth) return;
+    if (!connectedWorkspace || nav.entrance || !online || lowBandwidth) return;
     const ac = new AbortController();
     let timer: ReturnType<typeof setTimeout>;
     let retry = 1000;
@@ -352,7 +355,7 @@ export default function App() {
       ac.abort();
       clearTimeout(timer);
     };
-  }, [workspace, station, online, lowBandwidth, role, qc]);
+  }, [workspace, station, online, lowBandwidth, role, qc, connectedWorkspace, nav.entrance]);
   useEffect(() => {
     setScenarioPreset(undefined);
     setFocus("");
@@ -402,7 +405,7 @@ export default function App() {
       setWorkspace(w);
       setRole("demo_operator");
       notify(
-        API
+        usesServer(w)
           ? "Private demo session created. Changes persist on the server."
           : "Private demo started. Changes are saved only in this browser tab.",
       );
@@ -718,7 +721,7 @@ export default function App() {
                   <>
                     <WifiOff size={14} /> Disconnected · cached records
                   </>
-                ) : API ? (
+                ) : connectedWorkspace ? (
                   <>
                     <Radio size={14} />
                     {q.isError
@@ -736,7 +739,7 @@ export default function App() {
                 )}
               </span>
               <small>
-                {API && q.dataUpdatedAt
+                {connectedWorkspace && q.dataUpdatedAt
                   ? "Last successful fetch " +
                     date(new Date(q.dataUpdatedAt).toISOString())
                   : "Historical data · not live"}
@@ -767,7 +770,7 @@ export default function App() {
                     ? "Authenticated records only · missing data stays unavailable"
                     : "Backend not connected · operational data unavailable"
                   : workspace.startsWith("browser-")
-                    ? "Changes saved in this tab · server not connected"
+                    ? "Changes saved in this tab · isolated simulation"
                     : workspace.startsWith("session-")
                       ? "Isolated records · saved on the backend"
                       : "Synthetic station telemetry · illustrative topology"}

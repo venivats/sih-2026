@@ -41,7 +41,7 @@ import {
   Evidence,
 } from "./components";
 import { energy, latest, n, date, calculate, affected } from "./model";
-import { API, request, path, mutate, bearer } from "./api";
+import { API, usesServer, request, path, mutate, bearer } from "./api";
 export interface Props {
   d: Snapshot;
   startGuide?: () => void;
@@ -728,7 +728,7 @@ export function Maintenance(p: Props & { incidentId?: string }) {
                         </button>
                       </>
                     )}
-                    {API && write && (
+                    {usesServer(d.workspace) && write && (
                       <label className="attachment-button">
                         Attach evidence
                         <input
@@ -1117,7 +1117,7 @@ export function Scenarios(p: Props & { initial?: ScenarioInputs }) {
   async function run() {
     setBusy(true);
     try {
-      const r = API
+      const r = usesServer(p.d.workspace)
         ? await request(path(p.d.workspace, p.d.station) + "/scenarios", v)
         : calculate(p.d, v);
       setResult(r);
