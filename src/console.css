@@ -1,5 +1,23 @@
 /* Shared operation surfaces. Status colours describe evidence, never decoration. */
-.relationship-list { margin:0; padding:12px 22px; border-top:1px solid #cbd7db; color:#315463; font-size:.7rem; }.relationship-list button { background:transparent; border:0; padding:9px 0; display:flex; align-items:center; justify-content:space-between; width:100%; color:#285c6a; text-align:left; font-size:.7rem; }
+.relationship-list {
+  margin: 0;
+  padding: 12px 22px;
+  border-top: 1px solid #cbd7db;
+  color: #315463;
+  font-size: 0.7rem;
+}
+.relationship-list button {
+  background: transparent;
+  border: 0;
+  padding: 9px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #285c6a;
+  text-align: left;
+  font-size: 0.7rem;
+}
 .operations-metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

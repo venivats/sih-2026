@@ -1,11 +1,14 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { inject } from "@vercel/analytics";
 import App from "./App";
 import "./style.css";
 import "./redesign.css";
 import "./console.css";
 import "./expedition.css";
+inject();
+
 const queryClient = new QueryClient({
   defaultOptions: {
     mutations: { retry: false },
